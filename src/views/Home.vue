@@ -1,18 +1,29 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <img alt="Enyata logo" src="../assets/logo.png" />
+    <h3>Applicant Sign Up</h3>
+    <Form/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Form from "@/components/Form.vue"
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
-  },
+    Form
+  }
 };
 </script>
+<style>
+h3{
+  font-style: italic;
+  margin-bottom: 20px;
+  padding-top: 30px;
+  font-family: 'Lato', sans-serif;
+}
+img{
+  margin:30px 20px 0;
+}
+</style>
