@@ -1,15 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
+  
   {
     path: "/about",
     name: "About",
@@ -19,6 +15,43 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: '/takeAssessment',
+    name:'takeAssessment',
+    component: () => import(/* webpackChunkName: "takeAssessment" */ '../views/takeAssessment.vue'),
+    // meta: {
+    //   requiresAuth: true
+    // }
+  },
+
+  {
+    path: '/adminDashboard',
+    name: 'adminDashboard',
+    component: () => import('../views/AdminDashboard.vue'),
+    // meta: { requiresAuth: true },
+  },
+
+  {
+    path: '/adminentries',
+    name:'adminentries',
+    component: () => import(/* webpackChunkName: "Success" */ '../views/EntriesTable.vue'),
+    // meta: {
+    //   requiresAdmin: true
+    // }
+  },
+
+  {
+    path: '/adminresult',
+    name:'results',
+    component: () => import(/* webpackChunkName: "Success" */ '../views/Results.vue'),
+  },
+
+  {
+    path: '/timer-settings',
+    name: 'TimerSettings',
+    component: () => import('../views/TimerSettings.vue'),
+  },
+
 ];
 
 const router = new VueRouter({
