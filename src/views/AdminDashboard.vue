@@ -1,0 +1,236 @@
+<template>
+  <div class="row">
+    <div class="col-3">
+      <AdminSidebar/>
+    </div>
+
+    <div class="container my-5 col-9">
+      <div class="first_section">
+        <p>Dashboard</p>
+      </div>
+
+      <div class="date_section">
+        <div class="date">
+          <p>Current Application</p>
+          <span class="number">200</span>
+          <div class="horizontal"></div>
+          <div class>
+            <p class>Academy 1.0</p>
+          </div>
+        </div>
+
+        <div class="t_app">
+          <p>Total Application</p>
+          <span class="number">500</span>
+          <div class="horizontal2"></div>
+          <div class>
+            <p class>All entries so far</p>
+          </div>
+        </div>
+
+        <div class="academy">
+          <p>Academy's</p>
+          <span class="number">1</span>
+          <div class="horizontal3"></div>
+          <div class>
+            <p class>So far</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h4 class="heading">History</h4>
+          <p class="small-heading">Last Update: 18.24.21/01/20</p>
+          <div>
+            <table class="table table-borderless">
+              
+              <tbody>
+                <tr class="different-row">
+                  
+                  <td>Academy Batch 1</td>
+                  <td>0 students</td>
+                  <td>started 19/01/2020</td>
+                  
+                </tr>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col create container mr-5">
+          <h4 class="my-3 heading">Create Assessment</h4>
+
+          <div class="text-center my-5">
+            <p>
+              Create test question for an incoming academy
+              student
+            </p>
+            <router-link :to="{name: 'adminquestion'}" class="tests">
+              <button>Create Assessment</button>
+            </router-link>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import AdminSidebar from '@/components/AdminSidebar.vue';
+// import { mapGetters, mapActions } from "vuex";
+
+export default {
+  name: "adminDashboard",
+  components: {
+    AdminSidebar
+  }
+
+//   computed: {
+//     ...mapGetters(["getProfile"])
+//   },
+
+//   methods: {
+//     // ...mapActions(["fetchAdminProfile"]),
+    
+//   },
+
+//   async created () {
+//     await this.fetchAdminProfile()
+//   }
+}
+</script>
+
+<style scoped>
+.different-row:hover {
+  background: #ffffff;
+  box-shadow: 8px 18px 20px rgba(79, 79, 79, 0.3);
+  border-radius: 10px;
+  font-weight: bold;
+  color: #2b3c4e;
+  border-left: 10px solid #5ABEFD;;
+}
+.heading {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: -0.02em;
+  color: #2B3C4E;
+}
+.create {
+  border: 1px solid #ececf9;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+span {
+  margin-right: 90px;
+}
+h4 {
+  text-align: left;
+}
+/* .dashboard {
+  margin-left: 292px;
+  margin-top: 10px;
+
+  padding-left: 47px;
+} */
+.first_section p {
+  font-family: Lato, sans-serif;
+  /* font-style: normal; */
+  /* font-weight: 300; */
+  font-size: 35px;
+  letter-spacing: -0.02em;
+  color: #2b3c4e;
+  /* margin-right: 2em; */
+  margin-right: 540px;
+  text-align: left;
+}
+.date_section {
+  display: flex;
+  margin-top: 61px;
+  margin-bottom: 3em;
+}
+.t_app {
+  margin-right: 8em;
+}
+.date {
+  margin-right: 8em;
+}
+.date span {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 48px;
+  color: #2b3c4e;
+  border-bottom: blue;
+}
+.t_app span {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 48px;
+  color: #2b3c4e;
+}
+.academy span {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 48px;
+  color: #2b3c4e;
+}
+.his_cr {
+  display: flex;
+}
+.grid_container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 50px;
+}
+.grid {
+  display: flex;
+}
+.create_tq {
+  margin-left: 15em;
+  margin-bottom: 80px;
+}
+.ca {
+  margin-left: 20em;
+}
+button {
+  background: #b1b1b1;
+  border-radius: 4px;
+  color: white;
+  /* padding:3 2 2 3; */
+  padding-top: 10px;
+  padding-bottom: 11px;
+  padding-right: 31px;
+  padding-left: 38px;
+}
+/* .update{
+    padding-top: 0px;
+} */
+.horizontal {
+  width: 80%;
+  height: 4px;
+  background: #006df0;
+  border-radius: 4px;
+}
+.horizontal2 {
+  width: 80%;
+  height: 4px;
+  background: #00f026;
+  border-radius: 4px;
+}
+.horizontal3 {
+  width: 80%;
+  height: 4px;
+  background: #f09000;
+  border-radius: 4px;
+}
+.date_section p {
+  margin-right: 100px;
+}
+</style>

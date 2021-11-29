@@ -16,10 +16,14 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
+
+.home{
+margin-top: 30px;
+}
 h3{
   font-style: italic;
-  margin-bottom: 20px;
+  margin-bottom: 55px;
   padding-top: 30px;
   font-family: 'Lato', sans-serif;
 }

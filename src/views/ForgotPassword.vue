@@ -32,16 +32,23 @@ export default {
     max-width: 700px;
     margin: auto;
     box-shadow: 5px 5px 20px 0px #e7e1e1;
-    height: 90vh;
+    height: 95vh;
     font-family: 'Lato', sans-serif;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
-.border{
-  background: blue;
+div.forgotPassword.border{
+    border: 1px solid #7557D3 !important;
+    border-radius: 4px !important;
 }
-.no-border{
+/* .no-border{
   background: red;
-}
+}  */
 h2{
-    padding: 20px 0 10px 0 ;
+    padding: 50px 0 10px 0 ;
+}
+
+p{
+  padding-bottom: 20px;
 }
 </style>

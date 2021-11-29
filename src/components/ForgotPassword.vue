@@ -40,6 +40,7 @@ export default {
     color: #B1B1B1;
     border: 1px solid #7557D3;
 }
+
 .no-border{
     border: none;
 }
@@ -61,10 +62,14 @@ h4{
     padding: 5px;
     border-radius: 100%;
     background: #7557D3;
+    margin-top: 34px;
+    margin-right: 20px
 }
 .email img{
     border-radius: 100%;
     background: rgba(117, 87, 211, 0.1);
     padding: 16px;
+    margin-right: 28px;
+    margin-top: 19px;
 }
 </style>

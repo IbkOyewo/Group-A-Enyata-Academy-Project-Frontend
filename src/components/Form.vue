@@ -96,13 +96,15 @@ export default {
 .input input{
     margin: 16px 0;
     padding: 9px;
-    width: 280px;
+    width: 290px;
     border: 1.5px solid #BDBDBD;
+    border-radius: 4px;
 }
 .main{
     max-width: 700px;
     margin: auto;
 }
+
 button{
     background: #7557D3;
     margin: 15px 0;

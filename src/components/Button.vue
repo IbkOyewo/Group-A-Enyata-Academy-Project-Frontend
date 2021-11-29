@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .main{
-    max-width: 700px;
+    max-width: 600px;
     margin: auto;
 }
 button{

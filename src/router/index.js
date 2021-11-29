@@ -1,21 +1,64 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import ForgotPassword from "../views/ForgotPassword.vue"
 
 Vue.use(VueRouter);
 
 const routes = [
+
+
   {
-    path: "/login",
-    name: "Home",
-    component: Home,
+    path: '/takeAssessment',
+    name:'takeAssessment',
+    component: () => import('../views/takeAssessment.vue'),
   },
+
+  {
+    path: '/adminDashboard',
+    name: 'adminDashboard',
+    component: () => import('../views/AdminDashboard.vue'),
+  },
+
+  {
+    path: '/adminentries',
+    name:'adminentries',
+    component: () => import('../views/EntriesTable.vue'),
+  },
+
+  {
+    path: '/adminresult',
+    name:'results',
+    component: () => import('../views/Results.vue'),
+  },
+
+  {
+    path: '/timer-settings',
+    name: 'TimerSettings',
+    component: () => import('../views/TimerSettings.vue'),
+  },
+
+  {
+    path: "/signup",
+    name: "Home",
+    component: () => import('../views/Home.vue'),
+  },
+
   {
     path: "/forgot-password",
     name: "Forgot Password",
-    component: ForgotPassword,
-  }
+    component: () => import('../views/ForgotPassword.vue'),
+  },
+  
+  {
+    path: "/login",
+    name: "applicantLogin",
+    component: () => import('../views/ApplicantLogin.vue'),
+  },
+
+  {
+    path: "/applicationform",
+    name: "applicantForm",
+    component: () => import('../views/ApplicantForm.vue'),
+  },
 ];
 
 const router = new VueRouter({
