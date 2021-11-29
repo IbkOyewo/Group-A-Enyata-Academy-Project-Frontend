@@ -21,6 +21,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
+  color: #2b3c4e;
 }
 * {
   margin: 0;

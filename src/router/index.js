@@ -39,6 +39,16 @@ const routes = [
     name: "AssessHistory",
     component: () => import("../views/AssessHistory.vue"),
   },   
+  {
+    path: "/batch-3",
+    name: "Batch-3",
+    component: () => import("../views/Batch-3.vue"),
+  },   
+  {
+    path: "/profile-setting",
+    name: "ProfileSetting",
+    component: () => import("../views/ProfileSetting.vue"),
+  },   
 ];
 
 const router = new VueRouter({
