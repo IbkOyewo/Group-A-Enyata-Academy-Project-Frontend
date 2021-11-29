@@ -1,49 +1,33 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
-  
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
+
+
   {
     path: '/takeAssessment',
     name:'takeAssessment',
-    component: () => import(/* webpackChunkName: "takeAssessment" */ '../views/takeAssessment.vue'),
-    // meta: {
-    //   requiresAuth: true
-    // }
+    component: () => import('../views/takeAssessment.vue'),
   },
 
   {
     path: '/adminDashboard',
     name: 'adminDashboard',
     component: () => import('../views/AdminDashboard.vue'),
-    // meta: { requiresAuth: true },
   },
 
   {
     path: '/adminentries',
     name:'adminentries',
-    component: () => import(/* webpackChunkName: "Success" */ '../views/EntriesTable.vue'),
-    // meta: {
-    //   requiresAdmin: true
-    // }
+    component: () => import('../views/EntriesTable.vue'),
   },
 
   {
     path: '/adminresult',
     name:'results',
-    component: () => import(/* webpackChunkName: "Success" */ '../views/Results.vue'),
+    component: () => import('../views/Results.vue'),
   },
 
   {
@@ -52,6 +36,17 @@ const routes = [
     component: () => import('../views/TimerSettings.vue'),
   },
 
+  {
+    path: "/signup",
+    name: "Home",
+    component: () => import('../views/Home.vue'),
+  },
+
+  {
+    path: "/forgot-password",
+    name: "Forgot Password",
+    component: () => import('../views/ForgotPassword.vue'),
+  }
 ];
 
 const router = new VueRouter({
