@@ -57,8 +57,14 @@
 
 <script>
 export default {
+<<<<<<< HEAD
   name: "AssessHistory",
 };
+=======
+    name: 'AssessHistory'
+
+}
+>>>>>>> 441e82a18d45b7cd268dbee2c8ed03ff00f70622
 </script>
 
 <style>
