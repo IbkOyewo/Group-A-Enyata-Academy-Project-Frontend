@@ -11,7 +11,7 @@
           </button>
           <input type="file" name="file" ref="file" @change="handleFileUpload"/>
         </div>
-         <button type="submit" class="text-white p-2 btn btn-white">add profile picture</button>
+         <button type="submit" class="text-white p-2 btn btn-white">add profile pic</button>
          
       </form>
 
@@ -89,30 +89,25 @@ export default {
       message: ""
     };
   },
-
   computed: {
     ...mapGetters(["getProfile", "apiResponse"])
   },
-
   methods: {
     ...mapActions(["fetchProfile", "logout", "editProfile"]),
     logout() {
       this.logout();
       this.$router.push({ name: "login" });
     },
-
     handleFileUpload() {
       const file = this.$refs.file.files[0];
       this.file = file
     },
-
     submitForm() {
       const formData = new FormData();
       formData.append('file',this.file);
       this.editProfile(formData)
     }
   },
-
   async mounted() {
     await this.fetchProfile();
     this.Profile = await this.getProfile;
@@ -135,7 +130,6 @@ text-decoration: none;
   background: #ffff;
   border: none;
 }
-
 .sidebar {
   width: 292px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
@@ -160,31 +154,24 @@ text-decoration: none;
   border-radius: 50px;
   margin: auto;
 }
-
 .tests.dashboard{
 padding-right: 79px;
 }
-
 .tests.create{
   padding-right: 40px;
 }
-
 .tests.appentry{
 padding-right: 25px;
 }
-
 .tests.history{
 padding-right: 20px;
 }
-
 .tests.results{
   padding-right: 105px;
 }
-
 .tests.settings{
   padding-right: 105px;
 }
-
 .user-name {
   font-family: "Lato", sans-serif;
   font-weight: bold;
@@ -218,12 +205,10 @@ padding-right: 20px;
 .icon {
   margin-right: 25px;
 }
-
 button.logout{
 padding-right: 120px;
 padding-top: 50px;
 }
-
 .sidebar-icon > div > p {
   display: flex;
   font-family: "Lato", sans-serif;
@@ -245,7 +230,6 @@ padding-top: 50px;
   overflow: hidden;
   display: inline-block;
 }
-
 .btns {
   border: 1.55px dashed #2b3c4e;
   box-sizing: border-box;
@@ -256,7 +240,6 @@ padding-top: 50px;
   text-align: center;
   /* font-weight: bold; */
 }
-
 .upload-btn-wrapper input[type="file"] {
   font-size: 100px;
   position: absolute;
@@ -264,7 +247,6 @@ padding-top: 50px;
   top: 0;
   opacity: 0;
 }
-
 .logo {
   max-width: 100px;
   max-height: 85px;
