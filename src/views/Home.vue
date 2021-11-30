@@ -1,33 +1,17 @@
 <template>
-  <div class="home">
-    <img alt="Enyata logo" src="../assets/logo.png" />
-    <h3>Applicant Sign Up</h3>
-    <Form/>
+  <div class="home">  
+    <LandingPage/>
   </div>
 </template>
 
 <script>
-import Form from "@/components/Form.vue"
+// @ is an alias to /src
+import LandingPage from "@/components/LandingPage.vue";
 
 export default {
-  name: "Home",
+  name: "home",
   components: {
-    Form
-  }
+    LandingPage,
+  },
 };
 </script>
-<style scoped>
-
-.home{
-margin-top: 30px;
-}
-h3{
-  font-style: italic;
-  margin-bottom: 55px;
-  padding-top: 30px;
-  font-family: 'Lato', sans-serif;
-}
-img{
-  margin:30px 20px 0;
-}
-</style>
