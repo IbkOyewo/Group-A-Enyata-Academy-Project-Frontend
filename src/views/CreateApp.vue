@@ -1,120 +1,173 @@
 <template>
-  <div class="page">
-    <div>
-      <p class="top-text">Create Application</p>
+  <div class="row">
+    <div class="col-3">
+      <AdminSidebar/>
     </div>
-    <form action="">
+    <div class="container col-8 pt-5">
+      <h2 class="my-5">Create Application</h2>
+      <p>ssss</p>
       <div>
-        <div class="link">
-          <div class="file_upload">
-            <div class="file_div">
-              <label for="file-upload" class="custom-file-upload">
-                <i>&#x2B; &nbsp;</i>Choose file
-              </label>
-              <input id="file-upload" type="file" />
+        <form enctype="multipart/form-data" @submit.prevent="submitForm">
+          <div class="row">
+            <div class="fileup col">
+              <div class="upload-btn-wrapper">
+                <button class="btns">
+                  <strong>+</strong> Choose file
+                </button>
+                <input type="file" name="file" ref="file" @change="handleFileUpload"/>
+              </div>
+            </div>
+            <div class="col">
+              <label>Link</label>
+              <input type="text" class="form-control"  v-model="link"/>
+            </div>
+           
+          </div>
+          
+          <div class="row my-4">
+            <div class="col">
+              <label>Application closure date</label>
+              <input type="date" class="form-control" v-model="closing_date"/>
+            </div>
+            <div class="col">
+              <label>Batch ID</label>
+              <input type="text" class="form-control"  v-model="batch_id"/>
             </div>
           </div>
-
-          <div id="link">
-            <label for="link" class="text">Link</label> <br />
-            <input type="text" name="link" />
+          <div class="form-group my-3">
+            <label for>Instructions</label>
+            <textarea class="form-control" name id rows="4" v-model="instruction"></textarea>
           </div>
-        </div>
-
-        <div class="id">
-          <div>
-            <label for="closure" class="text">Application closure date</label> <br />
-            <input type="date" placeholder="dd/mm/yyy" name="closure" />
+          <div class="text-center">
+            <button class="btn" type="submit">Submit</button>
           </div>
-          <div>
-            <label for="batch" class="text">Batch ID</label> <br />
-            <input type="text" name="batch" />
-          </div>
-        </div>
+          
+        </form>
       </div>
-
-      <div class="instructions">
-        <label for="instructions" class="text">Instructions</label> <br>
-        <input name="instructions" id="instructions" />
-      </div>
-      <div class="button">
-        <button>Submit</button>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
+import AdminSidebar from '@/components/AdminSidebar.vue'
+import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "CreateApp",
+  name: "applicationAdmin",
+  components: {
+    AdminSidebar
+  },
+  data() {
+    return {
+      file: '',
+      batch_id: '',
+      link: '',
+      closing_date: "",
+      instructions: ""
+    }
+  },
+  computed: {
+    ...mapGetters(["apiResponse"]),
+
+    isValid() {
+      if (
+        this.link == "" ||
+        this.file == "" ||
+        this.batch_id == "" ||
+        this.closing_date == "" ||
+        this.instruction == ""
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  },
+
+  methods: {
+    ...mapActions(["createApp"]),
+
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+    },
+
+    submitForm() {
+      if (this.isValid) {
+        let formData = new FormData();
+        formData.append("file", this.file);
+        formData.append("batch_id", this.batch_id);
+        formData.append("link", this.link);
+        formData.append("closing_date", this.closing_date);
+        formData.append("instruction", this.instruction);
+        this.createApp(formData);
+        this.file = '';
+        this.batch_id =  '';
+        this.link =  '';
+        this.closing_date = "";
+        this.instruction   = "";
+        
+      } else {
+        alert("All fields are required");
+      }
+    }
+    
+  },
+
 };
 </script>
 
 <style scoped>
-.page {
+.fileup {
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 43.5555px;
+  line-height: 52px;
+  letter-spacing: -0.02em;
   color: #2b3c4e;
-  margin: 60px;
-}
-.top-text{
-    font-size: 43.56px;
 }
 
-.file_upload {
-  display: flex;
-  width: 300px;
-  flex-wrap: wrap;
-  gap: 33px;
-  padding: 20px 14px;
-  justify-content: center;
+input, textarea{
+  border:1.5px solid #2B3C4E;
 }
-.custom-file-upload {
-  border: 1.5px dashed #2b3c4e;
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
   display: inline-block;
-  padding: 15px 51px 0;
-  width: 223px;
-  height: 49px;
-  text-align: center;
+}
+
+.btn{
+  width: 379px;
+  height: 50px;
+  color: #fff;
+  background: #7557d3;
+  border-radius: 4px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
-input[type="file"] {
-  position: fixed;
-  right: 150%;
-  bottom: 100%;
-}
-.link,
-.id {
-  display: flex;
-  column-gap: 50px;
-  margin-top: 50px;
-}
-input {
-  border-radius: 4px;
-  border: 2px solid #2b3c4e;
-  outline: none;
-  width: 320px;
-  padding: 5px 0;
-  height: 30px;
-}
-.instructions {
-  padding: 60px 0;
-}
-#instructions {
-  padding: 30px 187px;
-}
-button {
-  background-color: #7557d3;
-  color: #ffffff;
-  padding: 10px 100px;
-  border-radius: 4px;
-  border: none;
-}
-.button {
-  display: flex;
-  justify-content: center;
+.btns {
+  border: 1.55px dashed #2b3c4e;
+  box-sizing: border-box;
+  color: #2b3c4e;
+  background-color: white;
+  padding: 46px 180px;
+  border-radius: 8px;
+  font-size: 12px;
+  text-align: center;
+  /* font-weight: bold; */
 }
 
-button:hover {
-  background-color: #6e5aac;
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }
 </style>

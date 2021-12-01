@@ -1,6 +1,11 @@
 <template>
-  <div>
-      <div>Assessment History</div>
+  <div class="row">
+      <div class="col-3">
+            <AdminSidebar/>
+        </div>
+
+        <div class="container my-5 col-9">
+             <div >Assessment History</div>
        <!-- <div class="short-img">
                   <img src="..assets/short.png" alt="">
               </div> -->
@@ -50,17 +55,23 @@
               </tr>
           </table>
       </div>
+        </div>
+     
   </div>
 </template>
 
 <script>
+import AdminSidebar from '@/components/AdminSidebar.vue'
 export default {
-    name: 'AssessHistory'
+    name: 'AssessHistory',
+    components: {
+    AdminSidebar
+  },
 
 }
 </script>
 
-<style>
+<style scoped>
 .table{
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }

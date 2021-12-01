@@ -1,5 +1,9 @@
 <template>
-  <div class="page">
+  <div class="row">
+<div class="col-3">
+            <applicantSidebar/>
+        </div>
+    <div class="container my-5 col-9">
     <div class="top-text">
       <div class="top-text1">Dashboard</div>
       <div class="top-text2">
@@ -43,19 +47,21 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
+import applicantSidebar from '@/components/applicantSidebar.vue'
 export default {
   name: "dashboard",
+
+  components: {
+       applicantSidebar
+  }
 };
 </script>
 
 <style scoped>
-.page {
-  width: 100%;
-  padding-left: 40px;
-}
 .top-text {
   color: #2b3c4e;
   padding: 40px 0;
@@ -77,10 +83,10 @@ hr {
   width: 150px;
 }
 #blue {
-  border: solid rgb(69, 69, 224);
+  border: solid #006DF0;
 }
 #orange {
-  border: solid orange;
+  border: solid #F09000;
 }
 .status-main {
   /* width: 100%; */

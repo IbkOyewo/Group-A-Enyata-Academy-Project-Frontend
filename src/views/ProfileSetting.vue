@@ -1,162 +1,113 @@
 <template>
-  <div class="container">
-    <div>
-      <p id="top-text">Profiles and Settings</p>
-      <p id="top-text-desc">
-        Helps you set admin profile and give other users permissions
-      </p>
+    <div class="wrapper">
+        <div class="aside">
+            <AdminSidebar :toggleSettingsBorder="toggleSettingsBorder" />
+        </div>
+        <div class="contents">
+          <div class="contents-top">
+            <div class="heading">
+              <h1>Profiles and Settings</h1>
+              <p>Helps you set admin profile and give other users permissions</p>
+            </div>
+            <div class="buttons-div">
+              <button class="btn1"><a href="#">Admin Profile</a></button>
+              <button @click="openTimerSettings" class="btn2">Timer Settings</button>
+            </div>
+          </div>
+          <div class="contents-bottom">
+            <ProfileComponent/>
+          </div>
+        </div>
     </div>
-    <div>
-      <div class="admin-setting">
-        <p id="admin">Admin Profile</p>
-        <p id="timer">Timer Settings</p>
-      </div>
-
-      <div class="profile-edit">
-        <p id="profile">Profiles Settings</p>
-        <button id="edit">Edit</button>
-      </div>
-      <hr />
-
-      <div class="account">
-        <img src="../assets/account-img.svg" alt="" />
-        <p id="upload-image">Upload new image</p>
-        <span id="remove"
-          ><img id="remove-img" src="../assets/remove.png" alt="" />
-          Remove</span
-        >
-      </div>
-
-      <form>
-        <div>
-          <label for="name">Name</label><br />
-          <input type="text" name="name" />
-        </div>
-        <div>
-          <label for="email">Email</label><br />
-          <input type="email" name="email" />
-        </div>
-        <div>
-          <label for="phone">Phone number</label><br />
-          <input type="num" name="phone" />
-        </div>
-        <div>
-          <label for="country">Country</label><br />
-          <input type="text" name="country" />
-        </div>
-        <div class="grid-2">
-          <label for="address">Address</label><br />
-          <input type="text" name="address" id="grid-2" />
-        </div>
-      </form>
-      <div class="button"><button>Save</button></div>
-    </div>
-  </div>
 </template>
 
 <script>
+import AdminSidebar from '@/components/AdminSidebar.vue';
+import ProfileComponent from '@/components/ProfileComponent.vue';
+
 export default {
-  name: "ProfileSetting",
+  name: 'ProfileSettings',
+  data() {
+    return {
+      toggleSettingsBorder: false,
+    };
+  },
+  components: {
+    AdminSidebar,
+    ProfileComponent,
+  },
+  methods: {
+    openTimerSettings() {
+      this.$router.push({ name: 'TimerSettings' });
+    },
+  },
+  mounted() {
+    this.toggleSettingsBorder = true;
+  },
 };
 </script>
 
-<style>
-.container {
-  padding: 100px 40px;
-}
-#top-text {
-  font-size: 43.56px;
-}
-#top-text-desc {
-  font-size: 12px;
-  padding: 5px 0;
-}
-.admin-setting {
-  padding: 4em 0 2em;
-  color: #333758;
-  font-size: 14px;
-  font-weight: bold;
+<style scoped>
+.wrapper {
+  width: 100%;
+  height: 900px;
   display: flex;
-  gap: 20px;
-  align-items: center;
+  font-family: Lato;
+  font-style: normal;
 }
-#admin {
-  background-color: #efebfa;
-  padding: 20px 20px;
+.aside {
+  width: 25%;
 }
-hr {
-  background-color: #f2f2f2;
-  border: none;
-  height: 1px;
+.contents {
+  width: 75%;
+  padding-left: 37px;
+  height: 750px;
 }
-#profile {
-  color: #4a4a4a;
-  font-size: 1em;
-  font-weight: bold;
+.contents-top {
+  width: 365px;
+  margin-top: 50px;
+  box-sizing: border-box;
 }
-.profile-edit {
+.contents-bottom {
+  width: 724px;
+  margin-top: 58px;
+  margin-bottom: 58px;
+}
+.heading h1 {
+  font-weight: 300;
+  font-size: 43.5555px;
+  line-height: 52px;
+  letter-spacing: -0.02em;
+}
+p {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #202F44;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}
+.heading p {
+  width: 393px;
+  height: 21px;
+}
+.buttons-div {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  margin-top: 86px;
 }
-#edit {
-  border: 2px solid #7557d3;
-  border-radius: 3px;
-  color: #7557d3;
-  background-color: #fff;
-  padding: 10px 50px;
-  margin-bottom: 10px;
-}
-.account {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  padding: 40px 0 30px;
-}
-#upload-image{
-    color: #333758;
-    border-bottom: 1px solid ;
-}
-#remove-img {
-  width: 8px;
-  height: 8px;
-}
-#remove {
-  color: #ff5722;
-  font-weight: bold;
-}
-form {
-  display: grid;
-  grid-template-columns: 14em 14em 14em;
-  width: 100%;
+.btn1, .btn2 {
+  width: 188px;
+  height: 64px;
+  background: rgba(117, 87, 211, 0.1);
+  border: none;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
   color: #333758;
-  gap: 20px;
-  font-size: 15px;
+  mix-blend-mode: normal;
 }
-input {
-  background-color: #efebfa;
-  border: none;
-  padding: 10px;
-}
-.grid-2 {
-  width: 186%;
-}
-#grid-2 {
-  grid-column-start: 2;
-  grid-column-end: -1;
-  width: 100%;
-}
-.button{
-    align-items: center;
-    justify-content: center;
-    padding-top: 40px ;
-    display: flex;
-}
-button {
-  background-color: #7557d3;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  padding: 5px 40px;
+.btn2 {
+  background: #ffffff;
 }
 </style>

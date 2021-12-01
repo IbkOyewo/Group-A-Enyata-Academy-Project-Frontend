@@ -1,30 +1,18 @@
 <template>
   <div id="app">
-    <Sidebar />
     <router-view />
   </div>
 </template>
 
-<script>
-import Sidebar from "./components/Sidebar.vue";
-
-export default {
-  components: {
-    Sidebar,
-  },
-};
-</script>
-
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 #app {
-  font-family: Lato;
+  font-family: "lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  color: #2b3c4e;
+  color: #2c3e50;
+  /* background-image: url("./assets/Background.png");
+  background-repeat: no-repeat; */
 }
-* {
-  margin: 0;
-  padding: 0;
-}
+@import'~bootstrap/dist/css/bootstrap.css'
 </style>
