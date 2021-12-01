@@ -1,31 +1,34 @@
 <template>
-  <div class="home">
+  <div class="main">
     <img alt="Enyata logo" src="../assets/logo.png" />
     <h3>Applicant Sign Up</h3>
-    <Form/>
+    <Form />
   </div>
 </template>
 
 <script>
-import Form from "@/components/Form.vue"
+import Form from "@/components/Form.vue";
 export default {
-  name: "Home",
+  name: "Sign up",
   components: {
-    Form
-  }
+    Form,
+  },
 };
 </script>
 <style scoped>
-.home{
-margin-top: 30px;
+.main {
+  margin-top: 30px;
+  text-align: center;
 }
-h3{
+h3 {
   font-style: italic;
   margin-bottom: 55px;
+  text-align: center;
   padding-top: 30px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
-img{
-  margin:30px 20px 0;
+img {
+  margin: 30px auto;
+  text-align: center;
 }
 </style>
