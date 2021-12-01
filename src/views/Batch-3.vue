@@ -153,36 +153,37 @@ form input {
   text-align: center;
   cursor: pointer;
 }
-#approve{
-    color: #fff;
-    background-color: #7557d3 ;
-    border: none;
-    font-weight: 100 ;
-    padding: 15px 30px;
-    border-radius: 5px;
-
+#approve {
+  color: #fff;
+  background-color: #7557d3;
+  border: none;
+  font-weight: 100;
+  padding: 15px 30px;
+  border-radius: 5px;
 }
-#decline{
-    color: #2b3c4e;
-    background-color: #fff ;
-    border: none;
-    font-weight: 100 ;
-    padding: 15px 30px;
-    border-radius: 5px;
-    border: 1px solid #CECECE;
-
+#decline {
+  color: #2b3c4e;
+  background-color: #fff;
+  border: none;
+  font-weight: 100;
+  padding: 15px 30px;
+  border-radius: 5px;
+  border: 1px solid #cecece;
 }
-.button{
-    padding: 30px;
-    display: flex;  
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
+.button {
+  padding: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
 }
-#approve:hover{
-  background-color: #6e5aac ;
+#approve:hover {
+  background-color: #6e5aac;
 }
-#decline:hover{
-  background-color: rgb(253, 247, 247) ;
+#decline:hover {
+  background-color: rgb(253, 247, 247);
+}
+.sidebar {
+  position: fixed;
 }
 </style>
