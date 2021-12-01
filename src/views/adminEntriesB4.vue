@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style scoped >
+<style scoped>
 body {
   background: rgba(0, 0, 0, 0.2);
   background-image: none;

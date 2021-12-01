@@ -93,6 +93,37 @@ const routes = [
     name: "adminEntryModal",
     component: () => import("../views/adminEntriesB5.vue"),
   },
+  {
+    path: "/success",
+    name: "Success",
+    component: () => import("../views/Success.vue"),
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("../views/Dashboard.vue"),
+  },
+  {
+    path: "/create-application",
+    name: "applicationAdmin",
+    component: () => import("../views/CreateApp.vue"),
+  }, 
+    
+  {
+    path: "/assessment-history",
+    name: "AssessHistory",
+    component: () => import("../views/AssessHistory.vue"),
+  },   
+  {
+    path: "/batch-3",
+    name: "Batch-3",
+    component: () => import("../views/Batch-3.vue"),
+  },   
+  {
+    path: "/profile-setting",
+    name: "ProfileSettings",
+    component: () => import("../views/ProfileSetting.vue"),
+  },   
 ];
 
 const router = new VueRouter({
