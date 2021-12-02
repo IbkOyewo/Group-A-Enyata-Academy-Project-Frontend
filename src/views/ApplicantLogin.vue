@@ -68,7 +68,7 @@
         <div class="input_div">
           <label for="password">Password</label>
           <div class="masked-input">
-            <input :type="passwordFieldType" v-model="password" />
+            <input :type="passwordFieldType" v-model="password" required/>
             <span type="password" @click="switchVisibility">
               <i v-if="passwordFieldType === 'password'" class="far fa-eye"></i>
               <i
@@ -182,7 +182,8 @@ input {
   box-sizing: border-box;
   resize: vertical;
   border-radius: 4px;
-  border: 1.5px solid #2b3c4e;
+  border: 1.5px solid #BDBDBD;
+  outline: none;
 }
 input:focus {
   border: 1px solid #7557d3;
@@ -203,7 +204,7 @@ input:focus {
 .masked-input {
   display: flex;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid #BDBDBD;
   border-radius: 3px;
   padding: 0 12px;
   max-width: 397px;
@@ -212,12 +213,18 @@ input:focus {
   border: none;
   outline: none;
 }
+
+.masked-input input:focus{
+border: 1px solid #7557d3;
+}
+
 .footer_text {
   width: 390px;
   text-align: center;
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
+  font-style: italic;
 }
 .ft_link {
   text-decoration: none;

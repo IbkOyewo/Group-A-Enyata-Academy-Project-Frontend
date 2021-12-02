@@ -115,11 +115,12 @@
           <input type="number" v-model.trim="cgpa" required />
         </div>
       </div>
-    </form>
-
-    <div class='button'>
+      <div class='button'>
                 <button @click.prevent="submit" type="submit" :disabled=!isComplete>Submit</button> 
             </div> 
+    </form>
+
+    
   </div>
 </template>
 
@@ -168,10 +169,16 @@ export default {
 
 .main {
   width: 100%;
-  height: 100vh;
-  position: relative;
-  margin-top: 60px
+  /* height: 100vh; */
+  /* position: relative; */
+  margin-top: 60px;
+  /* margin-bottom: 50px; */
 }
+
+div.main{
+margin-bottom: 60px;
+}
+
 .icon_wrapper {
   text-align: center;
 }
@@ -254,7 +261,8 @@ input.date::placeholder{
 
 button{
     background: #7557D3;
-    margin: 15px 0;
+    margin: 15px 0 15px 320px;
+
     color: #fff;
     width: 33%;
     padding: 13px;

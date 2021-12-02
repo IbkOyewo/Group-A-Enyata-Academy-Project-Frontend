@@ -37,6 +37,7 @@ export default {
     font-family: 'Lato', sans-serif;
     margin-top: 40px;
     margin-bottom: 20px;
+    text-align: center;
 }
 div.forgotPassword.border{
     border: 1px solid #7557D3 !important;
