@@ -51,7 +51,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 body {
   font-family: Lato;
   background-image: none;

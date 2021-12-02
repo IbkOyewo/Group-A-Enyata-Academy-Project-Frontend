@@ -1,5 +1,5 @@
 <template>
-  <div class="ibk">
+  <div class="all">
     <div>
       <AdminSidebars />
     </div>
@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 body {
   background: rgba(0, 0, 0, 0.2);
   background-image: none;

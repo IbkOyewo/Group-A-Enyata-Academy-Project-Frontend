@@ -9,7 +9,7 @@
 <script>
 import Form from "@/components/Form.vue"
 export default {
-  name: "Home",
+  name: "signup",
   components: {
     Form
   }
@@ -17,13 +17,19 @@ export default {
 </script>
 <style scoped>
 .home{
-margin-top: 30px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
 }
+
+
 h3{
   font-style: italic;
   margin-bottom: 55px;
   padding-top: 30px;
   font-family: 'Lato', sans-serif;
+  text-align: center;
 }
 img{
   margin:30px 20px 0;
