@@ -13,23 +13,24 @@ export default {
   components: {
     Form,
   },
+  methods: {},
 };
 </script>
+
 <style scoped>
-.home{
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-
-h3{
+h3 {
   font-style: italic;
   margin-bottom: 55px;
   text-align: center;
   padding-top: 30px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   text-align: center;
 }
 img {

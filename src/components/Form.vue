@@ -4,35 +4,35 @@
       <div class="form-input">
         <div class="input">
           <label> First Name</label>
-          <input type="text" v-model="firstname" />
+          <input type="text" v-model="formData.firstName" />
         </div>
         <div class="input">
           <label> Last Name</label>
-          <input class="right" type="text" v-model="lastname" />
+          <input class="right" type="text" v-model="formData.lastName" />
         </div>
       </div>
       <div class="form-input">
         <div class="input">
           <label> Email Address</label>
-          <input type="email" v-model="email" />
+          <input type="email" v-model="formData.email" />
         </div>
         <div class="input">
           <label> Phone Number</label>
-          <input class="right" type="text" v-model="phone" />
+          <input class="right" type="text" v-model="formData.phoneNumber" />
         </div>
       </div>
       <div class="form-input">
         <div class="input">
           <label> Password</label>
-          <input type="password" v-model="password" />
+          <input type="password" v-model="formData.password" />
         </div>
         <div class="input">
           <label> Confirm Password</label>
-          <input class="right" type="password" v-model="cpassword" />
+          <input class="right" type="password" v-model="formData.cpassword" />
         </div>
       </div>
       <div class="button">
-        <button @click.prevent="submit" type="submit" :disabled="!isComplete">
+        <button @click.prevent="signup(formData)" type="submit" :disabled="!isComplete">
           Sign up
         </button>
       </div>
@@ -44,34 +44,41 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
   name: "Form",
   data() {
     return {
-      firstname: "",
-      lastname: "",
-      email: "",
-      phone: "",
-      password: "",
-      cpassword: "",
+      formData:{
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+        cpassword: "",
+      }
+      
     };
   },
   computed: {
     isComplete() {
       return (
-        this.firstname != "" &&
-        this.lastname != "" &&
-        this.email != "" &&
-        this.phone != "" &&
-        this.password != "" &&
-        this.cpassword != ""
+        this.formData.firstName != "" &&
+        this.formData.lastName != "" &&
+        this.formData.email != "" &&
+        this.formData.phoneNumber != "" &&
+        this.formData.password != "" &&
+        this.formData.cpassword != ""
       );
     },
   },
+  mounted() {
+    console.log(this.$route.path); // path is /post
+  },
   methods: {
-    submit() {
-      console.log("HELLO");
-    },
+    ...mapActions(["signup"])
+
   },
 };
 </script>
