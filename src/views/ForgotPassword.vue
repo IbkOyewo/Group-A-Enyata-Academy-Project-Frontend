@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="main">
     <h2>Forgot Password</h2>
     <p>Please select option to send link to reset password</p>
     <ForgotPassword
@@ -21,7 +21,7 @@ import ForgotPassword from "@/components/ForgotPassword.vue";
 import Button from "@/components/Button.vue";
 
 export default {
-  name: "Home",
+  name: "Forgot Password",
   components: {
     ForgotPassword,
     Button,
@@ -35,15 +35,16 @@ export default {
 };
 </script>
 <style scoped>
-.home {
-  max-width: 700px;
-  margin: auto;
-  box-shadow: 5px 5px 20px 0px #e7e1e1;
-  height: 95vh;
-  font-family: "Lato", sans-serif;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  text-align: center;
+.main{
+    max-width: 700px;
+    margin: auto;
+    box-shadow: 5px 5px 20px 0px #e7e1e1;
+    height: 95vh;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 div.forgotPassword.border {
   border: 1px solid #7557d3 !important;
