@@ -6,9 +6,18 @@
       </div>
 
       <ul class="nav-links">
-        <li>Home</li>
-        <li>Sign in</li>
-        <li>Register Now</li>
+        <router-link style="color: rgba(33, 31, 38, 0.71);
+" :to="{ name: 'home' }"
+          ><li>Home</li></router-link
+        >
+        <router-link style="color: rgba(33, 31, 38, 0.71);
+" :to="{ name: 'applicantLogin' }"
+          ><li>Sign in</li></router-link
+        >
+        <router-link style="color: rgba(33, 31, 38, 0.71);
+" :to="{ name: 'signup' }"
+          ><li>Register Now</li></router-link
+        >
       </ul>
     </nav>
 
@@ -21,11 +30,14 @@
         </div>
         <div class="small-text-box">
           <p class="small-text">
-            Join enyata academy today and bring your long awaiting dream to reality.
+            Join enyata academy today and bring your long awaiting dream to
+            reality.
           </p>
         </div>
 
-        <button>Regster Now</button>
+        <router-link style="color: #FFFFFF;
+" :to="{ name: 'signup' }"><button>Register Now</button></router-link
+        >
       </div>
 
       <div class="image-box">
@@ -102,7 +114,7 @@ nav {
 body {
   background-image: url("../assets/Background.png");
   background-repeat: no-repeat;
-  background-position: right top; 
+  background-position: right top;
 }
 
 nav img {
@@ -119,7 +131,7 @@ nav img {
   padding: 10px;
 }
 
-.landing-page{
+.landing-page {
   background-image: url("../assets/Background.png");
   background-repeat: no-repeat;
   background-position: right top;
@@ -468,6 +480,4 @@ li {
 // }
 
 // }
-
-
 </style>

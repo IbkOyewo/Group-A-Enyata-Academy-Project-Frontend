@@ -42,7 +42,7 @@
           We have 4 days left until the next assessment <br />Watch this space
         </p>
 
-        <button>Take Assessment</button>
+        <router-link :to="{name: 'takeAssessment'}"><button>Take Assessment</button></router-link>
         </div>
       </div>
     </div>

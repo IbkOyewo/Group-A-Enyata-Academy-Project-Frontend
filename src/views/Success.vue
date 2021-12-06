@@ -27,7 +27,7 @@
               <br />
               Best of luck.
             </p>
-            <b-button type="submit" class="text-white button" @click="toHome"> Home </b-button>
+           <router-link :to="{name: 'home'}" style="padding-left: 189px;" class="tests"> <b-button type="submit" class="text-white button"> Home </b-button></router-link>
           </div>
         </div>
       </div>

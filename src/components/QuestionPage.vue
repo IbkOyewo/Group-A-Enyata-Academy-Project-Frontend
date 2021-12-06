@@ -15,13 +15,13 @@
         <div class="span">
           <div>
             <span class="time">
-              {{ 30}}
-              <span class="minute">min</span>
+              {{mins}}
+              <span class="minute">mins</span>
             </span>
           </div>
           <div>
             <span class="seconds time">
-              {{10}}
+              0{{secs}}
               <span class="minute">sec</span>
             </span>
           </div>
@@ -46,7 +46,7 @@
       <div class="two-buttons">
         <button class="second-button">Previous</button>
         <button class="btn">Finish</button>
-        <button @click="next" class="second-button">Next</button>
+        <button class="second-button">Next</button>
       </div>
   </div>
 </template>
@@ -55,6 +55,33 @@
 <script>
 export default {
   name: "QuestionPage",
+  data() {
+        return {
+            mins: 30,
+            secs: 0,
+        }
+    },
+    methods: {
+        startTimer(duration) {
+            let timer = duration
+            setInterval(() => {
+                this.mins = parseInt(timer / 60, 10);
+                this.secs = parseInt(timer % 60, 10);
+
+                this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
+                this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+    },
+    mounted() {
+        const thirtyMins = 60 * 30
+
+        this.startTimer(thirtyMins)
+    }
   } 
 </script>
 
