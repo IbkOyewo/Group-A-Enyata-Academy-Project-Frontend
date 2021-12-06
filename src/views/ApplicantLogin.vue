@@ -5,7 +5,7 @@
       <p>Applicant Log In</p>
     </div>
 
-    <form>
+    <form class="was-validated">
       <div class="form-body">
         <div class="input-field">
           <label for="email">Email</label>

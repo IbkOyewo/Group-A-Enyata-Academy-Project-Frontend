@@ -38,7 +38,7 @@
           space
         </p>
         <div class="dropdown">
-         <router-link style="text-decoration: none;" :to="{name: 'question'}"> <button class="btn btn-secondary ">Take Assessment</button></router-link>
+         <router-link style="text-decoration: none;" :to="{name: 'questionView'}"> <button class="btn btn-secondary ">Take Assessment</button></router-link>
         </div>
       </center>
     </div>
