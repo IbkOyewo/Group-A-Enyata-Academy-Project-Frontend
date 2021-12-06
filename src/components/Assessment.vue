@@ -15,13 +15,13 @@
         <div class="span">
           <div>
             <span>
-              {{30}}
+               {{mins}}
               <span class="minute">mins</span>
             </span>
           </div>
           <div>
             <span class="seconds">
-              00
+              0{{secs}}
               <span class="minute">sec</span>
             </span>
           </div>
@@ -38,7 +38,7 @@
           space
         </p>
         <div class="dropdown">
-         <router-link style="text-decoration: none;" :to="{name: 'question'}"> <button class="btn btn-secondary ">Take Assessment</button></router-link>
+         <router-link style="text-decoration: none;" :to="{name: 'questionView'}"> <button class="btn btn-secondary ">Take Assessment</button></router-link>
         </div>
       </center>
     </div>
@@ -48,6 +48,33 @@
 <script>
 export default {
   name: 'assessment',  
+  data() {
+        return {
+            mins: 30,
+            secs: 0,
+        }
+    },
+    methods: {
+        startTimer(duration) {
+            let timer = duration
+            setInterval(() => {
+                this.mins = parseInt(timer / 60, 10);
+                this.secs = parseInt(timer % 60, 10);
+
+                this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
+                this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+    },
+    mounted() {
+        const thirtyMins = 60 * 30
+
+        this.startTimer(thirtyMins)
+    }
 }
 </script>
 
