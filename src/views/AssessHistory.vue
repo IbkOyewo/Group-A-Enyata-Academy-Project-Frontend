@@ -1,91 +1,29 @@
 <template>
-  <div class="main-div">
-    <div id="top-text">Assessment History</div>
-    <!-- <div class="short-img">
-                  <img src="..assets/short.png" alt="">
-              </div> -->
-    <div class="table">
-      <table>
-        <thead class="table-header">
-          <td>Batch</td>
-          <td>Date Composed</td>
-          <td>No of Questions</td>
-          <td>Time Allocated</td>
-          <td>Status</td>
-        </thead>
-        <tbody>
-          <tr class="row-2">
-            <td>Batch</td>
-            <td>12/07/94</td>
-            <td>30</td>
-            <td>30 mins</td>
-            <td>Taken</td>
-          </tr>
-          <tr>
-            <td>Batch</td>
-            <td>12/07/94</td>
-            <td>30</td>
-            <td>30 mins</td>
-            <td>Taken</td>
-          </tr>
-          <tr>
-            <td>Batch</td>
-            <td>12/07/94</td>
-            <td>30</td>
-            <td>30 mins</td>
-            <td>Taken</td>
-          </tr>
-          <tr>
-            <td>Batch</td>
-            <td>12/07/94</td>
-            <td>30</td>
-            <td>30 mins</td>
-            <td>Taken</td>
-          </tr>
-          <tr>
-            <td>Batch</td>
-            <td>12/07/94</td>
-            <td>30</td>
-            <td>30 mins</td>
-            <td>Taken</td>
-          </tr>
-        </tbody>
-      </table>
+  <div>
+    <div>
+      <AdminSidebars />
+    </div>
+    <div class="main">
+      <AssessmentHistory />
     </div>
   </div>
 </template>
 
 <script>
-import AdminSidebar from '@/components/AdminSidebar.vue'
+import AdminSidebars from "@/components/AdminSidebars.vue";
+import  AssessmentHistory from "@/components/AssessmentHistory.vue";
 export default {
-    name: 'AssessHistory',
-    components: {
-    AdminSidebar
-  },
-
+  name: "composeQues",
+  components: {
+    AdminSidebars,
+    AssessmentHistory
+  }
 };
-
 </script>
 
-<style>
-.main-div{
-    margin: 111px 42px;
-}
-#top-text {
-  font-size: 43.56px;
-  margin-bottom: 20px;
-}
-.table {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-}
-.table-header {
-  background-color: #2b3c4e;
-  width: 100%;
-  color: #fff;
-}
-.row-2 {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+<style scoped>
+.main {
+  margin-left: 300px;
+  padding: 80px 70px 50px 70px;
 }
 </style>
