@@ -1,29 +1,29 @@
 <template>
-  <div>
-    <div>
-      <AdminSidebars />
+  <div class="row">
+    <div class="col-3">
+      <AdminSidebar />
     </div>
-    <div class="main">
-      <composeQuestion />
+    <div class="container col-8 pt-5">
+      <ComposeQuestion />
     </div>
   </div>
 </template>
 
 <script>
-import AdminSidebars from "@/components/AdminSidebars.vue";
+import AdminSidebar from "@/components/AdminSidebar.vue";
 import  ComposeQuestion from "@/components/ComposeQuestion.vue";
 export default {
   name: "composeQues",
   components: {
-    AdminSidebars,
+    AdminSidebar,
     ComposeQuestion
   }
 };
 </script>
 
 <style scoped>
-.main {
+/* .main {
   margin-left: 300px;
   padding: 80px 70px 50px 70px;
-}
+} */
 </style>

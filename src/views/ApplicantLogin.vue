@@ -40,13 +40,14 @@
       </button>
       <div class="bottom-text">
         <span class="ft_txt"
-          >Don’t have an account yet?<a href="#" target="_blank">
-            Sign Up</a
+          >Don’t have an account yet?<router-link :to="{ name: 'signup' }"
+          >
+            Sign Up</router-link
           ></span
         >
         <span class="ft_txt"
-          ><a class="ft_link" href="#" target="_blank"
-            >Forgot Password?</a
+          ><router-link :to="{ name: 'Forgot Password' }"
+          >Forgot Password?</router-link 
           ></span
         >
       </div>
