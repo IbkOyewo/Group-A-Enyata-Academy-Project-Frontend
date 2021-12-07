@@ -59,9 +59,6 @@
       </svg>
       <p class="appli_hd">Applicant Log In</p>
     </div>
-    <div>
-      <p>{{ invalid }}</p>
-    </div>
     <form @submit.prevent="login">
       <div class="form_body">
         <div class="input_div">
@@ -106,7 +103,6 @@ export default {
   name: "applicantLogin",
   data() {
     return {
-      invalid:"",
       email: "",
       password: "",
       passwordFieldType: "password",
@@ -114,7 +110,7 @@ export default {
   },
   computed: {
     isDisabled() {
-      return this.email != "" && this.lastname != "";
+      return this.email != "" && this.password != "";
     },
   },
   methods: {

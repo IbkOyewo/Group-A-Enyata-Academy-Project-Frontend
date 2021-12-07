@@ -30,7 +30,7 @@ export default new Vuex.Store({
     // eslint-disable-next-line no-unused-vars
     async login({commit}, {email,password}) {
       try {
-        const response =await axios.post('http://localhost:8082/api/login', {email,password})
+        const response = await axios.post('http://localhost:8082/api/login', {email,password})
         return response 
       } catch (error) {
         if (error.response.status === 401){
@@ -39,171 +39,172 @@ export default new Vuex.Store({
       }
     },
     //  // eslint-disable-next-line no-unused-vars
-    //  async adminLogin({commit}, {email,password}) {
+     async adminLogin({commit}, {email,password}) {
+      try {
+        const response = await axios.post('http://localhost:8082/api/admin/login', {email,password})
+        console.log(response);
+        return response 
+      } catch (error) {
+        if (error.response.status === 401){
+            alert("Admin already exists. Please try again")
+        }
+      }
+    },
+    // async application({
+    //   commit
+    // }, userInfo) {
     //   try {
-    //     const response =await axios.post('http://localhost:8082/api/admin/login', {email,password})
-    //     return response 
-    //   } catch (error) {
-    //     if (error.response.status === 401){
-    //         alert("Admin already exists. Please try again")
+    //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
+    //     const response = await axios.post('http://localhost:3000/api/user/application', userInfo);
+
+    //     let responseObject = {
+    //       type: 'success',
+    //       message: response.data.message
     //     }
+    //     commit('setResponse', responseObject)
+    //     console.log(response.data);
+    //   } catch (error) {
+    //     let responseObject = {
+    //       type: 'failed',
+    //       message: error.response.data.message
+    //     }
+    //     console.log(error.response.data.message);
+
+    //     commit('setResponse', responseObject)
+
     //   }
     // },
-    async application({
-      commit
-    }, userInfo) {
-      try {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
-        const response = await axios.post('http://localhost:3000/api/user/application', userInfo);
 
-        let responseObject = {
-          type: 'success',
-          message: response.data.message
-        }
-        commit('setResponse', responseObject)
-        console.log(response.data);
-      } catch (error) {
-        let responseObject = {
-          type: 'failed',
-          message: error.response.data.message
-        }
-        console.log(error.response.data.message);
+    // async fetchProfile({
+    //   commit
+    // }) {
+    //   try {
+    //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
+    //     var id = localStorage.getItem('userP')
+    //     const response = await axios.get(`http://localhost:3000/api/user/${id}`);
+    //     // console.log(id)
+    //     ;
+    //     // console.log(response);
+    //     commit('setProfile', response.data.data)
 
-        commit('setResponse', responseObject)
+    //   } catch (error) {
+    //     commit('setProfile', error.response)
+    //   }
+    // },
 
-      }
-    },
+    // async fetchOneApp({
+    //   commit
+    // }) {
+    //   try {
+    //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
+    //     var id = localStorage.getItem('userP')
+    //     const response = await axios.get(`http://localhost:3000/api/application/${id}`);
+    //     commit('setOneApp', response.data.data)
 
-    async fetchProfile({
-      commit
-    }) {
-      try {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
-        var id = localStorage.getItem('userP')
-        const response = await axios.get(`http://localhost:3000/api/user/${id}`);
-        // console.log(id)
-        ;
-        // console.log(response);
-        commit('setProfile', response.data.data)
+    //   } catch (error) {
+    //     commit('setOneApp', error.response)
+    //   }
+    // },
 
-      } catch (error) {
-        commit('setProfile', error.response)
-      }
-    },
+    // async fetchQuiz({
+    //   commit
+    // }) {
+    //   try {
+    //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
+    //     const response = await axios.get(
+    //       `http://localhost:3000/api/questions`
+    //     );
 
-    async fetchOneApp({
-      commit
-    }) {
-      try {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
-        var id = localStorage.getItem('userP')
-        const response = await axios.get(`http://localhost:3000/api/application/${id}`);
-        commit('setOneApp', response.data.data)
+    //     commit('setQuiz', response.data)
 
-      } catch (error) {
-        commit('setOneApp', error.response)
-      }
-    },
+    //   } catch (error) {
+    //     commit('setQuiz', error.response)
+    //   }
+    // },
 
-    async fetchQuiz({
-      commit
-    }) {
-      try {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
-        const response = await axios.get(
-          `http://localhost:3000/api/questions`
-        );
+    // async answers({
+    //   commit
+    // }, userInfo) {
+    //   try {
+    //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
+    //     const response = await axios.post('http://localhost:3000/api/user/question/submit', userInfo);
 
-        commit('setQuiz', response.data)
+    //     let responseObject = {
+    //       type: 'success',
+    //       message: response.data.message
+    //     }
 
-      } catch (error) {
-        commit('setQuiz', error.response)
-      }
-    },
+    //     commit('setResponse', responseObject)
+    //     console.log(response.data);
+    //   } catch (error) {
+    //     let responseObject = {
+    //       type: 'failed',
+    //       message: error.response.data.message
+    //     }
+    //     console.log(error.response.data.message);
 
-    async answers({
-      commit
-    }, userInfo) {
-      try {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
-        const response = await axios.post('http://localhost:3000/api/user/question/submit', userInfo);
+    //     commit('setResponse', responseObject)
 
-        let responseObject = {
-          type: 'success',
-          message: response.data.message
-        }
+    //   }
+    // },
 
-        commit('setResponse', responseObject)
-        console.log(response.data);
-      } catch (error) {
-        let responseObject = {
-          type: 'failed',
-          message: error.response.data.message
-        }
-        console.log(error.response.data.message);
-
-        commit('setResponse', responseObject)
-
-      }
-    },
-
-    async editProfile({
-      commit
-    }, userInfo) {
-      try {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
-        var id = localStorage.getItem('userP')
-        const response = await axios.put(`http://localhost:3000/api/user/profilepic/${id}`, userInfo);
+    // async editProfile({
+    //   commit
+    // }, userInfo) {
+    //   try {
+    //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
+    //     var id = localStorage.getItem('userP')
+    //     const response = await axios.put(`http://localhost:3000/api/user/profilepic/${id}`, userInfo);
 
 
-        let responseObject = {
-          type: 'success',
-          message: response.data.message
-        }
-        commit('setResponse', responseObject)
+    //     let responseObject = {
+    //       type: 'success',
+    //       message: response.data.message
+    //     }
+    //     commit('setResponse', responseObject)
 
 
-      } catch (error) {
+    //   } catch (error) {
 
-        let responseObject = {
-          type: 'failed',
-          message: error.response.data.message
-        }
-        commit('setResponse', responseObject)
-      }
-    },
+    //     let responseObject = {
+    //       type: 'failed',
+    //       message: error.response.data.message
+    //     }
+    //     commit('setResponse', responseObject)
+    //   }
+    // },
 
-    async adminLogin({
-      commit
-    }, userInfo) {
-      try {
-        const response = await axios.post('http://localhost:3000/api/admin/login', userInfo);
+    // async adminLogin({
+    //   commit
+    // }, userInfo) {
+    //   try {
+    //     const response = await axios.post('http://localhost:3000/api/admin/login', userInfo);
 
-        let responseObject = {
-          type: 'success',
-          message: response.data.message
-        }
+    //     let responseObject = {
+    //       type: 'success',
+    //       message: response.data.message
+    //     }
 
-        const token = response.data.token
-        localStorage.setItem('access_token', token)
+    //     const token = response.data.token
+    //     localStorage.setItem('access_token', token)
 
-        commit('retrieveToken', token)
-        commit('setResponse', responseObject)
+    //     commit('retrieveToken', token)
+    //     commit('setResponse', responseObject)
 
-        console.log(response.data.data._id);
-        const user = await response.data.data._id
-        localStorage.setItem('admin', user)
-        commit('setAdmin', user)
+    //     console.log(response.data.data._id);
+    //     const user = await response.data.data._id
+    //     localStorage.setItem('admin', user)
+    //     commit('setAdmin', user)
 
-      } catch (error) {
-        let responseObject = {
-          type: 'failed',
-          message: error.response.data.message
-        }
-        console.log(error.response.data.message);
-        commit('setResponse', responseObject)
-      }
-    },
+    //   } catch (error) {
+    //     let responseObject = {
+    //       type: 'failed',
+    //       message: error.response.data.message
+    //     }
+    //     console.log(error.response.data.message);
+    //     commit('setResponse', responseObject)
+    //   }
+    // },
 
 
   },

@@ -116,8 +116,8 @@
         </div>
       </div>
       <div class='button'>
-                <button @click.prevent="submit" type="submit" :disabled=!isComplete>Submit</button> 
-            </div> 
+        <button @click.prevent="submit" type="submit" :disabled=!isDisabled>Submit</button> 
+      </div> 
     </form>
 
     
