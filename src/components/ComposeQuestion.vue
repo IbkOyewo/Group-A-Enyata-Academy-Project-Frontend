@@ -51,6 +51,11 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'ComposeQuestion' }
+</script>
+
 <style scoped>
 body {
   font-family: Lato;

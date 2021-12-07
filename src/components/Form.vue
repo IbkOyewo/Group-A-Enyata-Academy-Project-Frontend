@@ -37,7 +37,8 @@
         </button>
       </div>
       <div class="signin">
-        <p>Already have an account?<a href="#">Sign in</a></p>
+        <p>Already have an account?<router-link :to="{ name: 'applicantLogin' }"
+          >Sign in</router-link></p>
       </div>
     </form>
   </div>

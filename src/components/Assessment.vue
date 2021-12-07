@@ -15,13 +15,13 @@
         <div class="span">
           <div>
             <span>
-               {{mins}}
+               00
               <span class="minute">mins</span>
             </span>
           </div>
           <div>
             <span class="seconds">
-              0{{secs}}
+              000
               <span class="minute">sec</span>
             </span>
           </div>
@@ -48,33 +48,33 @@
 <script>
 export default {
   name: 'assessment',  
-  data() {
-        return {
-            mins: 30,
-            secs: 0,
-        }
-    },
-    methods: {
-        startTimer(duration) {
-            let timer = duration
-            setInterval(() => {
-                this.mins = parseInt(timer / 60, 10);
-                this.secs = parseInt(timer % 60, 10);
+  // data() {
+  //       return {
+  //           mins: 30,
+  //           secs: 0,
+  //       }
+  //   },
+  //   methods: {
+  //       startTimer(duration) {
+  //           let timer = duration
+  //           setInterval(() => {
+  //               this.mins = parseInt(timer / 60, 10);
+  //               this.secs = parseInt(timer % 60, 10);
 
-                this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
-                this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
+  //               this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
+  //               this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
 
-                if (--timer < 0) {
-                    timer = duration;
-                }
-            }, 1000);
-        }
-    },
-    mounted() {
-        const thirtyMins = 60 * 30
+  //               if (--timer < 0) {
+  //                   timer = duration;
+  //               }
+  //           }, 1000);
+  //       }
+  //   },
+  //   mounted() {
+  //       const thirtyMins = 60 * 30
 
-        this.startTimer(thirtyMins)
-    }
+  //       this.startTimer(thirtyMins)
+  //   }
 }
 </script>
 
