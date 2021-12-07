@@ -59,64 +59,61 @@
       </svg>
       <p class="appli_hd">Application Form</p>
     </div>
-    <form>
+    <form enctype="multipart/form-data" @submit.prevent="submitForm">
       <div class="file_upload">
         <div class="file_div">
           <label for="file-upload" class="custom-file">
             <span>&#x2B; &nbsp;</span>Upload CV
           </label>
-          <input id="file-upload" :v-model="cv_input" type="file" />
+          <input type="file" id="file" :v-html="file" ref="file" v-on:change="handleFileUpload()" :v-model="appData.cv"/>
+          <!-- <input type="file" :v-model="appData.cv"/> -->
         </div>
         <div class="file_div">
           <label for="file-upload" class="custom-file">
             <span>&#x2B; &nbsp;</span>Upload Photo
           </label>
           <input
-            id="file-upload" :v-model="photo" type="file"
+            id="file-upload" :v-model="appData.image" type="file"
           />
         </div>
       </div>
       <div class="application_fm">
         <div class="input_div">
           <label for="firstname">First Name</label>
-          <input type="text" v-model.trim="firstname" required />
+          <input type="text" class="form-control" v-model="appData.fname" name="fname" />
         </div>
         <div class="input_div">
           <label for="lastname">Last Name</label>
-          <input type="text" v-model.trim="lastname" required />
+          <input type="text" class="form-control" v-model="appData.lname" name="lname"/>
         </div>
         <div class="input_div">
           <label for="firstname">Email</label>
-          <input type="email" v-model.trim="email" required />
+          <input type="email" class="form-control" v-model="appData.email" name="email"/>
         </div>
         <div class="input_div">
           <label for="firstname">Date of Birth</label>
-          <input class="date"
-            type="date"
-            v-model.trim="dateOfBirth"
-            required
-            placeholder="dd/mm/yyyy"
+          <input type="date" class="form-control" v-model="appData.dob" name="dob"  
           />
         </div>
         <div class="input_div">
           <label for="firstname">Address</label>
-          <input type="text" v-model.trim="address" required />
+          <input type="text" class="form-control" v-model="appData.address" name="address" />
         </div>
         <div class="input_div">
           <label for="firstname">University</label>
-          <input type="text" v-model.trim="university" required />
+          <input type="text" class="form-control" v-model="appData.university" name="university"/>
         </div>
         <div class="input_div">
           <label for="firstname">Course of Study</label>
-          <input type="text" v-model.trim="courseOfStudy" required />
+          <input type="text" class="form-control" v-model="appData.course" name="course" />
         </div>
         <div class="input_div">
           <label for="firstname">CGPA</label>
-          <input type="number" v-model.trim="cgpa" required />
+          <input type="text" class="form-control" v-model="appData.cpga" name="cgpa" value="7"/>
         </div>
       </div>
       <div class='button'>
-        <button @click.prevent="submit" type="submit" :disabled=!isDisabled>Submit</button> 
+          <button type="submit" @click="submitFile()">Submit</button> 
       </div> 
     </form>
 
@@ -125,43 +122,71 @@
 </template>
 
 <script>
+// import { mapGetters} from "vuex";
+import axios from 'axios'
 export default {
   name: "applicantForm",
   data() {
     return {
-      cv_input:"",
-      photo: "",
-      firstname: "",
-      lastname: "",
-      email: "",
-      dateOfBirth: "",
-      address: "",
-      university: "",
-      courseOfStudy: "",
-      cgpa: "",
+      file: "",
+       appData:{
+        cv: "",
+        image: "",
+        fname: "",
+        lname: "",
+        email: "",
+        cpga: "",
+        dob: "",
+        address: "",
+        course: "",
+        university: "",
+       }
     };
+    
   },
-  computed: {
-    isDisabled() {
-      return (
-        this.cv_input != "" &&
-        this.photo != "" &&
-        this.firstname != "" &&
-        this.lastname != "" &&
-        this.email != "" &&
-        this.dateOfBirth != "" &&
-        this.address != "" &&
-        this.university != "" &&
-        this.courseOfStudy != "" &&
-        this.cgpa != ""
-      );
-    },
-  },
+
   methods: {
-    formSubmit() {
-      alert("work in progress");
-    },
+    handleFileUpload(){
+    this.file = this.$refs.file.files[0];
   },
+  submitFile(){
+        /*
+                Initialize the form data
+            */
+            let formData = new FormData();
+
+            /*
+                Add the form data we need to submit
+            */
+            formData.append('file', this.file);
+
+        /*
+          Make the request to the POST /single-file URL
+        */
+            axios.post( '/http://localhost:8082/api/user/application',
+                formData,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(){
+          console.log('SUCCESS!!');
+        })
+        .catch(function(){
+          console.log('FAILURE!!');
+        });
+      },
+
+   submitForm: async function () {
+      let res = await this.$store.dispatch("application", this.appData)
+      console.log(res);
+      if (res.status === 201) {
+        this.$router.push("/dashboard")
+      } 
+  },
+  },
+
 };
 </script>
 <style scoped>
