@@ -65,7 +65,8 @@
           <label for="file-upload" class="custom-file">
             <span>&#x2B; &nbsp;</span>Upload CV
           </label>
-          <input type="file" :v-model="appData.cv"/>
+          <input type="file" id="file" :v-html="file" ref="file" v-on:change="handleFileUpload()" :v-model="appData.cv"/>
+          <!-- <input type="file" :v-model="appData.cv"/> -->
         </div>
         <div class="file_div">
           <label for="file-upload" class="custom-file">
@@ -112,8 +113,8 @@
         </div>
       </div>
       <div class='button'>
-                <button type="submit">Submit</button> 
-            </div> 
+          <button type="submit" @click="submitFile()">Submit</button> 
+      </div> 
     </form>
 
     
@@ -122,29 +123,62 @@
 
 <script>
 // import { mapGetters} from "vuex";
+import axios from 'axios'
 export default {
   name: "applicantForm",
   data() {
     return {
+      file: "",
        appData:{
-         cv: "",
-       image: "",
-      fname: "",
-      lname: "",
-      email: "",
-      cpga: "",
-      dob: "",
-      address: "",
-      course: "",
-      university: "",
+        cv: "",
+        image: "",
+        fname: "",
+        lname: "",
+        email: "",
+        cpga: "",
+        dob: "",
+        address: "",
+        course: "",
+        university: "",
        }
     };
     
   },
 
   methods: {
-   submitForm: async function () {
+    handleFileUpload(){
+    this.file = this.$refs.file.files[0];
+  },
+  submitFile(){
+        /*
+                Initialize the form data
+            */
+            let formData = new FormData();
 
+            /*
+                Add the form data we need to submit
+            */
+            formData.append('file', this.file);
+
+        /*
+          Make the request to the POST /single-file URL
+        */
+            axios.post( '/http://localhost:8082/api/user/application',
+                formData,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(){
+          console.log('SUCCESS!!');
+        })
+        .catch(function(){
+          console.log('FAILURE!!');
+        });
+      },
+
+   submitForm: async function () {
       let res = await this.$store.dispatch("application", this.appData)
       console.log(res);
       if (res.status === 201) {

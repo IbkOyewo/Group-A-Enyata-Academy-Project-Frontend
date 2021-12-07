@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="button">
-        <button @click.prevent="signup(formData)" type="submit" :disabled="!isComplete">
+        <button type="submit" @click.prevent="signup" :disabled="!isComplete">
           Sign up
         </button>
       </div>
@@ -46,7 +46,6 @@
 
 <script>
 import { mapActions } from "vuex"
-
 export default {
   name: "Form",
   data() {
@@ -74,13 +73,14 @@ export default {
       );
     },
   },
-  mounted() {
-    console.log(this.$route.path); // path is /post
-  },
   methods: {
-    ...mapActions(["signup"])
-
-  },
+    signup: async function () {
+      let res = await this.$store.dispatch("signup",this.formData);
+      if (res.status === 201) {
+        this.$router.push("/login");
+      } 
+    },
+  }
 };
 </script>
 
@@ -90,7 +90,6 @@ export default {
   margin: auto;
   color: #2b3c4e;
 }
-
 input.right {
   margin-left: 40px;
 }
@@ -104,7 +103,6 @@ input.right {
   flex-direction: column;
   align-items: flex-start;
 }
-
 .signin {
   text-align: center;
 }
@@ -124,11 +122,9 @@ p {
   max-width: 700px;
   margin: auto;
 }
-
 div.button {
   padding-left: 170px;
 }
-
 button {
   background: #7557d3;
   margin: 15px 0;

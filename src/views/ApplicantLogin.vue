@@ -5,7 +5,7 @@
       <p>Applicant Log In</p>
     </div>
 
-    <form class="was-validated">
+    <form class="was-validated" @submit.prevent="login">
       <div class="form-body">
         <div class="input-field">
           <label for="email">Email</label>
@@ -32,7 +32,6 @@
       </div>
       <button
         class="submit-btn"
-        @click.prevent="formSubmit"
         type="submit"
         :disabled="!isDisabled"
       >
@@ -91,9 +90,13 @@ export default {
     togglePassword() {
       this.showPassword = !this.showPassword;
     },
-
-    formSubmit() {
-      alert("work in progress");
+    login: async function () {
+      let email = this.user.email;
+      let password = this.user.password;
+      let res = await this.$store.dispatch("login", { email, password });
+      if (res.status === 200) {
+        this.$router.push("/applicationform")
+      } 
     },
   },
 };

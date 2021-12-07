@@ -79,26 +79,20 @@
 
 <script>
 import AdminSidebar from '@/components/AdminSidebar.vue';
-// import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "adminDashboard",
   components: {
     AdminSidebar
-  }
-
-//   computed: {
-//     ...mapGetters(["getProfile"])
-//   },
-
-//   methods: {
-//     // ...mapActions(["fetchAdminProfile"]),
+  },
+  computed: {
+    adminDashboard: async function () {
+      let res = await this.$store.dispatch("adminDashboard"); 
+    }
+  },
+  methods: {
     
-//   },
-
-//   async created () {
-//     await this.fetchAdminProfile()
-//   }
+  }
 }
 </script>
 
