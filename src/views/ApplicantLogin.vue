@@ -59,16 +59,19 @@
       </svg>
       <p class="appli_hd">Applicant Log In</p>
     </div>
-    <form>
+    <div>
+      <p>{{ invalid }}</p>
+    </div>
+    <form @submit.prevent="login">
       <div class="form_body">
         <div class="input_div">
           <label for="firstname">Email</label>
-          <input type="email" required />
+          <input type="email" v-model="email" required />
         </div>
         <div class="input_div">
           <label for="password">Password</label>
           <div class="masked-input">
-            <input :type="passwordFieldType" v-model="password" required/>
+            <input :type="passwordFieldType" v-model="password" required />
             <span type="password" @click="switchVisibility">
               <i v-if="passwordFieldType === 'password'" class="far fa-eye"></i>
               <i
@@ -79,12 +82,7 @@
           </div>
         </div>
       </div>
-      <button
-        class="btn_appli_form"
-        @click.prevent="formSubmit"
-        type="submit"
-        :disabled="!isDisabled"
-      >
+      <button class="btn_appli_form" type="submit" :disabled="!isDisabled">
         Submit
       </button>
       <div class="footer_text">
@@ -108,6 +106,7 @@ export default {
   name: "applicantLogin",
   data() {
     return {
+      invalid:"",
       email: "",
       password: "",
       passwordFieldType: "password",
@@ -123,8 +122,13 @@ export default {
       this.passwordFieldType =
         this.passwordFieldType === "password" ? "text" : "password";
     },
-    formSubmit() {
-      alert("work in progress");
+    login: async function () {
+      let email = this.email;
+      let password = this.password;
+      let res = await this.$store.dispatch("login", { email, password });
+      if (res.status === 200) {
+        this.$router.push("/applicationform")
+      } 
     },
   },
 };
@@ -162,7 +166,7 @@ form {
   font-weight: 500;
 }
 
-p.appli_hd{
+p.appli_hd {
   margin-top: 20px;
   margin-bottom: 28px;
 }
@@ -182,7 +186,7 @@ input {
   box-sizing: border-box;
   resize: vertical;
   border-radius: 4px;
-  border: 1.5px solid #BDBDBD;
+  border: 1.5px solid #bdbdbd;
   outline: none;
 }
 input:focus {
@@ -204,7 +208,7 @@ input:focus {
 .masked-input {
   display: flex;
   align-items: center;
-  border: 1px solid #BDBDBD;
+  border: 1px solid #bdbdbd;
   border-radius: 3px;
   padding: 0 12px;
   max-width: 397px;
@@ -214,8 +218,8 @@ input:focus {
   outline: none;
 }
 
-.masked-input input:focus{
-border: 1px solid #7557d3;
+.masked-input input:focus {
+  border: 1px solid #7557d3;
 }
 
 .footer_text {
