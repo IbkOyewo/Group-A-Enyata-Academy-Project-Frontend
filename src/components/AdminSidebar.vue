@@ -11,7 +11,7 @@
           </button>
           <input type="file" name="file" ref="file" @change="handleFileUpload"/>
         </div>
-         <button type="submit" class="text-white p-2 btn btn-white">add profile pic</button>
+         <button type="submit" class="text-white p-2 btn btn-white">add profile picture</button>
          
       </form>
 
