@@ -21,48 +21,48 @@
 
     <div class="sidebar-icon">
       <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests dashboard">
+        <router-link :to="{name: 'adminDashboard'}" class="tests dashboard">
           <img src="../assets/dashboard.png" alt="dashboard">
           <span class="mx-3">Dashboard</span>
         </router-link>
       </div>
       <div class="container">
-        <router-link :to="{name: 'takeAssessment'}" class="tests create ps-2">
+        <router-link :to="{name: 'applicationAdmin'}" class="tests create ps-2">
           <img src="../assets/create-application-icon.svg" alt="create application">
           <span class="mx-3">Create Application</span>
         </router-link>
       </div>
 
        <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests appentry">
+        <router-link :to="{name: 'adminEntryModal'}" class="tests appentry">
           <img src="../assets/application-entries-icon.svg" alt="application entries">
           <span class="mx-3">Application Entries</span>
         </router-link>
       </div>
 
        <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests compose">
+        <router-link :to="{name: 'composeQues'}" class="tests compose">
           <img src="../assets/compose-assessment-icon.svg" alt="Compose Assessment">
           <span class="mx-3">Compose Assessment</span>
         </router-link>
       </div>
 
       <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests history">
+        <router-link :to="{name: 'AssessHistory'}" class="tests history">
           <img src="../assets/assessment-history-icon.svg" alt="Assessment History">
           <span class="mx-3">Assessment History</span>
         </router-link>
       </div>
 
       <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests results">
+        <router-link :to="{name: 'results'}" class="tests results">
           <img src="../assets/results-icon.svg" alt="Results">
           <span class="mx-3">Results</span>
         </router-link>
       </div>
 
  <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests settings">
+        <router-link :to="{name: 'ProfileSettings'}" class="tests settings">
           <img src="../assets/settings-icon.svg" alt="Results"> 
           <span class="mx-3">Settings</span>
         </router-link>

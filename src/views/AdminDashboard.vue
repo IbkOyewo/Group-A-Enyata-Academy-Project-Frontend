@@ -66,7 +66,7 @@
               Create test question for an incoming academy
               student
             </p>
-            <router-link :to="{name: 'adminquestion'}" class="tests">
+            <router-link :to="{name: 'composeQues'}" class="tests">
               <button>Create Assessment</button>
             </router-link>
             
