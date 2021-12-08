@@ -66,7 +66,7 @@
               Create test question for an incoming academy
               student
             </p>
-            <router-link :to="{name: 'adminquestion'}" class="tests">
+            <router-link :to="{name: 'composeQues'}" class="tests">
               <button>Create Assessment</button>
             </router-link>
             
@@ -79,26 +79,20 @@
 
 <script>
 import AdminSidebar from '@/components/AdminSidebar.vue';
-// import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "adminDashboard",
   components: {
     AdminSidebar
-  }
-
-//   computed: {
-//     ...mapGetters(["getProfile"])
-//   },
-
-//   methods: {
-//     // ...mapActions(["fetchAdminProfile"]),
+  },
+  computed: {
+    adminDashboard: async function () {
+      let res = await this.$store.dispatch("adminDashboard"); 
+    }
+  },
+  methods: {
     
-//   },
-
-//   async created () {
-//     await this.fetchAdminProfile()
-//   }
+  }
 }
 </script>
 
