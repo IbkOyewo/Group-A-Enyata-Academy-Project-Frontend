@@ -59,6 +59,78 @@ export default {
         return {
             mins: 30,
             secs: 0,
+             currentQuestion: 0,
+            showScore: false,
+            score:0,
+            countDown : 30,
+            timer:null,
+            startQuiz: false,
+
+
+
+                        questions : [
+		{
+			questionText: 'Which one is used for two-way binding?',
+			answerOptions: [
+				{ answerText: 'v-on', isCorrect: false },
+                { answerText: 'v-bind', isCorrect: false },
+				{ answerText: 'v-model', isCorrect: true },
+				{ answerText: 'v-if', isCorrect: false },
+                
+			
+			],
+		},
+		{
+			questionText: 'Who is the creator of vueJS ?',
+			answerOptions: [
+				{ answerText: 'Jeff Bezos', isCorrect: false },
+				{ answerText: 'Elon Musk', isCorrect: false },
+				{ answerText: 'Evan You', isCorrect: true },
+				{ answerText: 'Tony Stark', isCorrect: false },
+			],
+		},
+		{
+			questionText: 'Vue is used in the backend. - True or False?',
+			answerOptions: [
+				{ answerText: 'True', isCorrect: false },
+				{ answerText: 'False', isCorrect: true },
+			],
+		},
+		{
+			questionText: 'Which version of Vue is Launched on 2020?',
+			answerOptions: [
+				{ answerText: 'Vue 2', isCorrect: false },
+				{ answerText: 'Vue 1', isCorrect: false },
+				{ answerText: 'Vue 4', isCorrect: false },
+				{ answerText: 'Vue 3', isCorrect: true },
+			],
+        },
+        {
+			questionText: 'Is vue an OpenSource Library?',
+			answerOptions: [
+				{ answerText: 'True', isCorrect: true },
+				{ answerText: 'False', isCorrect: false },
+			],
+        },
+        {
+			questionText: 'Which of the following is a Full Javascript Frramework',
+			answerOptions: [
+				{ answerText: 'Vue', isCorrect: false },
+				{ answerText: 'node', isCorrect: false },
+				{ answerText: 'react', isCorrect: false },
+				{ answerText: 'Angular', isCorrect: true },
+			],
+        },
+        {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    ],
         }
     },
     methods: {
@@ -75,12 +147,37 @@ export default {
                     timer = duration;
                 }
             }, 1000);
+        },
+         startQuizFunc(){
+            this.startQuiz = true
+            this.countDownTimer()
+        },
+        handleAnswerClick(isCorrect){
+            clearTimeout(this.timer);
+            let nextQuestion = this.currentQuestion + 1;
+            if(isCorrect){
+                this.score = this.score + 1;
+            }
+            if(nextQuestion < this.questions.length){
+            this.currentQuestion = nextQuestion;
+            // this.$store.state.questionAttended = this.currentQuestion;
+            // localStorage.setItem('qattended', this.currentQuestion)
+            this.countDown = 30;
+            this.countDownTimer();
+            }
+            else{
+                // localStorage.removeItem('qattended')
+                this.showScore = true;
+                // localStorage.setItem('testComplete',this.showScore)
+            }
         }
     },
     mounted() {
         const thirtyMins = 60 * 30
 
         this.startTimer(thirtyMins)
+
+
     }
   } 
 </script>
