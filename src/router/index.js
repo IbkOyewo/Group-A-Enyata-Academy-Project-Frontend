@@ -120,6 +120,11 @@ const routes = [
     component: () => import("../views/Batch-3.vue"),
   },   
   {
+    path: "/canva",
+    name: "offcanva",
+    component: () => import("../views/offcanvaview.vue"),
+  }, 
+  {
     path: "/profile-setting",
     name: "ProfileSettings",
     component: () => import("../views/ProfileSetting.vue"),

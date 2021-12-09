@@ -1,47 +1,58 @@
 <template>
   <div class="row">
     <div class="col-3">
-      <AdminSidebar/>
+      <AdminSidebar />
     </div>
     <div class="container col-8 pt-5">
       <h2 class="my-5">Create Application</h2>
       <p>ssss</p>
       <div>
-        <form enctype="multipart/form-data" @submit.prevent="submitForm">
+        <form
+          method="post"
+          enctype="multipart/form-data"
+          @submit.prevent="postData"
+        >
           <div class="row">
             <div class="fileup col">
               <div class="upload-btn-wrapper">
-                <button class="btns">
-                  <strong>+</strong> Choose file
-                </button>
-                <input type="file" name="file" ref="file" @change="handleFileUpload"/>
+                <button class="btns"><strong>+</strong> Choose file</button>
+                <!-- <input
+                  type="file"
+                  name="file"
+                  ref="file"
+                  @change="imageUrl"
+                /> -->
               </div>
             </div>
             <div class="col">
               <label>Link</label>
-              <input type="text" class="form-control"  v-model="link"/>
+              <input type="text" class="form-control" v-model="formData.applicationLink" />
             </div>
-           
           </div>
-          
+
           <div class="row my-4">
             <div class="col">
               <label>Application closure date</label>
-              <input type="date" class="form-control" v-model="closing_date"/>
+              <input type="date" class="form-control" v-model="formData.closureDate" />
             </div>
             <div class="col">
               <label>Batch ID</label>
-              <input type="text" class="form-control"  v-model="batch_id"/>
+              <input type="text" class="form-control" v-model="formData.batchId" />
             </div>
           </div>
           <div class="form-group my-3">
             <label for>Instructions</label>
-            <textarea class="form-control" name id rows="4" v-model="instruction"></textarea>
+            <textarea
+              class="form-control"
+              name
+              id
+              rows="4"
+              v-model="formData.instructions"
+            ></textarea>
           </div>
           <div class="text-center">
             <button class="btn" type="submit">Submit</button>
           </div>
-          
         </form>
       </div>
     </div>
@@ -50,7 +61,10 @@
 
 <script>
 import AdminSidebar from '@/components/AdminSidebar.vue'
-import { mapGetters, mapActions } from "vuex";
+// import Vue from 'vue'
+// import axios from 'axios'
+// import VueAxios from 'vue-axios'
+// Vue.use(VueAxios, axios)
 export default {
   name: "applicationAdmin",
   components: {
@@ -58,59 +72,81 @@ export default {
   },
   data() {
     return {
-      file: '',
-      batch_id: '',
-      link: '',
-      closing_date: "",
-      instructions: ""
-    }
-  },
-  computed: {
-    ...mapGetters(["apiResponse"]),
-
-    isValid() {
-      if (
-        this.link == "" ||
-        this.file == "" ||
-        this.batch_id == "" ||
-        this.closing_date == "" ||
-        this.instruction == ""
-      ) {
-        return false;
-      } else {
-        return true;
+      formData:{
+        batchId: "",
+        imageUrl: "",
+        applicationLink: "",
+        closureDate: "",
+        instructions: ""
       }
+
     }
   },
+  // computed: {
+    // ...mapGetters(["apiResponse"]),
+
+  //   isValid() {
+  //     if (
+  //       this.applicationLink == "" ||
+  //       this.file == "" ||
+  //       this.batchId == "" ||
+  //       this.closureDate == "" ||
+  //       this.instructions == ""
+  //     ) {
+  //       return false;
+  //     } else {
+  //       return true;
+  //     }
+  //   }
+  // },
 
   methods: {
-    ...mapActions(["createApp"]),
-
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0];
-    },
-
-    submitForm() {
-      if (this.isValid) {
-        let formData = new FormData();
-        formData.append("file", this.file);
-        formData.append("batch_id", this.batch_id);
-        formData.append("link", this.link);
-        formData.append("closing_date", this.closing_date);
-        formData.append("instruction", this.instruction);
-        this.createApp(formData);
-        this.file = '';
-        this.batch_id =  '';
-        this.link =  '';
-        this.closing_date = "";
-        this.instruction   = "";
-        
-      } else {
-        alert("All fields are required");
+    // ...mapActions(["createApp"]),
+    postData()
+    {
+      try {
+        //eslint-disable-next-line no-unused-vars
+        const {imageUrl, ...adminData} = this.formData
+        console.log(adminData)
+      } catch (error) {
+        console.log(error)
       }
     }
-    
-  },
+
+    // postData(e) 
+    // {
+    //   this.axios.post("http://localhost:8082/api/admin/application", this.formData)
+    //   .then((result)=> {
+    //     console.log(result)
+    //   })
+    //   e.preventDefault();
+    // },
+
+    // imageUrl() {
+    //   this.file = this.$refs.file.files[0];
+    // },
+
+  //   submitForm() {
+  //       if (this.isValid) {
+  //       let formData = new FormData();
+  //       formData.append("file", this.file);
+  //       formData.append("batch_id", this.batchId);
+  //       formData.append("link", this.applicationLlink);
+  //       formData.append("closing_date", this.closureDate);
+  //       formData.append("instruction", this.instructions);
+  //       // this.createApp(formData);
+  //       this.file = '';
+  //       this.batchId =  '';
+  //       this.applicationLink =  '';
+  //       this.closureDate = "";
+  //       this.instructions   = "";
+
+  //     } else {
+  //       alert("All fields are required");
+  //     }
+  //   }
+
+   },
 
 };
 </script>
@@ -131,8 +167,9 @@ h2 {
   color: #2b3c4e;
 }
 
-input, textarea{
-  border:1.5px solid #2B3C4E;
+input,
+textarea {
+  border: 1.5px solid #2b3c4e;
 }
 
 .upload-btn-wrapper {
@@ -141,7 +178,7 @@ input, textarea{
   display: inline-block;
 }
 
-.btn{
+.btn {
   width: 379px;
   height: 50px;
   color: #fff;
