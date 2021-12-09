@@ -136,6 +136,24 @@ export default new Vuex.Store({
       }
     },
 
+    // eslint-disable-next-line no-unused-vars
+    async assessmentHistory({commit}) {
+      try {
+        let config = {
+          method: 'get',
+          url: 'http://localhost:8082/api/admin/assessment_history',
+          headers: { 
+            'x-access-token': this.state.adminToken
+          }
+        };
+  
+       const response = await axios(config)
+          console.log(response)
+          return response
+      } catch (error) {
+        console.log(error)
+      }
+    },
 
     // eslint-disable-next-line no-unused-vars
     async composeAssessment({commit}, userInfo) {
@@ -178,5 +196,7 @@ export default new Vuex.Store({
       }
     },
   },
+
+
   modules: {},
 });

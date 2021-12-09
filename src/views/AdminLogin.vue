@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     adminLogin: async function () {
+      console.log('Working');
       let email = this.email;
       let password = this.password;
       let res = await this.$store.dispatch("adminLogin", { email, password })
