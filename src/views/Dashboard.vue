@@ -7,10 +7,8 @@
     <div class="top-text">
       <div class="top-text1">Dashboard</div>
       <div class="top-text2">
-        <i
-          >Your appliation is currently being reviewed, you will be notified if
-          successful</i
-        >
+        <i>Your application is currently being reviewed, you will be notified if
+          successful</i>
       </div>
     </div>
     <div class="status-main">
@@ -42,7 +40,7 @@
           We have 4 days left until the next assessment <br />Watch this space
         </p>
 
-        <button>Take Assessment</button>
+        <router-link :to="{name: 'takeAssessment'}"><button>Take Assessment</button></router-link>
         </div>
       </div>
     </div>

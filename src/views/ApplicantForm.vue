@@ -59,108 +59,110 @@
       </svg>
       <p class="appli_hd">Application Form</p>
     </div>
-    <form>
+    <form @submit.prevent="submitFile" enctype="multipart/form-data">
       <div class="file_upload">
         <div class="file_div">
           <label for="file-upload" class="custom-file">
             <span>&#x2B; &nbsp;</span>Upload CV
           </label>
-          <input id="file-upload" :v-model="cv_input" type="file" />
+          <input type="file" id="file" :v-html="file" ref="cv" @change="handleFileUpload()" :v-model="appData.cv"/>
         </div>
         <div class="file_div">
           <label for="file-upload" class="custom-file">
             <span>&#x2B; &nbsp;</span>Upload Photo
           </label>
           <input
-            id="file-upload" :v-model="photo" type="file"
+            id="file-upload" :v-model="appData.image" :v-html="file" type="file" ref="image"  @change="handleFileUpload()"
           />
         </div>
       </div>
       <div class="application_fm">
         <div class="input_div">
           <label for="firstname">First Name</label>
-          <input type="text" v-model.trim="firstname" required />
+          <input type="text" class="form-control" v-model="appData.fname" name="fname" />
         </div>
         <div class="input_div">
           <label for="lastname">Last Name</label>
-          <input type="text" v-model.trim="lastname" required />
+          <input type="text" class="form-control" v-model="appData.lname" name="lname"/>
         </div>
         <div class="input_div">
           <label for="firstname">Email</label>
-          <input type="email" v-model.trim="email" required />
+          <input type="email" class="form-control" v-model="appData.email" name="email"/>
         </div>
         <div class="input_div">
           <label for="firstname">Date of Birth</label>
-          <input class="date"
-            type="date"
-            v-model.trim="dateOfBirth"
-            required
-            placeholder="dd/mm/yyyy"
+          <input type="date" class="form-control" v-model="appData.dob" name="dob"  
           />
         </div>
         <div class="input_div">
           <label for="firstname">Address</label>
-          <input type="text" v-model.trim="address" required />
+          <input type="text" class="form-control" v-model="appData.address" name="address" />
         </div>
         <div class="input_div">
           <label for="firstname">University</label>
-          <input type="text" v-model.trim="university" required />
+          <input type="text" class="form-control" v-model="appData.university" name="university"/>
         </div>
         <div class="input_div">
           <label for="firstname">Course of Study</label>
-          <input type="text" v-model.trim="courseOfStudy" required />
+          <input type="text" class="form-control" v-model="appData.course" name="course" />
         </div>
         <div class="input_div">
           <label for="firstname">CGPA</label>
-          <input type="number" v-model.trim="cgpa" required />
+          <input type="text" class="form-control" v-model="appData.cgpa" name="cgpa" value="7"/>
         </div>
       </div>
       <div class='button'>
-                <button @click.prevent="submit" type="submit" :disabled=!isComplete>Submit</button> 
-            </div> 
+          <button type="submit">Submit</button> 
+      </div> 
     </form>
-
-    
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "applicantForm",
   data() {
     return {
-      cv_input:"",
-      photo: "",
-      firstname: "",
-      lastname: "",
-      email: "",
-      dateOfBirth: "",
-      address: "",
-      university: "",
-      courseOfStudy: "",
-      cgpa: "",
-    };
-  },
-  computed: {
-    isDisabled() {
-      return (
-        this.cv_input != "" &&
-        this.photo != "" &&
-        this.firstname != "" &&
-        this.lastname != "" &&
-        this.email != "" &&
-        this.dateOfBirth != "" &&
-        this.address != "" &&
-        this.university != "" &&
-        this.courseOfStudy != "" &&
-        this.cgpa != ""
-      );
-    },
+      profile: 0,
+       appData:{
+        fname: "",
+        lname: "",
+        email: "",
+        cgpa: "",
+        dob: "",
+        address: "",
+        course: "",
+        university: "",
+        cv: "",
+        image: "",
+       }
+    };  
   },
   methods: {
-    formSubmit() {
-      alert("work in progress");
-    },
+    handleFileUpload(){
+    this.appData.cv = this.$refs.cv.files[0];
+    this.appData.image =  this.$refs.image.files[0];
+  },
+  submitFile: async function () {
+      let formData = new FormData();
+      formData.append('fname', this.appData.fname);
+      formData.append('lname', this.appData.lname);
+      formData.append('email', this.appData.email);
+      formData.append('cgpa', this.appData.cgpa);
+      formData.append('dob', this.appData.dob);
+      formData.append('address', this.appData.address);
+      formData.append('course', this.appData.course);
+      formData.append('university', this.appData.university);
+      formData.append('cv', this.appData.cv);
+      formData.append('image', this.appData.image.name);
+      const data = {}
+      formData.forEach((value, key) => (data[key] = value))
+      let res = await this.$store.dispatch("application", data)
+      if (res.status === 201) {
+        this.$router.push("/dashboard")
+      } 
+      },
   },
 };
 </script>

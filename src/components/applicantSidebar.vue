@@ -21,7 +21,7 @@
 
     <div class="sidebar-icon">
       <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests">
+        <router-link :to="{name: 'Dashboard'}" class="tests ps-2">
           <img src="../assets/dashboard.png" alt="dashboard">
           <span class="mx-3">Dashboard</span>
         </router-link>
@@ -33,11 +33,13 @@
         </router-link>
       </div>
 
-      <div class="container">
+      <div class="container pt-3">
+        <router-link :to="{name: 'home'}" class="tests">
         <button @click="logut" class="logout">
           <img src="../assets/logout.png" alt="logout">
           <span class="mx-3">Logout</span>
         </button>
+        </router-link>
       </div>
     </div>
   </div>
@@ -54,19 +56,8 @@ export default {
       message: ""
     };
   },
-
-  computed: {
-    ...mapGetters(["getProfile", "apiResponse"])
-  },
-
   methods: {
-    ...mapActions(["fetchProfile", "logout", "editProfile"]),
-    logout() {
-      this.logout();
-      this.$router.push({ name: "login" });
-    },
-
-    handleFileUpload() {
+    fetchProfile() {
       const file = this.$refs.file.files[0];
       this.file = file
     },

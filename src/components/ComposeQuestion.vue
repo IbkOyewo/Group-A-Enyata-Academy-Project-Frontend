@@ -3,12 +3,12 @@
     <h1 class="compose">Compose Assessment</h1>
     <div class="container">
       <div class="container-side">
-        <p>15/30</p>
+        <p>{{question}}/10</p>
         <form>
           <label for="fileUpload" class="form">
             <span class="plus">
               <b style="font-weight: 600">+</b>&nbsp;Choose File
-              <input type="file" id="fileUpload" />
+              <input type="file" id="fileUpload" ref="file" @change="handleFile()" />
             </span>
           </label>
         </form>
@@ -16,40 +16,83 @@
     </div>
     <div class="question-space">
       <h5>Question</h5>
-      <input type="text" class="input-" />
+      <input type="text" class="input-"  v-model="questions"/>
     </div>
     <form class="whole-form">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Option A</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="optionA" />
         </div>
         <div class="form-group col-md-6">
           <label>Option B</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="optionB" />
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Option C</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="optionC" />
         </div>
         <div class="form-group col-md-6">
           <label>Option D</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="optionD" />
         </div>
       </div>
     </form>
     <div>
       <div class="two-buttons">
         <button class="first-button">Previous</button>
-        <button class="second-button">Next</button>
+        <button class="second-button" @click="handleSubmit()">Next</button>
       </div>
       <button class="last-button">Finish</button>
     </div>
   </div>
 </template>
+
+<script>
+  import axios from 'axios'
+export default {
+  name: 'ComposeQuestion',
+  data() {
+    return {
+      question:1,
+      imageUrl: "",
+      questions: "",
+      optionA: "",
+      optionB: "",
+      optionC: "",
+      optionD: ""
+    }; 
+  },
+  methods: {
+    handleFile(){
+    this.imageUrl = this.$refs.file.files[0];
+  },
+  async handleSubmit() {
+      let formData = new FormData();
+      formData.append('imageUrl', this.imageUrl);
+      formData.append('questions', this.questions);
+      formData.append('optionA', this.optionA);
+      formData.append('optionB', this.optionB);
+      formData.append('optionC', this.optionC);
+      formData.append('optionD', this.optionD);
+      const data = {}
+      formData.forEach((value, key) => (data[key] = value))
+      let res = await this.$store.dispatch("composeAssessment", data)
+      if (res.status === 201) {
+        this.question++;
+        this.questions = ''
+        this.optionA = '' 
+        this.optionB = ''
+        this.optionC = '' 
+        this.optionD = ''
+      } 
+    },
+  },
+  }
+</script>
 
 <style scoped>
 body {

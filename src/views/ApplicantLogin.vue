@@ -5,7 +5,7 @@
       <p>Applicant Log In</p>
     </div>
 
-    <form>
+    <form class="was-validated" @submit.prevent="login">
       <div class="form-body">
         <div class="input-field">
           <label for="email">Email</label>
@@ -19,6 +19,7 @@
               class="password-box"
               :type="showPassword ? 'text' : 'password'"
               name="password"
+              @keyup="validatePassword()"
               v-model="user.password"
             /><span @click="togglePassword" v-show="showPassword">
               <i class="fas fa-eye"></i>
@@ -31,7 +32,6 @@
       </div>
       <button
         class="submit-btn"
-        @click.prevent="formSubmit"
         type="submit"
         :disabled="!isDisabled"
       >
@@ -39,13 +39,14 @@
       </button>
       <div class="bottom-text">
         <span class="ft_txt"
-          >Don’t have an account yet?<a href="#" target="_blank">
-            Sign Up</a
+          >Don’t have an account yet?<router-link :to="{ name: 'signup' }"
+          >
+            Sign Up</router-link
           ></span
         >
         <span class="ft_txt"
-          ><a class="ft_link" href="#" target="_blank"
-            >Forgot Password?</a
+          ><router-link :to="{ name: 'Forgot Password' }"
+          >Forgot Password?</router-link 
           ></span
         >
       </div>
@@ -62,13 +63,17 @@ export default {
         email: "",
         password: "",
       },
-      inputType: "password",
+      // inputType: "password",
       showPassword: false,
     };
   },
   computed: {
     buttonLabel() {
       return this.showPassword ? "Hide" : "Show";
+    },
+
+    isDisabled() {
+      return (this.user.email != "" && this.user.password != "");
     },
   },
   methods: {
@@ -85,6 +90,14 @@ export default {
     togglePassword() {
       this.showPassword = !this.showPassword;
     },
+    login: async function () {
+      let email = this.user.email;
+      let password = this.user.password;
+      let res = await this.$store.dispatch("login", { email, password });
+      if (res.status === 200) {
+        this.$router.push("/applicationform")
+      } 
+    },
   },
 };
 </script>
@@ -100,6 +113,10 @@ export default {
   top: 70px;
   margin-top: 110px;
   line-height: 28.8px;
+}
+
+.submit-btn:disabled {
+  background: #ccc;
 }
 
 .form-header p {
@@ -132,12 +149,12 @@ form {
   margin: 20px 0;
 }
 
-input:-webkit-autofill,
+/* input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
-}
+} */
 
 label {
   margin-bottom: 7px;

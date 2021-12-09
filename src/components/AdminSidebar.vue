@@ -1,75 +1,75 @@
 <template>
   <div class="sidebar">
     <div class="applicant-image">
-      <div class="" v-if="Profile.profpic">
+      <!-- <div class="" v-if="Profile.profpic">
         <img :src="Profile.profpic" class="logo" />
-      </div>
-      <form class="fileup" v-else  @submit.prevent="submitForm" enctype="multipart/form-data">
+      </div> -->
+      <form class="fileup" @submit.prevent="submitForm" enctype="multipart/form-data">
         <div class="upload-btn-wrapper">
           <button class="btns">
             <strong><i class="fa fa-plus" aria-hidden="true"></i></strong> 
           </button>
-          <input type="file" name="file" ref="file" @change="handleFileUpload"/>
+          <input type="file" name="file" ref="file" />
         </div>
          <button type="submit" class="text-white p-2 btn btn-white">add profile picture</button>
          
       </form>
-
+<!-- 
       <h1 class="user-name">{{Profile.fname + " " + Profile.lname}}</h1>
-      <p class="user-email">{{Profile.email}}</p>
+      <p class="user-email">{{Profile.email}}</p> -->
     </div>
 
     <div class="sidebar-icon">
       <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests dashboard">
+        <router-link :to="{name: 'Dashboard'}" class="tests dashboard">
           <img src="../assets/dashboard.png" alt="dashboard">
           <span class="mx-3">Dashboard</span>
         </router-link>
       </div>
       <div class="container">
-        <router-link :to="{name: 'takeAssessment'}" class="tests create ps-2">
+        <router-link :to="{name: 'applicationAdmin'}" class="tests create ps-2">
           <img src="../assets/create-application-icon.svg" alt="create application">
           <span class="mx-3">Create Application</span>
         </router-link>
       </div>
 
        <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests appentry">
+        <router-link :to="{name: 'adminEntryModalb'}" class="tests appentry">
           <img src="../assets/application-entries-icon.svg" alt="application entries">
           <span class="mx-3">Application Entries</span>
         </router-link>
       </div>
 
        <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests compose">
+        <router-link :to="{name: 'composeQues'}" class="tests compose">
           <img src="../assets/compose-assessment-icon.svg" alt="Compose Assessment">
           <span class="mx-3">Compose Assessment</span>
         </router-link>
       </div>
 
       <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests history">
+        <router-link :to="{name: 'AssessHistory'}" class="tests history">
           <img src="../assets/assessment-history-icon.svg" alt="Assessment History">
           <span class="mx-3">Assessment History</span>
         </router-link>
       </div>
 
       <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests results">
+        <router-link :to="{name: 'results'}" class="tests results">
           <img src="../assets/results-icon.svg" alt="Results">
           <span class="mx-3">Results</span>
         </router-link>
       </div>
 
  <div class="container">
-        <router-link :to="{name: 'applicantDashboard'}" class="tests settings">
+        <router-link :to="{name: 'ProfileSettings'}" class="tests settings">
           <img src="../assets/settings-icon.svg" alt="Results"> 
           <span class="mx-3">Settings</span>
         </router-link>
       </div>
 
       <div class="container">
-        <button @click="logut" class="logout">
+        <button class="logout">
           <img src="../assets/log-out-icon.svg" alt="logout">
           <span class="mx-3">Logout</span>
         </button>
@@ -82,36 +82,36 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "adminSidebar",
-  data() {
-    return {
-      Profile: [],
-      file: '',
-      message: ""
-    };
-  },
-  computed: {
-    ...mapGetters(["getProfile", "apiResponse"])
-  },
-  methods: {
-    ...mapActions(["fetchProfile", "logout", "editProfile"]),
-    logout() {
-      this.logout();
-      this.$router.push({ name: "login" });
-    },
-    handleFileUpload() {
-      const file = this.$refs.file.files[0];
-      this.file = file
-    },
-    submitForm() {
-      const formData = new FormData();
-      formData.append('file',this.file);
-      this.editProfile(formData)
-    }
-  },
-  async mounted() {
-    await this.fetchProfile();
-    this.Profile = await this.getProfile;
-  }
+  // data() {
+  //   return {
+  //     Profile: [],
+  //     file: '',
+  //     message: ""
+  //   };
+  // },
+  // computed: {
+  //   ...mapGetters(["getProfile", "apiResponse"])
+  // },
+  // methods: {
+  //   ...mapActions(["fetchProfile", "logout", "editProfile"]),
+  //   logout() {
+  //     this.logout();
+  //     this.$router.push({ name: "login" });
+  //   },
+  //   handleFileUpload() {
+  //     const file = this.$refs.file.files[0];
+  //     this.file = file
+  //   },
+  //   submitForm() {
+  //     const formData = new FormData();
+  //     formData.append('file',this.file);
+  //     this.editProfile(formData)
+  //   }
+  // },
+  // async mounted() {
+  //   await this.fetchProfile();
+  //   this.Profile = await this.getProfile;
+  // }
 };
 </script>
 

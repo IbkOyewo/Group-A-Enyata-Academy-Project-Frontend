@@ -16,12 +16,8 @@
             <div class="fileup col">
               <div class="upload-btn-wrapper">
                 <button class="btns"><strong>+</strong> Choose file</button>
-                <!-- <input
-                  type="file"
-                  name="file"
-                  ref="file"
-                  @change="imageUrl"
-                /> -->
+                <input id="file-upload" :v-model="formData.imageUrl" :v-html="file" type="file" ref="image"  @change="handleFileUpload()"
+          />
               </div>
             </div>
             <div class="col">
@@ -61,10 +57,6 @@
 
 <script>
 import AdminSidebar from '@/components/AdminSidebar.vue'
-// import Vue from 'vue'
-// import axios from 'axios'
-// import VueAxios from 'vue-axios'
-// Vue.use(VueAxios, axios)
 export default {
   name: "applicationAdmin",
   components: {
@@ -82,69 +74,21 @@ export default {
 
     }
   },
-  // computed: {
-    // ...mapGetters(["apiResponse"]),
-
-  //   isValid() {
-  //     if (
-  //       this.applicationLink == "" ||
-  //       this.file == "" ||
-  //       this.batchId == "" ||
-  //       this.closureDate == "" ||
-  //       this.instructions == ""
-  //     ) {
-  //       return false;
-  //     } else {
-  //       return true;
-  //     }
-  //   }
-  // },
-
+  
   methods: {
-    // ...mapActions(["createApp"]),
-    postData()
+    handleFileUpload(){
+    this.formData.imageUrl =  this.$refs.image.files[0];
+  },
+    async postData()
     {
       try {
-        //eslint-disable-next-line no-unused-vars
-        const {imageUrl, ...adminData} = this.formData
-        console.log(adminData)
+        const { ...adminData} = this.formData
+        let res = await this.$store.dispatch("createApplication", adminData)
+        console.log(res)
       } catch (error) {
         console.log(error)
       }
     }
-
-    // postData(e) 
-    // {
-    //   this.axios.post("http://localhost:8082/api/admin/application", this.formData)
-    //   .then((result)=> {
-    //     console.log(result)
-    //   })
-    //   e.preventDefault();
-    // },
-
-    // imageUrl() {
-    //   this.file = this.$refs.file.files[0];
-    // },
-
-  //   submitForm() {
-  //       if (this.isValid) {
-  //       let formData = new FormData();
-  //       formData.append("file", this.file);
-  //       formData.append("batch_id", this.batchId);
-  //       formData.append("link", this.applicationLlink);
-  //       formData.append("closing_date", this.closureDate);
-  //       formData.append("instruction", this.instructions);
-  //       // this.createApp(formData);
-  //       this.file = '';
-  //       this.batchId =  '';
-  //       this.applicationLink =  '';
-  //       this.closureDate = "";
-  //       this.instructions   = "";
-
-  //     } else {
-  //       alert("All fields are required");
-  //     }
-  //   }
 
    },
 

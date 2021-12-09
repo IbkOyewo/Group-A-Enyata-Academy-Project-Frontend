@@ -36,13 +36,13 @@
           </thead>
           <tbody>
             <tr class="different-row">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{details.fname}} {{details.lname}}</td>
+              <td>{{details.email}}</td>
+              <td>{{details.dob}}</td>
+              <td>{{details.address}}</td>
+              <td>{{details.university}}</td>
+              <td>{{details.cgpa}}</td>
+              <td>{{details.testscores}}</td>
             </tr>
           </tbody>
         </table>
@@ -59,20 +59,40 @@ import AdminSidebar from '@/components/AdminSidebar.vue';
 
 export default {
   name: "results",
-  data() {
-    return {
-      apps: [],
-      currentSort:'Name',
-      currentSortDir:'asc'
-    }
-  },
-
   components: {
     AdminSidebar
+  },
+  data() {
+    return {
+      details:{
+        fname: "",
+        lname: "",
+        email:"",
+        dob:"",
+        address:"",
+        university:"",
+        cgpa:"",
+        testscores:""
+      }
+    }
+  },
+  mounted: async function () {
+    let res = await this.$store.dispatch("getResults")
+    let results = JSON.stringify(res.data.data)
+    let obj = JSON.parse(results)
+    for(let i=0;i < obj.length; i++){
+      this.details.fname=obj[i].fname
+      this.details.lname=obj[i].lname
+      this.details.email=obj[i].email
+      this.details.dob=obj[i].dob
+      this.details.address=obj[i].address
+      this.details.university=obj[i].university
+      this.details.cgpa=obj[i].cgpa
+      this.details.testscores=obj[i].testscores
+      //console.log(Object.keys(obj[i]));
+    }
   }
-
-    
-}
+  }
 </script>
 
 <style scoped>

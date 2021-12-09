@@ -9,24 +9,23 @@
         <p class="response"></p>
       </div>
       <div class="form-gro">
-        <form @submit.prevent="loging">
+        <form @submit.prevent="adminLogin">
           <div class="form-group">
             <label for>Email Address</label>
-            <input type="email" class="form-control" name="email" />
+            <input type="email" class="form-control" name="email" v-model="email" required />
           </div>
           <div class="form-group">
             <label for>Password</label>
-            <input type="password" class="form-control" name="password" />
+            <input type="password" class="form-control" name="password" v-model="password" required />
             <span>
               <i
-                @click="toggleP"
                 class="fa fa-eye-slash field-icon mr-5"
                 aria-hidden="true"
               >
               </i>
             </span>
           </div>
-          <button type="submit" class="btn" @click="loging">
+          <button type="submit" class="btn" :disabled="!isDisabled" >
             Sign in
           </button>
         </form>
@@ -42,6 +41,27 @@
 <script>
 export default {
   name: "adminlogin",
+   data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  computed: {
+    isDisabled() {
+      return this.email != "" && this.password != "";
+    },
+  },
+  methods: {
+    adminLogin: async function () {
+      let email = this.email;
+      let password = this.password;
+      let res = await this.$store.dispatch("adminLogin", { email, password })
+      if (res.status === 200) {
+        this.$router.push("/adminDashboard")
+      } 
+    },
+  },
 };
 </script>
 
@@ -173,5 +193,8 @@ label {
 .response.success {
   background-color: green;
   color: #2b3c4e;
+}
+button:disabled {
+  background: #ccc;
 }
 </style>
