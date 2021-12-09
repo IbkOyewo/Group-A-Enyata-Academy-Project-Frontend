@@ -69,7 +69,7 @@ export default {
     try {
       let res = await this.$store.dispatch('assessmentHistory');  
       console.log(res)
-      // this.histories = res.data.data  
+      this.histories = res.data.data  
     } catch (error) {
       console.log(error)
     }
