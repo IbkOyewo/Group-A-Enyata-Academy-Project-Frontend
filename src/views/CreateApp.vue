@@ -5,7 +5,6 @@
     </div>
     <div class="container col-8 pt-5">
       <h2 class="my-5">Create Application</h2>
-      <p>ssss</p>
       <div>
         <form enctype="multipart/form-data" @submit.prevent="submitForm">
           <div class="row">

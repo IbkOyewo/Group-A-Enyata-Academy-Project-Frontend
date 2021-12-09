@@ -47,8 +47,8 @@
               <tbody>
                 <tr class="different-row">
                   <td>Academy Batch 1</td>
-                  <td>0 students</td>
-                  <td>started 19/01/2020</td>
+                  <td>{{currentApplicants}} students</td>
+                  <td>started 8/1/2021</td>
                 </tr>
               </tbody>
             </table>
