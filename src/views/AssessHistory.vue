@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import AdminSidebars from "@/components/AdminSidebars.vue";
 import  AssessmentHistory from "@/components/AssessmentHistory.vue";
 export default {
@@ -17,7 +18,9 @@ export default {
   components: {
     AdminSidebars,
     AssessmentHistory
-  }
+  },
+  
+  
 };
 </script>
 

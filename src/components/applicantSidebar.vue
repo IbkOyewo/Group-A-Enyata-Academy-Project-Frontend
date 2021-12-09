@@ -56,19 +56,8 @@ export default {
       message: ""
     };
   },
-
-  computed: {
-    ...mapGetters(["getProfile", "apiResponse"])
-  },
-
   methods: {
-    ...mapActions(["fetchProfile", "logout", "editProfile"]),
-    logout() {
-      this.logout();
-      this.$router.push({ name: "login" });
-    },
-
-    handleFileUpload() {
+    fetchProfile() {
       const file = this.$refs.file.files[0];
       this.file = file
     },

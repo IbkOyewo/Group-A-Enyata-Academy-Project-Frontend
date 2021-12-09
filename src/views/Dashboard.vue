@@ -7,10 +7,8 @@
     <div class="top-text">
       <div class="top-text1">Dashboard</div>
       <div class="top-text2">
-        <i
-          >Your appliation is currently being reviewed, you will be notified if
-          successful</i
-        >
+        <i>Your application is currently being reviewed, you will be notified if
+          successful</i>
       </div>
     </div>
     <div class="status-main">

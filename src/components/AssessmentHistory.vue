@@ -12,9 +12,16 @@
           <td>Time Allocated</td>
           <td>Status</td>
         </thead>
-        
-        <tbody>
+
+        <tbody v-for="history in histories" v-bind:key="history.client_id">
           <tr>
+            <td><div>{{ history.batch  }}</div></td>
+            <td><div>{{ history.datecomposed }}</div></td>
+            <td><div>{{ history.noofquestions }}</div></td>
+            <td><div>{{ history.timeallocated }}</div></td>
+            <td><div>{{ history.status }}</div></td>
+          </tr>
+          <!-- <tr>
             <td><div>Batch 1</div></td>
             <td><div>12/07/94</div></td>
             <td><div>30</div></td>
@@ -41,20 +48,37 @@
             <td><div>30</div></td>
             <td><div>30 mins</div></td>
             <td><div>Taken</div></td>
-          </tr>
-          <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'assessmentHistory',
+  data() {
+    return {
+      histories: '',
+    }
+  },
+
+  async mounted() {
+    try {
+      let res = await this.$store.dispatch('assessmentHistory');  
+      console.log(res)
+      // this.histories = res.data.data  
+    } catch (error) {
+      console.log(error)
+    }
+}
+
+}
+
+
+</script>
 
 <style>
 #top-text {
