@@ -80,7 +80,7 @@ export default new Vuex.Store({
       }
     },
     // eslint-disable-next-line no-unused-vars
-    async adminDashboard({commit}, userInfo) {
+    async adminDashboard({commit}) {
       try {
         let config = {
           method: 'get',
@@ -90,12 +90,53 @@ export default new Vuex.Store({
           }
         };
   
-      let response = axios(config)
-      return response
+       const response = await axios(config)
+          return response
       } catch (error) {
         console.log(error)
       }
     },
+
+    // eslint-disable-next-line no-unused-vars
+    async totalApplication({commit}) {
+      try {
+        let config = {
+          method: 'get',
+          url: 'http://localhost:8082/api/admin/total_applications',
+          headers: { 
+            'x-access-token': this.state.adminToken
+          }
+        };
+  
+       const response = await axios(config)
+          console.log(response)
+          return response
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+
+    // eslint-disable-next-line no-unused-vars
+    async batchEntries({commit}) {
+      try {
+        let config = {
+          method: 'get',
+          url: 'http://localhost:8082/api/user/profile',
+          headers: { 
+            'x-access-token': this.state.adminToken
+          }
+        };
+  
+       const response = await axios(config)
+          console.log(response)
+          return response
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+
     // eslint-disable-next-line no-unused-vars
     async composeAssessment({commit}, userInfo) {
       try {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <AdminSidebars />
+      <AdminSidebar />
     </div>
     <div class="main">
       <AssessmentHistory />
@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import AdminSidebars from "@/components/AdminSidebars.vue";
+import AdminSidebar from "@/components/AdminSidebars.vue";
 import  AssessmentHistory from "@/components/AssessmentHistory.vue";
 export default {
-  name: "composeQues",
+  name: "AssessHistory",
   components: {
-    AdminSidebars,
+    AdminSidebar,
     AssessmentHistory
   }
 };

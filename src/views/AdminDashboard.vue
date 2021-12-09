@@ -21,7 +21,7 @@
 
         <div class="t_app">
           <p>Total Application</p>
-          <span class="number">500</span>
+          <span class="number">{{totalApplicants}}</span>
           <div class="horizontal2"></div>
           <div class>
             <p class>All entries so far</p>
@@ -84,17 +84,25 @@ export default {
   components: {
     AdminSidebar,
   },
-  computed: {
-    adminDashboard: async function () {
-      let res = await this.$store.dispatch("adminDashboard");
-    },
-  },
+  // computed: {
+  //   adminDashboard: async function () {
+  //     let res = await this.$store.dispatch("adminDashboard");
+  //   },
+  // },
 
   async mounted() {
     try {
-      let res = await this.$store.dispatch("adminDashboard");  
+      let res = await this.$store.dispatch('adminDashboard');  
       console.log(res)
       this.currentApplicants = res.data.data    
+    } catch (error) {
+      console.log(error)
+    }
+
+    try {
+      let res = await this.$store.dispatch('totalApplication');  
+      console.log(res)
+      this.totalApplicants = res.data.data[0].count    
     } catch (error) {
       console.log(error)
     }

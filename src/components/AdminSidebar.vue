@@ -34,7 +34,7 @@
       </div>
 
        <div class="container">
-        <router-link :to="{name: 'adminEntryModalb'}" class="tests appentry">
+        <router-link :to="{name: 'adminentries'}" class="tests appentry">
           <img src="../assets/application-entries-icon.svg" alt="application entries">
           <span class="mx-3">Application Entries</span>
         </router-link>
