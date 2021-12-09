@@ -49,7 +49,7 @@ export default new Vuex.Store({
           email,
           password
         })
-        let token = response.data.token;
+        let token = response.data.data;
         localStorage.setItem('Admin-Token', token)
         return response
       } catch (error) {
@@ -97,18 +97,19 @@ export default new Vuex.Store({
 
         // }
         ,
-        async adminDashboard({commit}, userInfo) {
+        async adminDashboard({commit}) {
+          const token = localStorage.getItem('Admin-Token')
           let config = {
             method: 'get',
             url: 'http://localhost:8082/api/admin/current_applications',
             headers: { 
-              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjM4OTEwMDIwLCJleHAiOjE2Mzg5MTM2MjB9.6rhrrJaROiWFk7ENubZDVVUTCmCr3SYfhzxboUMT4pg'
+              'x-access-token': token
             }
           };
-
+          
         axios(config)
         .then(function (response) {
-          console.log(JSON.stringify(response.data));
+        return response;
         })
         .catch(function (error) {
           console.log(error);
