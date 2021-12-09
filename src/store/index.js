@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token: localStorage.getItem('token') || '',
+    userToken: localStorage.getItem('User-Token') || '',
+    adminToken: localStorage.getItem('Admin-Token') || '',
   },
   getters: {},
   mutations: {},
@@ -60,62 +61,81 @@ export default new Vuex.Store({
     },
     // eslint-disable-next-line no-unused-vars
     async application({commit}, userInfo) {
+      try {
           let config = {
             method: 'post',
             url: 'http://localhost:8082/api/user/application',
-            headers: { 
-              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjM4OTEwMDIwLCJleHAiOjE2Mzg5MTM2MjB9.6rhrrJaROiWFk7ENubZDVVUTCmCr3SYfhzxboUMT4pg'
-            },
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.userToken
+          },
             data : userInfo
           };
 
-        axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          let response = axios(config)
+          return response
       }
-          //axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
-        //   let user = localStorage.getItem('User-Token');
-        //   console.log(user)
-        //    if (user) {
-        //     // for Node.js Express back-end
-        //     return { 'x-access-token': user };
-        //     const response = await axios.post('http://localhost:8082/api/user/application', userInfo);
-          
-         
-        //   console.log(response);
-        //   return response;
-        //   } else {
-        //     return {};
-        //   }
-          
-        // } catch (error) {
-        //   console.log(error);
+      catch(error){
+        console.log(error);
+      }
+    },
+    // eslint-disable-next-line no-unused-vars
+    async adminDashboard({commit}, userInfo) {
+      try {
+        let config = {
+          method: 'get',
+          url: 'http://localhost:8082/api/admin/current_applications',
+          headers: { 
+            'x-access-token': this.state.adminToken
+          }
+        };
+  
+      let response = axios(config)
+      return response
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    // eslint-disable-next-line no-unused-vars
+    async composeAssessment({commit}, userInfo) {
+      try {
+          let config = {
+            method: 'post',
+            url: 'http://localhost:8082/api/admin/compose-assessment',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.adminToken
+          },
+            data : userInfo
+          };
 
-        // }
-        ,
-        async adminDashboard({commit}) {
-          const token = localStorage.getItem('Admin-Token')
+          let response = axios(config)
+          return response
+      }
+      catch(error){
+        console.log(error);
+      }
+    },
+    // eslint-disable-next-line no-unused-vars
+    async getResults({commit}, userInfo) {
+      try {
           let config = {
             method: 'get',
-            url: 'http://localhost:8082/api/admin/current_applications',
-            headers: { 
-              'x-access-token': token
-            }
+            url: 'http://localhost:8082/api/user/results',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.adminToken
+          }
           };
-          
-        axios(config)
-        .then(function (response) {
-        return response;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }
 
+          let response = axios(config)
+          console.log(response);
+          return response
+      }
+      catch(error){
+        console.log(error);
+      }
+    },
   },
   modules: {},
 });
