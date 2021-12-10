@@ -2,7 +2,7 @@
     <div class="container">
       <div class="title">
         <h4>Profile Settings</h4>
-        <button @click="editNow=false">Edit</button>
+        <button v-on:click="editNow=false" id="edit-btn">Edit</button>
       </div>
       <hr>
       <div class="options">
@@ -225,6 +225,12 @@ input:focus {
 }
 .address {
   width: 469px;
+}
+#edit-btn:hover {
+  background-color: #cac2e4;
+}
+#edit-btn:active {
+  background-color: #a395d1;
 }
 .save-btn {
   width: 127px;
