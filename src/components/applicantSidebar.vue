@@ -1,22 +1,11 @@
 <template>
   <div class="sidebar">
     <div class="applicant-image">
-      <div class="" v-if="Profile.profpic">
-        <img :src="Profile.profpic" class="logo" />
+      <div v-if="Profile[0].image">
+        <img :src="Profile[0].image" class="profile"/>
       </div>
-      <form class="fileup" v-else  @submit.prevent="submitForm" enctype="multipart/form-data">
-        <div class="upload-btn-wrapper">
-          <button class="btns">
-            <strong><i class="fa fa-plus" aria-hidden="true"></i></strong> 
-          </button>
-          <input type="file" name="file" ref="file" @change="handleFileUpload"/>
-        </div>
-         <button type="submit" class="text-white p-2 btn btn-white">add profile picture</button>
-         
-      </form>
-
-      <h1 class="user-name">{{Profile.fname + " " + Profile.lname}}</h1>
-      <p class="user-email">{{Profile.email}}</p>
+      <h1 class="user-name">{{Profile[0].fname + " " + Profile[0].lname}}</h1>
+      <p class="user-email">{{Profile[0].email}}</p>
     </div>
 
     <div class="sidebar-icon">
@@ -56,22 +45,11 @@ export default {
       message: ""
     };
   },
-  methods: {
-    fetchProfile() {
-      const file = this.$refs.file.files[0];
-      this.file = file
-    },
-
-    submitForm() {
-      const formData = new FormData();
-      formData.append('file',this.file);
-      this.editProfile(formData)
-    }
-  },
-
-  async mounted() {
-    await this.fetchProfile();
-    this.Profile = await this.getProfile;
+  created: async function () {
+    let res = await this.$store.dispatch("getDashboard")
+    let obj = res.data.data
+    this.Profile.push(obj)
+    //console.log(this.Profile[0]);
   }
 };
 </script>

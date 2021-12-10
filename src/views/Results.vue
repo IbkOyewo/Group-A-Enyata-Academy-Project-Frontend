@@ -35,14 +35,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="different-row">
-              <td>{{details.fname}} {{details.lname}}</td>
-              <td>{{details.email}}</td>
-              <td>{{details.dob}}</td>
-              <td>{{details.address}}</td>
-              <td>{{details.university}}</td>
-              <td>{{details.cgpa}}</td>
-              <td>{{details.testscores}}</td>
+            <tr class="different-row" v-for="detail in result" :key="detail.index">
+              <td>{{detail.fname}} {{detail.lname}}</td>
+              <td>{{detail.email}}</td>
+              <td>{{detail.dob}}</td>
+              <td>{{detail.address}}</td>
+              <td>{{detail.university}}</td>
+              <td>{{detail.cgpa}}</td>
+              <td>{{detail.testscores}}</td>
             </tr>
           </tbody>
         </table>
@@ -54,9 +54,6 @@
 <script>
 import AdminSidebar from '@/components/AdminSidebar.vue';
 
-
-
-
 export default {
   name: "results",
   components: {
@@ -64,6 +61,7 @@ export default {
   },
   data() {
     return {
+      result: [],
       details:{
         fname: "",
         lname: "",
@@ -72,25 +70,17 @@ export default {
         address:"",
         university:"",
         cgpa:"",
-        testscores:""
+        testscores:"",
+        
       }
     }
   },
-  mounted: async function () {
+  created: async function () {
     let res = await this.$store.dispatch("getResults")
-    let results = JSON.stringify(res.data.data)
-    let obj = JSON.parse(results)
-    for(let i=0;i < obj.length; i++){
-      this.details.fname=obj[i].fname
-      this.details.lname=obj[i].lname
-      this.details.email=obj[i].email
-      this.details.dob=obj[i].dob
-      this.details.address=obj[i].address
-      this.details.university=obj[i].university
-      this.details.cgpa=obj[i].cgpa
-      this.details.testscores=obj[i].testscores
-      //console.log(Object.keys(obj[i]));
-    }
+    let obj = res.data.data;
+    obj.forEach(element => {
+      this.result.push(element)
+    });
   }
   }
 </script>
