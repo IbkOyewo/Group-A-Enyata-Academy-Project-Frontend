@@ -10,7 +10,7 @@
       </div>
       <div class="timer pe-5">
         <p>Timer</p>
-        <h6 class="p3">23<span>min</span> 043<span>sec</span></h6>
+        <h6 class="p3">20<span>min</span> 026<span>sec</span></h6>
       </div>
     </div>
     <div class="row">

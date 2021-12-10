@@ -16,7 +16,7 @@
         <div class="date-text">Date of Application</div>
         <div class="status-display">{{Profile[0].created_at}}</div>
         <hr id="blue" />
-        <div class="date-text">4 days since applied</div>
+        <div class="date-text">1 days since applied</div>
       </div>
       <div class="status-msg">
         <div class="date-text">Application Status</div>

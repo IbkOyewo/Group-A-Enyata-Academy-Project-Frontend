@@ -33,25 +33,25 @@
         <div class="row1">
           <div class="input-1">
             <label for="name">Name</label>
-            <input :disabled="editNow" type="text" v-model="update.fullName">
+            <input :disabled="editNow" type="text" placeholder="Fatomi Abiodun" v-model="update.fullName">
           </div>
           <div class="input-2">
             <label for="name">Email</label>
-            <input disabled type="text" v-model="update.email">
+            <input disabled type="text" placeholder="fatomi@enyata.com" v-model="update.email">
           </div>
           <div class="input-3">
             <label for="name">Phone number</label>
-            <input :disabled="editNow" type="text" v-model="update.phone">
+            <input :disabled="editNow" placeholder="08012345678" type="text" v-model="update.phone">
           </div>
         </div>
         <div class="row2">
           <div class="input-4">
             <label for="name">Country</label>
-            <input :disabled="editNow" type="text" v-model="update.country">
+            <input :disabled="editNow" placeholder="Nigeria" type="text" v-model="update.country">
           </div>
           <div class="input-5">
             <label for="name">Address</label>
-            <input :disabled="editNow" class="address"
+            <input :disabled="editNow" placeholder="Ibadan, Nigeria" class="address"
             type="text" v-model="update.address">
           </div>
         </div>

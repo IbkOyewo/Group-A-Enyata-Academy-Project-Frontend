@@ -1,53 +1,46 @@
 <template>
   <div class="row">
     <div class="col-3">
-      <AdminSidebar />
+      <AdminSidebar/>
     </div>
     <div class="container col-8 pt-5">
       <h2 class="my-5">Create Application</h2>
       <div>
-        <form
-          method="post"
-          enctype="multipart/form-data"
-          @submit.prevent="postData"
-        >
+        <form enctype="multipart/form-data" @submit.prevent="submitForm">
           <div class="row">
             <div class="fileup col">
               <div class="upload-btn-wrapper">
-                <button class="btns"><strong>+</strong> Choose file</button>
-                <input id="file-upload" :v-model="formData.imageUrl" :v-html="file" type="file" ref="image"  @change="handleFileUpload()"
-          />
+                <button class="btns">
+                  <strong>+</strong> Choose file
+                </button>
+                <input type="file" name="file" ref="file" @change="handleFileUpload"/>
               </div>
             </div>
             <div class="col">
               <label>Link</label>
-              <input type="text" class="form-control" v-model="formData.applicationLink" />
+              <input type="text" class="form-control"  v-model="link"/>
             </div>
+           
           </div>
-
+          
           <div class="row my-4">
             <div class="col">
               <label>Application closure date</label>
-              <input type="date" class="form-control" v-model="formData.closureDate" />
+              <input type="date" class="form-control" v-model="closing_date"/>
             </div>
             <div class="col">
               <label>Batch ID</label>
-              <input type="text" class="form-control" v-model="formData.batchId" />
+              <input type="text" class="form-control"  v-model="batch_id"/>
             </div>
           </div>
           <div class="form-group my-3">
             <label for>Instructions</label>
-            <textarea
-              class="form-control"
-              name
-              id
-              rows="4"
-              v-model="formData.instructions"
-            ></textarea>
+            <textarea class="form-control" name id rows="4" v-model="instruction"></textarea>
           </div>
           <div class="text-center">
             <button class="btn" type="submit">Submit</button>
           </div>
+          
         </form>
       </div>
     </div>
@@ -56,6 +49,7 @@
 
 <script>
 import AdminSidebar from '@/components/AdminSidebar.vue'
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "applicationAdmin",
   components: {
@@ -63,33 +57,60 @@ export default {
   },
   data() {
     return {
-      formData:{
-        batchId: "",
-        imageUrl: "",
-        applicationLink: "",
-        closureDate: "",
-        instructions: ""
-      }
-
+      file: '',
+      batch_id: '',
+      link: '',
+      closing_date: "",
+      instructions: ""
     }
   },
-  
+  computed: {
+    ...mapGetters(["apiResponse"]),
+
+    isValid() {
+      if (
+        this.link == "" ||
+        this.file == "" ||
+        this.batch_id == "" ||
+        this.closing_date == "" ||
+        this.instruction == ""
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  },
+
   methods: {
-    handleFileUpload(){
-    this.formData.imageUrl =  this.$refs.image.files[0];
-  },
-    async postData()
-    {
-      try {
-        const { ...adminData} = this.formData
-        let res = await this.$store.dispatch("createApplication", adminData)
-        console.log(res)
-      } catch (error) {
-        console.log(error)
+    ...mapActions(["createApp"]),
+
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+    },
+
+    submitForm() {
+      if( this.isValid) {
+        let formData = new FormData();
+        // formData.append("file", this.file);
+        formData.append("batch_id", this.batch_id);
+        formData.append("link", this.link);
+        formData.append("closing_date", this.closing_date);
+        formData.append("instruction", this.instruction);
+        this.createApp(formData);
+        // this.file = '';
+        this.batch_id =  '';
+        this.link =  '';
+        this.closing_date = "";
+        this.instruction   = "";
+        alert("Application Successfully Created")
+        
+      } else {
+        alert("All fields are required");
       }
     }
-
-   },
+    
+  },
 
 };
 </script>
@@ -110,9 +131,8 @@ h2 {
   color: #2b3c4e;
 }
 
-input,
-textarea {
-  border: 1.5px solid #2b3c4e;
+input, textarea{
+  border:1.5px solid #2B3C4E;
 }
 
 .upload-btn-wrapper {
@@ -121,7 +141,7 @@ textarea {
   display: inline-block;
 }
 
-.btn {
+.btn{
   width: 379px;
   height: 50px;
   color: #fff;
@@ -140,7 +160,7 @@ textarea {
   border-radius: 8px;
   font-size: 12px;
   text-align: center;
-  /* font-weight: bold; */
+  /* / font-weight: bold; / */
 }
 
 .upload-btn-wrapper input[type="file"] {

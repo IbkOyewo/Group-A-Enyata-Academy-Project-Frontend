@@ -133,6 +133,123 @@ export default {
 				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
 			],
 		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		}
     ],
         }
     },
@@ -164,7 +281,7 @@ export default {
            this.currentQuestion -= 1
         },
        submit(){
-         if(this.questions.length === 7){
+         if(this.questions.length === 20){
            this.$router.push('/success');
          } else{
                setTimeout(() => {
