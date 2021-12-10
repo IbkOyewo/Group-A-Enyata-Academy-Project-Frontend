@@ -24,7 +24,7 @@
       </div>
 
        <div class="container">
-        <router-link :to="{name: 'adminEntryModalb'}" class="tests appentry">
+        <router-link :to="{name: 'adminentries'}" class="tests appentry">
           <img src="../assets/application-entries-icon.svg" alt="application entries">
           <span class="mx-3">Application Entries</span>
         </router-link>
@@ -59,17 +59,16 @@
       </div>
 
       <div class="container">
-        <button class="logout">
+        <router-link :to="{name: 'adminlogin'}" class="tests logout">
           <img src="../assets/log-out-icon.svg" alt="logout">
           <span class="mx-3">Logout</span>
-        </button>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 export default {
   name: "adminSidebar",
  data() {
@@ -178,9 +177,9 @@ padding-right: 20px;
 .icon {
   margin-right: 25px;
 }
-button.logout{
+.logout{
 padding-right: 120px;
-padding-top: 50px;
+padding-top: 35px;
 }
 .sidebar-icon > div > p {
   display: flex;

@@ -1,8 +1,8 @@
 <template>
   <div class="all">
-    <div class="first_sec container my-5 overflow-hidden">
+    <div class="first_sec container mt-5 pb-5 overflow-hidden">
       <div class="f_s_txt text-center">
-        <img src="../assets/enyata_logo.png" alt="Enyata">
+        <img src="../assets/enyata_logo.png" alt="Enyata" />
         <h6>Admin Log In</h6>
       </div>
       <div class="container col-6">
@@ -12,26 +12,38 @@
         <form @submit.prevent="adminLogin">
           <div class="form-group">
             <label for>Email Address</label>
-            <input type="email" class="form-control" name="email" v-model="email" required />
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              v-model="email"
+              required
+            />
           </div>
           <div class="form-group">
             <label for>Password</label>
-            <input type="password" class="form-control" name="password" v-model="password" required />
-            <span>
-              <i
-                class="fa fa-eye-slash field-icon mr-5"
-                aria-hidden="true"
-              >
+            <input
+              class="form-control password"
+              name="password"
+              v-model="password"
+              :type="showPassword ? 'text' : 'password'"
+              @keyup="validatePassword()"
+              required
+            /> <span @click="togglePassword" v-show="showPassword">
+              <i class="fas fa-eye mr-5" aria-hidden="true"></i>
+            </span>
+            <span @click="togglePassword" v-show="!showPassword">
+              <i class="fa fa-eye-slash mr-5" aria-hidden="true">
               </i>
             </span>
           </div>
-          <button type="submit" class="btn" :disabled="!isDisabled" >
+          <button type="submit" class="btn" :disabled="!isDisabled">
             Sign in
           </button>
         </form>
 
         <div class="photo">
-          <img src="../assets/Group-1.png" width="557px" height="615px" pb-4/>
+          <img src="../assets/Group-1.png" width="557px" height="615px" pb-4 />
         </div>
       </div>
     </div>
@@ -41,10 +53,11 @@
 <script>
 export default {
   name: "adminlogin",
-   data() {
+  data() {
     return {
       email: "",
       password: "",
+      showPassword: false,
     };
   },
   computed: {
@@ -53,21 +66,37 @@ export default {
     },
   },
   methods: {
+
+    validatePassword() {
+      if (this.userDetails.password.length >= 8) {
+        this.feedbackPassword = true;
+        this.valid = false;
+        return this.feedbackPassword;
+      }
+      this.feedbackPassword = false;
+      this.valid = true;
+      return this.feedbackPassword;
+    },
+    togglePassword() {
+      this.showPassword = !this.showPassword;
+    },
+
     adminLogin: async function () {
+      console.log("Working");
       let email = this.email;
       let password = this.password;
-      let res = await this.$store.dispatch("adminLogin", { email, password })
+      let res = await this.$store.dispatch("adminLogin", { email, password });
       if (res.status === 200) {
-        this.$router.push("/adminDashboard")
-      } 
+        this.$router.push("/adminDashboard");
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-
-body, html{
+body,
+html {
   overflow: hidden;
 }
 .all {
@@ -81,23 +110,26 @@ body, html{
 
 .photo {
   position: absolute;
-    left: 49.%;
-    right: 0;
-    top: 7%;
-    bottom: 650%;
-    margin-bottom: 60px
+  left: 63.2%;
+  right: 0;
+  top: 7%;
+  bottom: 550%;
+  margin-bottom: 0px;
 }
 
-.photo img{
+.photo img {
   padding-left: 100px;
 }
 
-i {
+.fa-eye,
+.fa-eye-slash {
+  font-size: 13px;
+  color: #b8b8b9;
+  position: relative;
+  z-index: 2;
   cursor: pointer;
-}
-
-.svg-inline--fa.fa-w-20 {
-    width: 1em;
+  bottom: 52px;
+    left: 350px;
 }
 
 .field-icon {
@@ -118,7 +150,6 @@ i {
 .form-gro {
   display: flex;
   justify-content: center;
- 
 }
 
 .form-item {
@@ -137,7 +168,7 @@ h6 {
   font-style: italic;
   color: white;
   margin-bottom: 60px;
-   margin-top: 20px;
+  margin-top: 20px;
 }
 
 .account {
@@ -147,7 +178,7 @@ h6 {
 .btn {
   margin-top: 15px;
   background: white;
-  color: #7557D3;
+  color: #7557d3;
   border-radius: 4px;
   width: 379px;
   height: 44px;
@@ -156,9 +187,10 @@ h6 {
   font-weight: 700;
 }
 
-
 .password {
   color: white;
+  position: relative;
+  z-index: 1;
 }
 
 .input-form {
@@ -177,8 +209,8 @@ label {
 }
 
 .form-control {
-  background: #7557D3;  
-    margin-bottom: 20px;
+  background: #7557d3;
+  margin-bottom: 20px;
 }
 
 .response {
