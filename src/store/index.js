@@ -201,7 +201,7 @@ export default new Vuex.Store({
       }
     },
     // eslint-disable-next-line no-unused-vars
-    async getResults({commit}, userInfo) {
+    async getResults({commit}) {
       try {
           let config = {
             method: 'get',
@@ -212,6 +212,45 @@ export default new Vuex.Store({
           }
           };
 
+          let response = axios(config)
+          return response
+      }
+      catch(error){
+        console.log(error);
+      }
+    },
+     // eslint-disable-next-line no-unused-vars
+     async getDashboard({commit}) {
+      try {
+          let config = {
+            method: 'get',
+            url: 'http://localhost:8082/api/dashboard/1',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.userToken
+          }
+          };
+// console.log(this.state.userToken.id);
+          let response = axios(config)
+          console.log(response);
+          return response
+      }
+      catch(error){
+        console.log(error);
+      }
+    },
+     // eslint-disable-next-line no-unused-vars
+     async getAdminDashboard({commit}) {
+      try {
+          let config = {
+            method: 'get',
+            url: 'http://localhost:8082/api/dashboard/12',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.userToken
+          }
+          };
+// console.log(this.state.userToken.id);
           let response = axios(config)
           console.log(response);
           return response
