@@ -32,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="mx-1 different-row" v-for="entry in entries" :key="entry.id">
+            <tr class="mx-1 different-row" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" v-for="entry in entries" :key="entry.id">
               <td>{{ entry.fname }} {{entry.lname}}</td>
               <td>{{entry.email}}</td>
               <td>{{entry.dob}}</td>
@@ -49,13 +49,15 @@
 
 <script>
 import AdminSidebar from '@/components/AdminSidebar.vue'
+import offcanva from '@/components/offcanva.vue'
 // import { mapGetters, mapActions } from "vuex";
 
 
 export default {
   name: "adminentries",
   components: {
-    AdminSidebar
+    AdminSidebar,
+    offcanva
   },
 
   data() {

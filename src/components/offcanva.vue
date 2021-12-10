@@ -1,29 +1,24 @@
 <template>
 
-<div>
-        <div class="container">
-            <span class="float-start">
-                <button class="button" type="button" @click.prevent="showOffcanvasMenu()">
-                    classic
-                </button>
-            </span>
-        </div>
-        <div class="offcanvas offcanvas-end" :class="showMenu ? 'show' : ''" tabindex="-1" :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="">Offcanvas with backdrop</h5>
-                <button type="button" class="btn-close text-reset" @click.prevent="showOffcanvasMenu()"></button>
-            </div>
-            <div class="offcanvas-body">
-                <p>.....</p>
-            </div>
-        </div>
-  
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+
+<div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    ...
+  </div>
+
 </div>
+  
+
   
 </template>
 
 <script>
   export default {
+    name: "offcanva",
     data() {
       return {
           showMenu: false

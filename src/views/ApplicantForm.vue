@@ -65,14 +65,14 @@
           <label for="file-upload" class="custom-file">
             <span>&#x2B; &nbsp;</span>Upload CV
           </label>
-          <input type="file" id="file" :v-html="file" ref="cv" @change="handleFileUpload()" :v-model="appData.cv"/>
+          <input id="file" name="cv" :v-model="appData.cv" :v-html="file" type="file" ref="cv" @change="handleCvUpload()"/>
         </div>
         <div class="file_div">
           <label for="file-upload" class="custom-file">
             <span>&#x2B; &nbsp;</span>Upload Photo
           </label>
           <input
-            id="file-upload" :v-model="appData.image" :v-html="file" type="file" ref="image"  @change="handleFileUpload()"
+            id="file-upload" name="image" :v-model="appData.image" :v-html="file" type="file" ref="image" @change="handleImageUpload()"
           />
         </div>
       </div>
@@ -134,15 +134,11 @@ export default {
         course: "",
         university: "",
         cv: "",
-        image: "",
+        image: ""
        }
     };  
   },
   methods: {
-    handleFileUpload(){
-    this.appData.cv = this.$refs.cv.files[0];
-    this.appData.image =  this.$refs.image.files[0];
-  },
   submitFile: async function () {
       let formData = new FormData();
       formData.append('fname', this.appData.fname);
@@ -153,15 +149,27 @@ export default {
       formData.append('address', this.appData.address);
       formData.append('course', this.appData.course);
       formData.append('university', this.appData.university);
-      formData.append('cv', this.appData.cv);
+      formData.append('cv', this.appData.cv.name);
       formData.append('image', this.appData.image.name);
-      const data = {}
-      formData.forEach((value, key) => (data[key] = value))
-      let res = await this.$store.dispatch("application", data)
+      // const data = {}
+      // formData.forEach((value, key) => (data[key] = value))
+      let res = await this.$store.dispatch("application", this.appData)
       if (res.status === 201) {
         this.$router.push("/dashboard")
-      } 
-      },
+  }
+  },
+  handleFileUpload( event ){
+  this.file = event.target.files[0];
+},
+  handleCvUpload(){
+    this.appData.cv = this.$refs.cv.files;
+    console.log("cv",this.$refs.cv);
+  },
+  handleImageUpload(){
+    this.appData.image =  this.$refs.image.files[0];
+    console.log("image",this.$refs.image);
+    console.log(this.appData);
+  }
   },
 };
 </script>

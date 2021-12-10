@@ -30,13 +30,13 @@
     </div>
     <div class="container">
         <div>      
-          <h6 class="text-center">Question 1</h6>
-          <h2 class="text-center question_name">What is the purpose of HDR technology?</h2>
+          <h6 class="text-center">Question {{currentQuestion+1}}</h6>
+          <h2 class="text-center question_name">{{questions[currentQuestion]["questionText"]}}</h2>
          <div class= "d-flex justify-content-center mt-5">
            <div class="mb-5">
-              <div class="d-flex align-items-center mb-3">
-                <input type="radio"/>
-                <span class="mx-3 options_name"></span>
+              <div  class="d-flex align-items-center mb-3  gap-2"  v-for="(item) in questions[currentQuestion]['answerOptions']" :key="item.answerText">
+                <input :id="item.answerText" type="radio" :value="item.answerText"   v-model="userAnswers[currentQuestion]">
+                <label :for="item.answerText">{{item.answerText}}</label>
               </div> 
             </div>
          </div>
@@ -44,9 +44,9 @@
         </div>
     </div>
       <div class="two-buttons">
-        <button class="second-button">Previous</button>
-        <button class="btn">Finish</button>
-        <button class="second-button">Next</button>
+        <button class="second-button" @click="preQuest">Previous</button>
+        <button class="btn" @click="submit">Finish</button>
+        <button class="second-button" @click="nextQuest">Next</button>
       </div>
   </div>
 </template>
@@ -59,7 +59,84 @@ export default {
         return {
             mins: 30,
             secs: 0,
+             currentQuestion: 1,
+             selectedAnswers:{},
+            showScore: false,
+            score:0,
+            countDown : 30,
+            timer:null,
+            startQuiz: false,
+            userAnswers: new Array(7).fill(""),
+            // questions:[],
+
+
+    questions : [
+		{
+			questionText: 'Which one is used for two-way binding?',
+			answerOptions: [
+				{ answerText: 'v-on', isCorrect: false },
+        { answerText: 'v-bind', isCorrect: false },
+				{ answerText: 'v-model', isCorrect: true },
+				{ answerText: 'v-if', isCorrect: false },
+			],
+		},
+
+
+
+		{
+			questionText: 'Who is the creator of vueJS ?',
+			answerOptions: [
+				{ answerText: 'Jeff Bezos', isCorrect: false },
+				{ answerText: 'Elon Musk', isCorrect: false },
+				{ answerText: 'Evan You', isCorrect: true },
+				{ answerText: 'Tony Stark', isCorrect: false },
+			],
+		},
+		{
+			questionText: 'Vue is used in the backend. - True or False?',
+			answerOptions: [
+				{ answerText: 'True', isCorrect: false },
+				{ answerText: 'False', isCorrect: true },
+			],
+		},
+		{
+			questionText: 'Which version of Vue is Launched on 2020?',
+			answerOptions: [
+				{ answerText: 'Vue 2', isCorrect: false },
+				{ answerText: 'Vue 1', isCorrect: false },
+				{ answerText: 'Vue 4', isCorrect: false },
+				{ answerText: 'Vue 3', isCorrect: true },
+			],
+        },
+        {
+			questionText: 'Is vue an OpenSource Library?',
+			answerOptions: [
+				{ answerText: 'True', isCorrect: true },
+				{ answerText: 'False', isCorrect: false },
+			],
+        },
+        {
+			questionText: 'Which of the following is a Full Javascript Frramework',
+			answerOptions: [
+				{ answerText: 'Vue', isCorrect: false },
+				{ answerText: 'node', isCorrect: false },
+				{ answerText: 'react', isCorrect: false },
+				{ answerText: 'Angular', isCorrect: true },
+			],
+        },
+        {
+			questionText: 'Composition API can be used on which version?',
+			answerOptions: [
+				{ answerText: 'Vue 5', isCorrect: false },
+				{ answerText: 'Vue 2 Only', isCorrect: false },
+				{ answerText: 'Vue 3 Only', isCorrect: false },
+				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
+			],
+		},
+    ],
         }
+    },
+    computed:{
     },
     methods: {
         startTimer(duration) {
@@ -73,14 +150,54 @@ export default {
 
                 if (--timer < 0) {
                     timer = duration;
-                }
+                } e
             }, 1000);
-        }
+        },
+         
+       
+        nextQuest(){
+          if(this.currentQuestion === this.questions.length - 1) return 
+           this.currentQuestion += 1
+        },
+        preQuest(){
+          if(this.currentQuestion === 0) return 
+           this.currentQuestion -= 1
+        },
+       submit(){
+         if(this.questions.length === 7){
+           this.$router.push('/success');
+         } else{
+               setTimeout(() => {
+           const thirtyMins = 60 * 30
+          if(this.startTimer(thirtyMins)){
+               this.$router.push('/success');
+          }
+         })
+         }
+       },
+    },
+    created(){
+       this.$http.get("http://localhost:8082/api/user/take-assessment")
+       .then(data => {
+         console.log(data.data.data)
+          // this.questions = data.data.data
+         
+       })
     },
     mounted() {
         const thirtyMins = 60 * 30
 
         this.startTimer(thirtyMins)
+        
+
+    },
+    watch:{
+      userAnswers:{
+        handler(userAnswers){
+          console.log(userAnswers)
+        },
+        deep:true
+      }
     }
   } 
 </script>
