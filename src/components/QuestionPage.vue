@@ -30,13 +30,13 @@
     </div>
     <div class="container">
         <div>      
-          <h6 class="text-center">Question 1</h6>
-          <h2 class="text-center question_name">What is the purpose of HDR technology?</h2>
+          <h6 class="text-center">Question {{currentQuestion+1}}</h6>
+          <h2 class="text-center question_name">{{questions[currentQuestion]["questionText"]}}</h2>
          <div class= "d-flex justify-content-center mt-5">
            <div class="mb-5">
-              <div class="d-flex align-items-center mb-3">
-                <input type="radio"/>
-                <span class="mx-3 options_name"></span>
+              <div  class="d-flex align-items-center mb-3  gap-2"  v-for="(item) in questions[currentQuestion]['answerOptions']" :key="item.answerText">
+                <input :id="item.answerText" type="radio" :value="item.answerText"   v-model="userAnswers[currentQuestion]">
+                <label :for="item.answerText">{{item.answerText}}</label>
               </div> 
             </div>
          </div>
@@ -44,9 +44,9 @@
         </div>
     </div>
       <div class="two-buttons">
-        <button class="second-button">Previous</button>
-        <button class="btn">Finish</button>
-        <button class="second-button">Next</button>
+        <button class="second-button" @click="preQuest">Previous</button>
+        <button class="btn" @click="submit">Finish</button>
+        <button class="second-button" @click="nextQuest">Next</button>
       </div>
   </div>
 </template>
@@ -59,27 +59,30 @@ export default {
         return {
             mins: 30,
             secs: 0,
-             currentQuestion: 0,
+             currentQuestion: 1,
+             selectedAnswers:{},
             showScore: false,
             score:0,
             countDown : 30,
             timer:null,
             startQuiz: false,
+            userAnswers: new Array(7).fill(""),
+            // questions:[],
 
 
-
-                        questions : [
+    questions : [
 		{
 			questionText: 'Which one is used for two-way binding?',
 			answerOptions: [
 				{ answerText: 'v-on', isCorrect: false },
-                { answerText: 'v-bind', isCorrect: false },
+        { answerText: 'v-bind', isCorrect: false },
 				{ answerText: 'v-model', isCorrect: true },
 				{ answerText: 'v-if', isCorrect: false },
-                
-			
 			],
 		},
+
+
+
 		{
 			questionText: 'Who is the creator of vueJS ?',
 			answerOptions: [
@@ -133,6 +136,8 @@ export default {
     ],
         }
     },
+    computed:{
+    },
     methods: {
         startTimer(duration) {
             let timer = duration
@@ -145,39 +150,54 @@ export default {
 
                 if (--timer < 0) {
                     timer = duration;
-                }
+                } e
             }, 1000);
         },
-         startQuizFunc(){
-            this.startQuiz = true
-            this.countDownTimer()
+         
+       
+        nextQuest(){
+          if(this.currentQuestion === this.questions.length - 1) return 
+           this.currentQuestion += 1
         },
-        handleAnswerClick(isCorrect){
-            clearTimeout(this.timer);
-            let nextQuestion = this.currentQuestion + 1;
-            if(isCorrect){
-                this.score = this.score + 1;
-            }
-            if(nextQuestion < this.questions.length){
-            this.currentQuestion = nextQuestion;
-            // this.$store.state.questionAttended = this.currentQuestion;
-            // localStorage.setItem('qattended', this.currentQuestion)
-            this.countDown = 30;
-            this.countDownTimer();
-            }
-            else{
-                // localStorage.removeItem('qattended')
-                this.showScore = true;
-                // localStorage.setItem('testComplete',this.showScore)
-            }
-        }
+        preQuest(){
+          if(this.currentQuestion === 0) return 
+           this.currentQuestion -= 1
+        },
+       submit(){
+         if(this.questions.length === 7){
+           this.$router.push('/success');
+         } else{
+               setTimeout(() => {
+           const thirtyMins = 60 * 30
+          if(this.startTimer(thirtyMins)){
+               this.$router.push('/success');
+          }
+         })
+         }
+       },
+    },
+    created(){
+       this.$http.get("http://localhost:8082/api/user/take-assessment")
+       .then(data => {
+         console.log(data.data.data)
+          // this.questions = data.data.data
+         
+       })
     },
     mounted() {
         const thirtyMins = 60 * 30
 
         this.startTimer(thirtyMins)
+        
 
-
+    },
+    watch:{
+      userAnswers:{
+        handler(userAnswers){
+          console.log(userAnswers)
+        },
+        deep:true
+      }
     }
   } 
 </script>
