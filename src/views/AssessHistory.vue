@@ -1,9 +1,9 @@
 <template>
   <div class="row">
     <div class="col-3">
-      <AdminSidebar />
+      <AdminSidebar/>
     </div>
-    <div class="container my-5 col-9">
+    <div class="my-5 py-5 col-9">
       <AssessmentHistory />
     </div>
   </div>

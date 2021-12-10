@@ -21,7 +21,7 @@
 
     <div class="sidebar-icon">
       <div class="container">
-        <router-link :to="{name: 'Dashboard'}" class="tests dashboard">
+        <router-link :to="{name: 'adminDashboard'}" class="tests dashboard">
           <img src="../assets/dashboard.png" alt="dashboard">
           <span class="mx-3">Dashboard</span>
         </router-link>
@@ -69,17 +69,16 @@
       </div>
 
       <div class="container">
-        <button class="logout">
+        <router-link :to="{name: 'adminlogin'}" class="tests logout">
           <img src="../assets/log-out-icon.svg" alt="logout">
           <span class="mx-3">Logout</span>
-        </button>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 export default {
   name: "adminSidebar",
   // data() {
@@ -205,9 +204,9 @@ padding-right: 20px;
 .icon {
   margin-right: 25px;
 }
-button.logout{
+.logout{
 padding-right: 120px;
-padding-top: 50px;
+padding-top: 35px;
 }
 .sidebar-icon > div > p {
   display: flex;

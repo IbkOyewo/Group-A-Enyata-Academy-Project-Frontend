@@ -12,7 +12,7 @@
       <div class="date_section">
         <div class="date">
           <p>Current Application</p>
-          <span class="number">{{currentApplicants}}</span>
+          <span class="number">{{totalApplicants}}</span>
           <div class="horizontal"></div>
           <div class>
             <p class>Academy 1.0</p>
