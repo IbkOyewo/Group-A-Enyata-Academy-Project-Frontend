@@ -10,38 +10,38 @@
 
     <div class="sidebar-icon">
       <div class="active">
-        <p><img src="../assets/dashboard-icon.png" class="icon" />Dashboard</p>
+        <router-link :to="{name: 'adminDashboard'}"><img src="../assets/dashboard-icon.png" class="icon" />Dashboard</router-link>
       </div>
       <div>
-        <p>
+        <router-link :to="{name: 'applicationAdmin'}">
           <img src="../assets/create-assessment.png" class="icon" />Create
           Application
-        </p>
+        </router-link>
       </div>
       <div>
-        <p>
+        <router-link :to="{name: 'adminEntryModal'}">
           <img src="../assets/app-entry.png" class="icon" />Application Entries
-        </p>
+        </router-link>
       </div>
       <div>
-        <p>
+        <router-link :to="{name: 'composeQues'}">
           <img src="../assets/compose-ass.png" class="icon" />Compose Assessment
-        </p>
+        </router-link>
       </div>
       <div>
-        <p>
+        <router-link :to="{name: 'AssessHistory'}">
           <img src="../assets/asses-history.png" class="icon" />Assessment
           History
-        </p>
+        </router-link>
       </div>
       <div>
-        <p><img src="../assets/result.png" class="icon" />Results</p>
+        <router-link :to="{name: 'results'}"><img src="../assets/result.png" class="icon" />Results</router-link>
       </div>
       <div class="setting-icon">
-        <p><img src="../assets/Setting.png" class="icon" />Settings</p>
+        <router-link :to="{name: 'ProfileSettings'}"><img src="../assets/Setting.png" class="icon" />Settings</router-link>
       </div>
       <div class="logout-icon">
-        <p><img src="../assets/logout-icon.png" class="icon" />Logout</p>
+        <router-link :to="{name: 'home'}"><img src="../assets/logout-icon.png" class="icon" />Logout</router-link>
       </div>
     </div>
   </div>
@@ -54,6 +54,15 @@ export default {
 </script>
 
 <style scoped>
+a.router-link-exact-active {
+  color: #2B3C4E;
+  font-weight: 700;
+}
+ a{
+text-decoration: none;
+  color: #212529;
+
+}
 .sidebar {
   width: 292px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);

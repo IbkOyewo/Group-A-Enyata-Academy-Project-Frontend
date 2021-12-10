@@ -1,7 +1,7 @@
 <template>
-  <div class="main-div">
-    <div id="top-text">Assessment History</div>
-    <div class="container">
+  <div class="container py-5">
+    <div id="top-text" class="ms-4">Assessment History</div>
+    <div>
      
 
       <table>
@@ -12,42 +12,14 @@
           <td>Time Allocated</td>
           <td>Status</td>
         </thead>
-        
-        <tbody>
+
+        <tbody v-for="history in histories" v-bind:key="history.client_id">
           <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
-          </tr>
-          <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
-          </tr>
-          <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
-          </tr>
-          <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
-          </tr>
-          <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
+            <td><div>{{ history.batch  }}</div></td>
+            <td><div>{{ history.datecomposed }}</div></td>
+            <td><div>{{ history.noofquestions }}</div></td>
+            <td><div>{{ history.timeallocated }}</div></td>
+            <td><div>{{ history.status }}</div></td>
           </tr>
         </tbody>
       </table>
@@ -56,9 +28,33 @@
   </div>
 </template>
 
-<style>
+<script>
+export default {
+  name: 'assessmentHistory',
+  data() {
+    return {
+      histories: '',
+    }
+  },
+
+  async mounted() {
+    try {
+      let res = await this.$store.dispatch('assessmentHistory');  
+      console.log(res)
+      this.histories = res.data.data  
+    } catch (error) {
+      console.log(error)
+    }
+}
+
+}
+
+
+</script>
+
+<style scoped>
 #top-text {
-  position: absolute;
+  /* position: absolute; */
   width: 355px;
   height: 53px;
   left: 334px;
@@ -72,24 +68,16 @@
   color: #2b3c4e;
 }
 
-.container {
-  position: absolute;
-  width: 850px;
-  height: 430px;
-  left: 334px;
-  top: 164px;
-  background: #ffffff;
-  box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
-  border-radius: 8px;
-}
-
 table {
   margin-top: 30px;
   margin-left: 25px;
   width: 720px;
   text-align: center;
   border-collapse: collapse; 
+  box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
+  border-radius: 8px;
 }
+
 
 td {
      padding: 0;
