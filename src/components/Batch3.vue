@@ -19,7 +19,11 @@
         </thead>
 
         <tbody>
-          <tr v-b-modal.modal-1>
+          <tr
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
+          >
             <td><div>Ify Chinke</div></td>
             <td><div>ify@enyata.com</div></td>
             <td><div>12/09/19 - 22</div></td>
@@ -47,9 +51,12 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> 
 
-    <div class="box mx-auto">
+
+   
+
+    <!-- <div class="box mx-auto">
       <b-modal id="modal-1" data-backdrop="false" hide-footer hide-header>
         <div class="container">
           <img class="user-image" src="../assets/girl-img.png" alt="" />
@@ -106,18 +113,17 @@
           </div>
         </div>
       </b-modal>
-    </div>
-
+    </div> -->
   </div>
 </template>
+
+
 
 <style scoped>
 body {
   background-image: none;
 }
-.modal-dialog {
-  position:absolute !important;
-}
+
 table {
   margin-top: 30px;
   width: 930px;
@@ -166,12 +172,14 @@ tr:hover {
 .batch1 {
   display: flex;
 }
+
 img {
   width: 12px;
   height: 12px;
   margin-left: 30px;
   margin-top: 20px;
 }
+
 h6 {
   font-family: Lato;
   font-style: normal;
@@ -180,6 +188,7 @@ h6 {
   line-height: 52px;
   color: #2b3c4e;
 }
+
 p {
   font-family: Lato;
   font-style: italic;
@@ -189,7 +198,7 @@ p {
   color: #2b3c4e;
 }
 
-#modal-1 {
+/* #modal-1 {
   padding: 95px 30px;
   position: absolute !important;
   width: 560px !important;
@@ -197,7 +206,7 @@ p {
   left: 786px !important;
   top: 0px !important;
   background: #ffffff;
-}
+} */
 
 .container {
   padding: 95px 30px;
@@ -274,6 +283,7 @@ form input {
   margin-top: 37px;
   text-align: center;
 }
+
 .file_upload {
   display: flex;
   width: 300px;

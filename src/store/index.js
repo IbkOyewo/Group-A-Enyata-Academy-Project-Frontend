@@ -9,8 +9,12 @@ export default new Vuex.Store({
     userToken: localStorage.getItem('User-Token') || '',
     adminToken: localStorage.getItem('Admin-Token') || '',
   },
-  getters: {},
-  mutations: {},
+  getters: {
+    getToken: (state) => state.adminToken,
+  },
+  mutations: {
+    setToken: (state, payload) => state.adminToken = payload,
+  },
   actions: {
     // eslint-disable-next-line no-unused-vars
     async signup({commit}, userInfo) {
@@ -79,6 +83,27 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+ // eslint-disable-next-line no-unused-vars
+    async createApplication({commit}, applicationInfo) {
+      try {
+          let config = {
+            method: 'post',
+            url: 'http://localhost:8082/api/admin/application',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.adminToken
+          },
+            data : applicationInfo
+          };
+
+          let response = axios(config)
+          return response
+      }
+      catch(error){
+        console.log(error);
+      }
+    },
+
     // eslint-disable-next-line no-unused-vars
     async adminDashboard({commit}) {
       try {
