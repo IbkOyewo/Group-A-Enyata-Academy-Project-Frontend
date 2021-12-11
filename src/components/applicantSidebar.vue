@@ -4,8 +4,8 @@
       <div v-if="Profile[0].image">
         <img :src="Profile[0].image" class="profile"/>
       </div>
-      <h1 class="user-name">{{Profile[0].fname + " " + Profile[0].lname}}</h1>
-      <p class="user-email">{{Profile[0].email}}</p>
+      <h1 class="user-name">{{user.fname + " " + user.lname}}</h1>
+      <p class="user-email">{{user.email}}</p>
     </div>
 
     <div class="sidebar-icon">
@@ -24,7 +24,7 @@
 
       <div class="container pt-3">
         <router-link :to="{name: 'home'}" class="tests">
-        <button @click="logut" class="logout">
+        <button class="logout">
           <img src="../assets/logout.png" alt="logout">
           <span class="mx-3">Logout</span>
         </button>
@@ -36,20 +36,38 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import VueJwtDecode from 'vue-jwt-decode'
+
 export default {
   name: "sidebar",
   data() {
     return {
       Profile: [],
       file: '',
-      message: ""
+      message: "",
+      user:{}
     };
   },
+  methods: {
+    getUserDetails() {
+      // get token from localstorage
+      let token = localStorage.getItem("User-Token");
+      try {
+      //decode token here and attach to the user object
+      let decoded = VueJwtDecode.decode(token);
+      this.user = decoded;
+      console.log(this.user);  
+      } catch (error) {
+        // return error in production env
+        console.log(error, 'error from decoding token')
+      }
+    },
+  },
   created: async function () {
+    this.getUserDetails();
     let res = await this.$store.dispatch("getDashboard")
     let obj = res.data.data
     this.Profile.push(obj)
-    //console.log(this.Profile[0]);
   }
 };
 </script>

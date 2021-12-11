@@ -5,8 +5,8 @@
         <img :src="Profile[0].image" class="profile" />
       </div>
 
-      <h1 class="user-name">{{Profile[0].fname+ " " + Profile[0].lname}}</h1>
-      <p class="user-email">{{Profile[0].email}}</p>
+      <h1 class="user-name">{{admin.name}}</h1>
+      <p class="user-email">{{admin.email}}</p>
     </div>
 
     <div class="sidebar-icon">
@@ -69,20 +69,38 @@
 </template>
 
 <script>
+import VueJwtDecode from 'vue-jwt-decode'
 export default {
   name: "adminSidebar",
  data() {
     return {
       Profile: [],
       file: '',
-      message: ""
+      message: "",
+      admin:{}
     };
   },
+    methods: {
+    getAdminDetails() {
+      // get token from localstorage
+      let token = localStorage.getItem("Admin-Token");
+      try {
+      //decode token here and attach to the user object
+      let decoded = VueJwtDecode.decode(token);
+      this.admin = decoded;
+      //console.log(this.admin);  
+      } catch (error) {
+        // return error in production env
+        console.log(error, 'error from decoding token')
+      }
+    },
+  },
   created: async function () {
+    this.getAdminDetails()
     let res = await this.$store.dispatch("getAdminDashboard")
     let obj = res.data.data
     this.Profile.push(obj)
-    //console.log(this.Profile[0]);
+    // console.log(this.Profile[0]);
   }
 };
 </script>

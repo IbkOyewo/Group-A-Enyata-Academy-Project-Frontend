@@ -59,62 +59,62 @@
       </svg>
       <p class="appli_hd">Application Form</p>
     </div>
-    <form @submit.prevent="submitFile" enctype="multipart/form-data">
+    <form@submit.prevent="submitFile" enctype="multipart/form-data">
       <div class="file_upload">
         <div class="file_div">
           <label for="file-upload" class="custom-file">
             <span>&#x2B; &nbsp;</span>Upload CV
           </label>
-          <input id="file" name="cv" :v-model="appData.cv" :v-html="file" type="file" ref="cv" @change="handleCvUpload()"/>
+          <input id="file-upload" name="cv" :v-model="cv" type="file" ref="cv" @change="handleCvUpload"/>
         </div>
         <div class="file_div">
-          <label for="file-upload" class="custom-file">
+          <label for="image-upload" class="custom-file">
             <span>&#x2B; &nbsp;</span>Upload Photo
           </label>
           <input
-            id="file-upload" name="image" :v-model="appData.image" :v-html="file" type="file" ref="image" @change="handleImageUpload()"
+            id="image-upload" name="image" :v-model="image" type="file" ref="image" @change="handleImageUpload"
           />
         </div>
       </div>
       <div class="application_fm">
         <div class="input_div">
           <label for="firstname">First Name</label>
-          <input type="text" class="form-control" v-model="appData.fname" name="fname" />
+          <input type="text" class="form-control" v-model="fname" name="fname" />
         </div>
         <div class="input_div">
           <label for="lastname">Last Name</label>
-          <input type="text" class="form-control" v-model="appData.lname" name="lname"/>
+          <input type="text" class="form-control" v-model="lname" name="lname"/>
         </div>
         <div class="input_div">
           <label for="firstname">Email</label>
-          <input type="email" class="form-control" v-model="appData.email" name="email"/>
+          <input type="email" class="form-control" v-model="email" name="email"/>
         </div>
         <div class="input_div">
           <label for="firstname">Date of Birth</label>
-          <input type="date" class="form-control" v-model="appData.dob" name="dob"  
+          <input type="date" class="form-control" v-model="dob" name="dob"  
           />
         </div>
         <div class="input_div">
           <label for="firstname">Address</label>
-          <input type="text" class="form-control" v-model="appData.address" name="address" />
+          <input type="text" class="form-control" v-model="address" name="address" />
         </div>
         <div class="input_div">
           <label for="firstname">University</label>
-          <input type="text" class="form-control" v-model="appData.university" name="university"/>
+          <input type="text" class="form-control" v-model="university" name="university"/>
         </div>
         <div class="input_div">
           <label for="firstname">Course of Study</label>
-          <input type="text" class="form-control" v-model="appData.course" name="course" />
+          <input type="text" class="form-control" v-model="course" name="course" />
         </div>
         <div class="input_div">
           <label for="firstname">CGPA</label>
-          <input type="text" class="form-control" v-model="appData.cgpa" name="cgpa" value="7"/>
+          <input type="text" class="form-control" v-model="cgpa" name="cgpa" value="7"/>
         </div>
       </div>
       <div class='button'>
           <button type="submit">Submit</button> 
       </div> 
-    </form>
+    </form@submit.prevent=>
   </div>
 </template>
 
@@ -124,7 +124,6 @@ export default {
   data() {
     return {
       profile: 0,
-       appData:{
         fname: "",
         lname: "",
         email: "",
@@ -135,41 +134,34 @@ export default {
         university: "",
         cv: "",
         image: ""
-       }
     };  
   },
   methods: {
+      handleCvUpload(event){
+    this.cv = event.target.files[0];
+  },
+     handleImageUpload(event){
+     this.image = event.target.files[0];
+  },
   submitFile: async function () {
       let formData = new FormData();
-      formData.append('fname', this.appData.fname);
-      formData.append('lname', this.appData.lname);
-      formData.append('email', this.appData.email);
-      formData.append('cgpa', this.appData.cgpa);
-      formData.append('dob', this.appData.dob);
-      formData.append('address', this.appData.address);
-      formData.append('course', this.appData.course);
-      formData.append('university', this.appData.university);
-      formData.append('cv', this.appData.cv.name);
-      formData.append('image', this.appData.image.name);
-      // const data = {}
-      // formData.forEach((value, key) => (data[key] = value))
-      let res = await this.$store.dispatch("application", this.appData)
+      formData.append('fname', this.fname);
+      formData.append('lname', this.lname);
+      formData.append('email', this.email);
+      formData.append('cgpa', this.cgpa);
+      formData.append('dob', this.dob);
+      formData.append('address', this.address);
+      formData.append('course', this.course);
+      formData.append('university', this.university);
+      formData.append('cv', this.cv);
+      formData.append('image', this.image);
+      let res = await this.$store.dispatch("application", formData)
+
       if (res.status === 201) {
+        alert("Application submitted Successfully")
         this.$router.push("/dashboard")
   }
   },
-  handleFileUpload( event ){
-  this.file = event.target.files[0];
-},
-  handleCvUpload(){
-    this.appData.cv = this.$refs.cv.files;
-    console.log("cv",this.$refs.cv);
-  },
-  handleImageUpload(){
-    this.appData.image =  this.$refs.image.files[0];
-    console.log("image",this.$refs.image);
-    console.log(this.appData);
-  }
   },
 };
 </script>

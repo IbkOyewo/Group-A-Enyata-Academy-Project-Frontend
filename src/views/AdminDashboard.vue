@@ -93,7 +93,7 @@ export default {
   async mounted() {
     try {
       let res = await this.$store.dispatch('adminDashboard');  
-      console.log(res)
+      //console.log(res)
       this.currentApplicants = res.data.data    
     } catch (error) {
       console.log(error)
@@ -101,7 +101,7 @@ export default {
 
     try {
       let res = await this.$store.dispatch('totalApplication');  
-      console.log(res)
+      //console.log(res)
       this.totalApplicants = res.data.data[0].count    
     } catch (error) {
       console.log(error)
