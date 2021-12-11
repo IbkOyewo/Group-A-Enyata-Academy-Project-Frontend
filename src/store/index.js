@@ -8,9 +8,16 @@ export default new Vuex.Store({
   state: {
     userToken: localStorage.getItem('User-Token') || '',
     adminToken: localStorage.getItem('Admin-Token') || '',
+    adminInfo: {},
   },
-  getters: {},
-  mutations: {},
+  getters: {
+    getAdminInfo : (state) => state.adminInfo
+  },
+  mutations: {
+    setAdminInfo(state, info) {
+      state.adminInfo = info;
+    }
+  },
   actions: {
     // eslint-disable-next-line no-unused-vars
     async signup({commit}, userInfo) {
@@ -115,6 +122,25 @@ export default new Vuex.Store({
         console.log(error)
       }
     },
+
+      // eslint-disable-next-line no-unused-vars
+      async adminProfile({commit}) {
+        try {
+          let config = {
+            method: 'get',
+            url: 'http://localhost:8082/api/admin/profile',
+            headers: { 
+              'x-access-token': this.state.adminToken
+            }
+          };
+    
+         const response = await axios(config)
+            console.log(response)
+            commit("setAdminInfo", response.data.data);
+        } catch (error) {
+          console.log(error)
+        }
+      },
 
     // eslint-disable-next-line no-unused-vars
     async composeAssessment({commit}, userInfo) {
