@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-3">
-      <AdminSidebar/>
+      <AdminSidebar />
     </div>
 
     <div class="container my-5 col-9">
@@ -12,7 +12,7 @@
       <div class="date_section">
         <div class="date">
           <p>Current Application</p>
-          <span class="number">200</span>
+          <span class="number">{{totalApplicants}}</span>
           <div class="horizontal"></div>
           <div class>
             <p class>Academy 1.0</p>
@@ -21,7 +21,7 @@
 
         <div class="t_app">
           <p>Total Application</p>
-          <span class="number">500</span>
+          <span class="number">{{totalApplicants}}</span>
           <div class="horizontal2"></div>
           <div class>
             <p class>All entries so far</p>
@@ -44,16 +44,12 @@
           <p class="small-heading">Last Update: 18.24.21/01/20</p>
           <div>
             <table class="table table-borderless">
-              
               <tbody>
                 <tr class="different-row">
-                  
                   <td>Academy Batch 1</td>
-                  <td>0 students</td>
-                  <td>started 19/01/2020</td>
-                  
+                  <td>{{totalApplicants}} students</td>
+                  <td>started 8/1/2021</td>
                 </tr>
-               
               </tbody>
             </table>
           </div>
@@ -62,14 +58,10 @@
           <h4 class="my-3 heading">Create Assessment</h4>
 
           <div class="text-center my-5">
-            <p>
-              Create test question for an incoming academy
-              student
-            </p>
-            <router-link :to="{name: 'composeQues'}" class="tests">
+            <p>Create test question for an incoming academy student</p>
+            <router-link :to="{ name: 'applicationAdmin' }" class="tests">
               <button>Create Assessment</button>
             </router-link>
-            
           </div>
         </div>
       </div>
@@ -78,22 +70,45 @@
 </template>
 
 <script>
-import AdminSidebar from '@/components/AdminSidebar.vue';
+import AdminSidebar from "@/components/AdminSidebar.vue";
 
 export default {
   name: "adminDashboard",
-  components: {
-    AdminSidebar
+  data() {
+    return {
+      currentApplicants: "",
+      totalApplicants: "",
+      batches: "",
+    };
   },
-  computed: {
-    adminDashboard: async function () {
-      let res = await this.$store.dispatch("adminDashboard"); 
+  components: {
+    AdminSidebar,
+  },
+  // computed: {
+  //   adminDashboard: async function () {
+  //     let res = await this.$store.dispatch("adminDashboard");
+  //   },
+  // },
+
+  async mounted() {
+    try {
+      let res = await this.$store.dispatch('adminDashboard');  
+      console.log(res)
+      this.currentApplicants = res.data.data    
+    } catch (error) {
+      console.log(error)
+    }
+
+    try {
+      let res = await this.$store.dispatch('totalApplication');  
+      console.log(res)
+      this.totalApplicants = res.data.data[0].count    
+    } catch (error) {
+      console.log(error)
     }
   },
-  methods: {
-    
-  }
-}
+  
+};
 </script>
 
 <style scoped>
@@ -103,7 +118,7 @@ export default {
   border-radius: 10px;
   font-weight: bold;
   color: #2b3c4e;
-  border-left: 10px solid #5ABEFD;;
+  border-left: 10px solid #5abefd;
 }
 .heading {
   font-family: Lato;
@@ -112,7 +127,7 @@ export default {
   font-size: 16px;
   line-height: 19px;
   letter-spacing: -0.02em;
-  color: #2B3C4E;
+  color: #2b3c4e;
 }
 .create {
   border: 1px solid #ececf9;

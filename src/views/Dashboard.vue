@@ -14,9 +14,9 @@
     <div class="status-main">
       <div class="status-date">
         <div class="date-text">Date of Application</div>
-        <div class="status-display">09.09.19</div>
+        <div class="status-display">{{Profile[0].created_at}}</div>
         <hr id="blue" />
-        <div class="date-text">4 days since applied</div>
+        <div class="date-text">1 days since applied</div>
       </div>
       <div class="status-msg">
         <div class="date-text">Application Status</div>
@@ -52,9 +52,24 @@
 import applicantSidebar from '@/components/applicantSidebar.vue'
 export default {
   name: "dashboard",
-
   components: {
-       applicantSidebar
+    applicantSidebar
+  },
+ data() {
+    return {
+      Profile: [],
+      file: '',
+      message: ""
+    };
+  },
+  created: async function () {
+    let res = await this.$store.dispatch("getDashboard")
+    let obj = res.data.data
+    this.Profile.push(obj)
+    const date =new Date(this.Profile[0].created_at) 
+    const newDate = date.toLocaleDateString()
+    this.Profile[0].created_at = newDate
+    console.log(this.Profile[0].created_at);
   }
 };
 </script>

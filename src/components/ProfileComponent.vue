@@ -6,23 +6,6 @@
       </div>
       <hr>
       <div class="options">
-        <!-- <VueFileAgent
-          ref="vueFileAgent"
-          :theme="'list'"
-          :multiple="false"
-          :meta="true"
-          :accept="'.jpeg'"
-          :maxSize="'2MB'"
-          :maxFiles="1"
-          :helpText="'Upload a new image'"
-          :errorText="{
-          type: 'Invalid file type. Only files with jpeg extension are allowed',
-          size: 'Files should not exceed 2MB in size',
-          }"
-          @select="filesSelectedPhoto($event)"
-          v-model="update.photo"
-          id="choose-file"
-        ></VueFileAgent> -->
         <div class="circle">
           <img src="../assets/account.svg" alt="profile-picture">
         </div> 
@@ -41,17 +24,17 @@
           </div>
           <div class="input-3">
             <label for="name">Phone number</label>
-            <input :disabled="editNow" type="text" v-model="update.phone">
+            <input :disabled="editNow" placeholder="08012345678" type="text" v-model="update.phone">
           </div>
         </div>
         <div class="row2">
           <div class="input-4">
             <label for="name">Country</label>
-            <input :disabled="editNow" type="text" v-model="update.country">
+            <input :disabled="editNow" placeholder="Nigeria" type="text" v-model="update.country">
           </div>
           <div class="input-5">
             <label for="name">Address</label>
-            <input :disabled="editNow" class="address"
+            <input :disabled="editNow" placeholder="Ibadan, Nigeria" class="address"
             type="text" v-model="update.address">
           </div>
         </div>

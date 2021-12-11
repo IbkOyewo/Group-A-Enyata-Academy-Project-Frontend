@@ -1,7 +1,7 @@
 <template>
   <div class="all">
     <div>
-      <AdminSidebars />
+      <AdminSidebar />
     </div>
     <div class="main">
       <AdminEntriesB4 />
@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import AdminSidebars from "@/components/AdminSidebars.vue";
+import AdminSidebar from "@/components/AdminSidebars.vue";
 import AdminEntriesB4 from "@/components/AdminEntriesB4.vue";
 
 export default {
   name: "adminEntryModalb",
   components: {
-    AdminSidebars,
+    AdminSidebar,
     AdminEntriesB4,
   },
 };

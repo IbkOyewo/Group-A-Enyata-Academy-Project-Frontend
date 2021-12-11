@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <AdminSidebars />
+      <AdminSidebar />
     </div>
     <div class="main">
       <Batch3 />
@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import AdminSidebars from "@/components/AdminSidebars.vue";
+import AdminSidebar from "@/components/AdminSidebars.vue";
 import  Batch3 from "@/components/Batch3.vue";
 export default {
-  name: "composeQues",
+  name: "Batch-3",
   components: {
-    AdminSidebars,
+    AdminSidebar,
     Batch3
   }
 };

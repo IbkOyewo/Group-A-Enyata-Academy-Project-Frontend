@@ -32,13 +32,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="mx-1 different-row">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr class="mx-1 different-row" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" v-for="entry in entries" :key="entry.id">
+              <td>{{ entry.fname }} {{entry.lname}}</td>
+              <td>{{entry.email}}</td>
+              <td>{{entry.dob}}</td>
+              <td>{{entry.address}}</td>
+              <td>{{entry.university}}</td>
+              <td>{{entry.cgpa}}</td>
             </tr>
           </tbody>
         </table>
@@ -49,59 +49,33 @@
 
 <script>
 import AdminSidebar from '@/components/AdminSidebar.vue'
+import offcanva from '@/components/offcanva.vue'
 // import { mapGetters, mapActions } from "vuex";
 
 
 export default {
-  name: "adminQstn",
+  name: "adminentries",
   components: {
-    AdminSidebar
+    AdminSidebar,
+    offcanva
   },
 
   data() {
     return {
-      apps: [],
-      currentSort:'Name',
-      currentSortDir:'asc'
+      entries: "",
     }
   },
 
+async mounted() {
+    try {
+      let res = await this.$store.dispatch('batchEntries');  
+      console.log(res)
+      this.entries = res.data.data  
+    } catch (error) {
+      console.log(error)
+    }
+}
 
-//   computed: {
-//     ...mapGetters(["getApps"]),
-
-//      sortedApps() {
-//       return this.apps.slice().sort((a,b) => {
-//         let modifier = 1;
-//         if(this.currentSortDir === 'desc') modifier = -1;
-//         if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
-//         if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
-//         return 0;
-//       });
-//     }
-//   },
-    
-
-//   methods: {
-//     ...mapActions(["fetchApps"]),
-//     getAge(dob) {
-//       return Math.floor((new Date() - new Date(dob).getTime()) / 3.15576e+10);
-//     },
-
-//     sort(s) {
-//     if(s === this.currentSort) {
-//       this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
-//     }
-//     console.log("hello");
-    
-//     this.currentSort = s;
-//   }
-//   },
-
-//   async mounted() {
-//     await this.fetchApps();
-//     this.apps = await this.getApps;
-//   }
 }
 </script>
 
@@ -111,6 +85,11 @@ export default {
 }
 html{
     overflow-x: hidden !important;
+}
+
+.different-row{
+  border-left: 10px solid none;
+  box-shadow: 8px 18px 20px none;
 }
 .different-row:hover {
   background: #ffffff;
@@ -169,6 +148,8 @@ h6 {
 .heading {
   background: #2b3c4e;
   overflow: hidden;
+  border-left: 10px solid none;
+  box-shadow: 8px 18px 20px none;
 }
 th {
   color: white;

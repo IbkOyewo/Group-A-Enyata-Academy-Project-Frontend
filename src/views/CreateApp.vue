@@ -5,7 +5,6 @@
     </div>
     <div class="container col-8 pt-5">
       <h2 class="my-5">Create Application</h2>
-      <p>ssss</p>
       <div>
         <form enctype="multipart/form-data" @submit.prevent="submitForm">
           <div class="row">
@@ -91,19 +90,20 @@ export default {
     },
 
     submitForm() {
-      if (this.isValid) {
+      if( this.isValid) {
         let formData = new FormData();
-        formData.append("file", this.file);
+        // formData.append("file", this.file);
         formData.append("batch_id", this.batch_id);
         formData.append("link", this.link);
         formData.append("closing_date", this.closing_date);
         formData.append("instruction", this.instruction);
         this.createApp(formData);
-        this.file = '';
+        // this.file = '';
         this.batch_id =  '';
         this.link =  '';
         this.closing_date = "";
         this.instruction   = "";
+        alert("Application Successfully Created")
         
       } else {
         alert("All fields are required");
@@ -160,7 +160,7 @@ input, textarea{
   border-radius: 8px;
   font-size: 12px;
   text-align: center;
-  /* font-weight: bold; */
+  /* / font-weight: bold; / */
 }
 
 .upload-btn-wrapper input[type="file"] {

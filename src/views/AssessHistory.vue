@@ -1,22 +1,21 @@
 <template>
-  <div>
-    <div>
-      <AdminSidebars />
+  <div class="row">
+    <div class="col-3">
+      <AdminSidebar/>
     </div>
-    <div class="main">
+    <div class="my-5 py-5 col-9">
       <AssessmentHistory />
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import AdminSidebars from "@/components/AdminSidebars.vue";
+import AdminSidebar from "@/components/AdminSidebar.vue";
 import  AssessmentHistory from "@/components/AssessmentHistory.vue";
 export default {
-  name: "composeQues",
+  name: "AssessHistory",
   components: {
-    AdminSidebars,
+    AdminSidebar,
     AssessmentHistory
   },
   

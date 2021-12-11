@@ -1,7 +1,7 @@
 <template>
-  <div class="main-div">
-    <div id="top-text">Assessment History</div>
-    <div class="container">
+  <div class="container py-5">
+    <div id="top-text" class="ms-4">Assessment History</div>
+    <div>
      
 
       <table>
@@ -21,34 +21,6 @@
             <td><div>{{ history.timeallocated }}</div></td>
             <td><div>{{ history.status }}</div></td>
           </tr>
-          <!-- <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
-          </tr>
-          <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
-          </tr>
-          <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
-          </tr>
-          <tr>
-            <td><div>Batch 1</div></td>
-            <td><div>12/07/94</div></td>
-            <td><div>30</div></td>
-            <td><div>30 mins</div></td>
-            <td><div>Taken</div></td>
-          </tr> -->
         </tbody>
       </table>
     
@@ -80,9 +52,9 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 #top-text {
-  position: absolute;
+  /* position: absolute; */
   width: 355px;
   height: 53px;
   left: 334px;
@@ -96,24 +68,16 @@ export default {
   color: #2b3c4e;
 }
 
-.container {
-  position: absolute;
-  width: 850px;
-  height: 430px;
-  left: 334px;
-  top: 164px;
-  background: #ffffff;
-  box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
-  border-radius: 8px;
-}
-
 table {
   margin-top: 30px;
   margin-left: 25px;
   width: 720px;
   text-align: center;
   border-collapse: collapse; 
+  box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
+  border-radius: 8px;
 }
+
 
 td {
      padding: 0;

@@ -1,27 +1,17 @@
 <template>
   <div class="sidebar">
     <div class="applicant-image">
-      <!-- <div class="" v-if="Profile.profpic">
-        <img :src="Profile.profpic" class="logo" />
-      </div> -->
-      <form class="fileup" @submit.prevent="submitForm" enctype="multipart/form-data">
-        <div class="upload-btn-wrapper">
-          <button class="btns">
-            <strong><i class="fa fa-plus" aria-hidden="true"></i></strong> 
-          </button>
-          <input type="file" name="file" ref="file" />
-        </div>
-         <button type="submit" class="text-white p-2 btn btn-white">add profile picture</button>
-         
-      </form>
-<!-- 
-      <h1 class="user-name">{{Profile.fname + " " + Profile.lname}}</h1>
-      <p class="user-email">{{Profile.email}}</p> -->
+      <div class="" v-if="Profile[0].image">
+        <img :src="Profile[0].image" class="profile" />
+      </div>
+
+      <h1 class="user-name">{{Profile[0].fname+ " " + Profile[0].lname}}</h1>
+      <p class="user-email">{{Profile[0].email}}</p>
     </div>
 
     <div class="sidebar-icon">
       <div class="container">
-        <router-link :to="{name: 'Dashboard'}" class="tests dashboard">
+        <router-link :to="{name: 'adminDashboard'}" class="tests dashboard">
           <img src="../assets/dashboard.png" alt="dashboard">
           <span class="mx-3">Dashboard</span>
         </router-link>
@@ -34,7 +24,7 @@
       </div>
 
        <div class="container">
-        <router-link :to="{name: 'adminEntryModalb'}" class="tests appentry">
+        <router-link :to="{name: 'adminentries'}" class="tests appentry">
           <img src="../assets/application-entries-icon.svg" alt="application entries">
           <span class="mx-3">Application Entries</span>
         </router-link>
@@ -69,49 +59,31 @@
       </div>
 
       <div class="container">
-        <button class="logout">
+        <router-link :to="{name: 'adminlogin'}" class="tests logout">
           <img src="../assets/log-out-icon.svg" alt="logout">
           <span class="mx-3">Logout</span>
-        </button>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 export default {
   name: "adminSidebar",
-  // data() {
-  //   return {
-  //     Profile: [],
-  //     file: '',
-  //     message: ""
-  //   };
-  // },
-  // computed: {
-  //   ...mapGetters(["getProfile", "apiResponse"])
-  // },
-  // methods: {
-  //   ...mapActions(["fetchProfile", "logout", "editProfile"]),
-  //   logout() {
-  //     this.logout();
-  //     this.$router.push({ name: "login" });
-  //   },
-  //   handleFileUpload() {
-  //     const file = this.$refs.file.files[0];
-  //     this.file = file
-  //   },
-  //   submitForm() {
-  //     const formData = new FormData();
-  //     formData.append('file',this.file);
-  //     this.editProfile(formData)
-  //   }
-  // },
-  // async mounted() {
-  //   await this.fetchProfile();
-  //   this.Profile = await this.getProfile;
-  // }
+ data() {
+    return {
+      Profile: [],
+      file: '',
+      message: ""
+    };
+  },
+  created: async function () {
+    let res = await this.$store.dispatch("getAdminDashboard")
+    let obj = res.data.data
+    this.Profile.push(obj)
+    //console.log(this.Profile[0]);
+  }
 };
 </script>
 
@@ -205,9 +177,9 @@ padding-right: 20px;
 .icon {
   margin-right: 25px;
 }
-button.logout{
+.logout{
 padding-right: 120px;
-padding-top: 50px;
+padding-top: 35px;
 }
 .sidebar-icon > div > p {
   display: flex;
