@@ -12,7 +12,7 @@
         <p>Timer</p>
         <h6 class="p3">{{timeFinish.mins}}<span>min</span> 0{{timeFinish.secs}}<span>sec</span></h6>
       </div>
-    </div>
+    </div> 
     <div class="row">
         <div class="col-9 offset-1 d-flex justify-content-around mt-5">
           <div class="row d-flex flex-column align-items-center confetti">
