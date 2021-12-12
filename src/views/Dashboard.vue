@@ -69,7 +69,6 @@ export default {
     const date =new Date(this.Profile[0].created_at) 
     const newDate = date.toLocaleDateString()
     this.Profile[0].created_at = newDate
-    console.log(this.Profile[0].created_at);
   }
 };
 </script>

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from 'axios';
+import VueJwtDecode from 'vue-jwt-decode'
 
 Vue.use(Vuex)
 
@@ -46,8 +47,6 @@ export default new Vuex.Store({
         });
         let token = response.data.token;
         localStorage.setItem("User-Token", token);
-        //axios.defaults.headers.common['Authorization'] = token
-        //console.log(token)
         return response;
       } catch (error) {
         if (error.response.status === 401) {
@@ -90,7 +89,14 @@ export default new Vuex.Store({
         let response = axios(config);
         return response;
       } catch (error) {
-        console.log(error);
+        //console.log(error.response.status);
+        if (error.response.message === 'This user has already sent an application'){
+          alert("This user has already sent an application")
+        }
+        if (error.response.message === 'This user is not registered'){
+          alert("This user is not registered")
+        }
+        //console.log(error);
       }
     },
  // eslint-disable-next-line no-unused-vars
@@ -116,7 +122,7 @@ export default new Vuex.Store({
 
     // eslint-disable-next-line no-unused-vars
     async adminDashboard({commit}) {
-      try {
+      try { 
         let config = {
           method: "get",
           url: "http://localhost:8082/api/admin/current_applications",
@@ -144,7 +150,6 @@ export default new Vuex.Store({
         };
   
        const response = await axios(config)
-          console.log(response)
           return response
       } catch (error) {
         console.log(error)
@@ -231,17 +236,20 @@ export default new Vuex.Store({
      // eslint-disable-next-line no-unused-vars
      async getDashboard({commit}) {
       try {
+        let token = localStorage.getItem("User-Token");
+        let decoded = VueJwtDecode.decode(token);
+        const {id} = decoded
+        console.log(decoded);
           let config = {
             method: 'get',
-            url: 'http://localhost:8082/api/dashboard/1',
+            url: `http://localhost:8082/api/dashboard/1`,
             headers: {
               'Content-Type': 'application/json',
               'x-access-token': this.state.userToken
           }
           };
-// console.log(this.state.userToken.id);
+
           let response = axios(config)
-          console.log(response);
           return response
       }
       catch(error){
@@ -251,17 +259,20 @@ export default new Vuex.Store({
      // eslint-disable-next-line no-unused-vars
      async getAdminDashboard({commit}) {
       try {
+        let token = localStorage.getItem("Admin-Token");
+        let decoded = VueJwtDecode.decode(token);
+        const {id} = decoded
+        //console.log(decoded);
           let config = {
             method: 'get',
-            url: 'http://localhost:8082/api/dashboard/12',
+            url: `http://localhost:8082/api/dashboard/1`,
             headers: {
               'Content-Type': 'application/json',
               'x-access-token': this.state.userToken
           }
           };
-// console.log(this.state.userToken.id);
+
           let response = axios(config)
-          console.log(response);
           return response
       }
       catch(error){
