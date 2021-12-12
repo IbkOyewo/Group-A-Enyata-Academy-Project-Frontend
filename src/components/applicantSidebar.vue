@@ -55,8 +55,7 @@ export default {
       try {
       //decode token here and attach to the user object
       let decoded = VueJwtDecode.decode(token);
-      this.user = decoded;
-      console.log(this.user);  
+      this.user = decoded; 
       } catch (error) {
         // return error in production env
         console.log(error, 'error from decoding token')
@@ -68,6 +67,7 @@ export default {
     let res = await this.$store.dispatch("getDashboard")
     let obj = res.data.data
     this.Profile.push(obj)
+    console.log(this.Profile);
   }
 };
 </script>

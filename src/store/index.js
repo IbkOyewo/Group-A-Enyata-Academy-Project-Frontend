@@ -162,7 +162,7 @@ export default new Vuex.Store({
       try {
         let config = {
           method: 'get',
-          url: 'http://localhost:8082/api/user/profile',
+          url: 'http://localhost:8082/api/user/details',
           headers: { 
             'x-access-token': this.state.adminToken
           }
@@ -239,10 +239,9 @@ export default new Vuex.Store({
         let token = localStorage.getItem("User-Token");
         let decoded = VueJwtDecode.decode(token);
         const {id} = decoded
-        console.log(decoded);
           let config = {
             method: 'get',
-            url: `http://localhost:8082/api/dashboard/3`,
+            url: `http://localhost:8082/api/user/profile/${id}`,
             headers: {
               'Content-Type': 'application/json',
               'x-access-token': this.state.userToken
@@ -261,11 +260,10 @@ export default new Vuex.Store({
       try {
         let token = localStorage.getItem("Admin-Token");
         let decoded = VueJwtDecode.decode(token);
-        const {id} = decoded
-        //console.log(decoded);
+        const {user_id} = decoded
           let config = {
             method: 'get',
-            url: `http://localhost:8082/api/dashboard/1`,
+            url: `http://localhost:8082/api/admin-dashboard/${user_id}`,
             headers: {
               'Content-Type': 'application/json',
               'x-access-token': this.state.userToken
