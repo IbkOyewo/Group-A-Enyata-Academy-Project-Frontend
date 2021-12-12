@@ -289,14 +289,9 @@ export default {
            this.currentQuestion -= 1
         },
        submit(){
-         if(this.currentQuestion > 5 ){
            this.$router.push('/success');
-           console.log(this.mins )
-           console.log("secs", this.secs)
            const timeFinish = {mins:this.mins, secs:this.secs} 
-           console.log(timeFinish)
            this.$store.commit("setTimeFinish", timeFinish)
-         }
        },
        isDisabled(){
          if(this.currentQuestion > 5) return true
@@ -311,7 +306,7 @@ export default {
       //  })
     },
    mounted() {
-        const thirtyMins = 60 * 5
+        const thirtyMins = 60 * 1
 
          this.startTimer(thirtyMins)
     },
@@ -324,7 +319,7 @@ export default {
       },
       secs(secs){
         if(Number(secs)===0 && Number(this.mins)===0){
-          this.$router.push('/success');
+         this.submit()
           clearInterval(this.startTimer())
         }
       }
