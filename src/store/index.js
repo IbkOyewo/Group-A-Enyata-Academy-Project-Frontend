@@ -245,7 +245,7 @@ export default new Vuex.Store({
         const {id} = decoded
           let config = {
             method: 'get',
-            url: `http://localhost:8082/api/user/profile/${id}`,
+            url: `http://localhost:8082/api/dashboard/3`,
             headers: {
               'Content-Type': 'application/json',
               'x-access-token': this.state.userToken

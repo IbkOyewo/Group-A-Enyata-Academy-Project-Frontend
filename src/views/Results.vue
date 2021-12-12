@@ -14,7 +14,7 @@
 
       <div class="my-4">
         
-        <table class="table table-borderless">
+        <table class="table table-sm table-borderless table-responsive">
           <thead class="heading">
             <tr>
               <th scope="col">Name</th>
@@ -24,7 +24,7 @@
                 <i class="fa fa-sort mx-1" aria-hidden="true" @click="sort('dob')"></i>
               </th>
               <th scope="col">Address</th>
-              <th scope="col">University</th>
+              <th scope="col">University<br></th>
               <th scope="col" >
                 CGPA 
                 <i class="fa fa-sort mx-1" aria-hidden="true" @click="sort('dob')"></i>
@@ -36,13 +36,13 @@
           </thead>
           <tbody>
             <tr class="different-row" v-for="detail in result" :key="detail.index">
-              <td>{{detail.fname}} {{detail.lname}}</td>
-              <td>{{detail.email}}</td>
-              <td>{{detail.dob}}</td>
-              <td>{{detail.address}}</td>
-              <td>{{detail.university}}</td>
-              <td>{{detail.cgpa}}</td>
-              <td>{{detail.testscores}}</td>
+              <td class="text-left">{{detail.fname}} {{detail.lname}}</td>
+              <td class="text-left">{{detail.email}}</td>
+              <td class="text-left">{{detail.dob}}</td>
+              <td class="text-left">{{detail.address}}</td>
+              <td class="text-left">{{detail.university}}</td>
+              <td class="text-left">{{detail.cgpa}}</td>
+              <td class="text-left">{{detail.testscores}}</td>
             </tr>
           </tbody>
         </table>
@@ -110,6 +110,11 @@ border-left: 10px solid #31d283;
   margin-bottom: 37px;
   text-align: left;
 }
+
+.container{
+  width: 70% !important;
+}
+
 .description {
   font-weight: normal;
   font-size: 13px;
@@ -145,7 +150,7 @@ th {
   color: white;
   font-family: Lato;
   font-size: 14px;
-  text-align: center;
+  text-align: left;
   line-height: 17px;
 }
 td {
@@ -154,7 +159,6 @@ td {
   font-weight: normal;
   font-size: 16px;
   line-height: 19px;
-  text-align: center;
   color: #4f4f4f;
 }
 i {
