@@ -274,7 +274,7 @@ li {
 }
 
 .second-button:hover {
-  color: white;
+  color: rgb(63, 62, 62);
   background: #7557D3;
 }
 
@@ -291,6 +291,20 @@ li {
   line-height: 19px;
   color: white;
   cursor: no-drop;
+}
+
+.btn-finish {
+  border: none;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background: #7557D3;
+  border-radius: 4px;
+  width: 205px;
+  height: 41px;
+  margin-top: 130px;
+  font-size: 16px;
+  line-height: 19px;
+  color: white;
 }
 
 .btn-finish {
