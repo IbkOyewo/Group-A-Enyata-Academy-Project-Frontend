@@ -10,7 +10,7 @@
       </div>
       <div class="timer pe-5">
         <p>Timer</p>
-        <h6 class="p3">20<span>min</span> 026<span>sec</span></h6>
+        <h6 class="p3">{{timeFinish.mins}}<span>min</span> 0{{timeFinish.secs}}<span>sec</span></h6>
       </div>
     </div>
     <div class="row">
@@ -38,13 +38,22 @@
 import applicantSidebar from '@/components/applicantSidebar.vue'
 export default {
   name: "success",
+  data(){
+    return{
+      timeFinish: {}
+    }
+  },
   components: {
        applicantSidebar
+  },
+  beforeMount(){
+    console.log(this.$store.state.timeFinish)
+    this.timeFinish = this.$store.state.timeFinish
   }
 };
 </script>
 
-<style scoped>
+<style scoped> 
 .main-view {
   width: 100%;
   padding: 107px 100px 0px 47px;
