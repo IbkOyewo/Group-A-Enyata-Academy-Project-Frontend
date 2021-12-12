@@ -100,7 +100,6 @@ export default {
     let res = await this.$store.dispatch("getAdminDashboard")
     let obj = res.data.data
     this.Profile.push(obj)
-    // console.log(this.Profile[0]);
   }
 };
 </script>
