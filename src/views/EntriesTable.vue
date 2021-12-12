@@ -14,7 +14,7 @@
 
       <div class="my-4">
         
-        <table class="table table-borderless">
+        <table class="table table-sm table-borderless table-responsive">
           <thead class="heading">
             <tr>
               <th scope="col">Name</th>
@@ -32,14 +32,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="mx-1 different-row" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" v-for="entry in entries" :key="entry.id">
-              <td>{{ entry.fname }} {{entry.lname}}</td>
-              <td>{{entry.email}}</td>
-              <td>{{entry.dob}}</td>
-              <td>{{entry.address}}</td>
-              <td>{{entry.university}}</td>
-              <td>{{entry.cgpa}}</td>
+            <p v-if='entries === ""' class="fs-3 fw-bold">There are no applicants yet. Check back later</p>
+            <tr  v-else class="mx-1 different-row text-left" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" @click="selectEntry(entry.id)"
+                            aria-controls="offcanvasRight" v-for="entry in entries" :key="entry.id">
+              <td class="text-left">{{ entry.fname }} {{entry.lname}}</td>
+              <td class="text-left">{{entry.email}}</td>
+              <td class="text-left">{{entry.dob}}</td>
+              <td class="text-left">{{entry.address}}</td>
+              <td class="text-left">{{entry.university}}</td>
+              <td class="text-left">{{entry.cgpa}}</td>
             </tr>
+            <offcanva/>
           </tbody>
         </table>
       </div>
@@ -125,6 +128,10 @@ html{
   color: var(--text-secondary-small);
 }
 
+.container{
+  width: 70% !important;
+}
+
 h3 {
   font-family: Lato;
   font-style: normal;
@@ -147,7 +154,7 @@ h6 {
 
 .heading {
   background: #2b3c4e;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-left: 10px solid none;
   box-shadow: 8px 18px 20px none;
 }
@@ -155,7 +162,7 @@ th {
   color: white;
   font-family: Lato;
   font-size: 14px;
-  text-align: center;
+  text-align: left;
   line-height: 17px;
 }
 td {
@@ -164,8 +171,8 @@ td {
   font-weight: normal;
   font-size: 16px;
   line-height: 19px;
-  text-align: center;
   color: #4f4f4f;
+  /* padding-left: 30px; */
 }
 i {
   cursor: pointer;

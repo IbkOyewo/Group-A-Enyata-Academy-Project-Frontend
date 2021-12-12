@@ -113,7 +113,16 @@ const routes = [
     path: "/assessment-history",
     name: "AssessHistory",
     component: () => import("../views/AssessHistory.vue"),
-  },   
+  }, 
+
+  {
+    path: "/reset-password",
+    name: "resetPassword",
+    component: () => import("../views/ResetPassword.vue"),
+  }, 
+  
+  
+
   {
     path: "/batch-3",
     name: "Batch-3",

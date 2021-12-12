@@ -242,7 +242,7 @@ export default new Vuex.Store({
         console.log(decoded);
           let config = {
             method: 'get',
-            url: `http://localhost:8082/api/dashboard/1`,
+            url: `http://localhost:8082/api/dashboard/3`,
             headers: {
               'Content-Type': 'application/json',
               'x-access-token': this.state.userToken
