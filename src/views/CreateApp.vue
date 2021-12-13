@@ -13,12 +13,12 @@
                 <button class="btns">
                   <strong>+</strong> Choose file
                 </button>
-                <input type="file" name="file" ref="file" @change="handleFileUpload"/>
+                <input type="file" name="file" :v-model="image" ref="file" @change="handleFileUpload"/>
               </div>
             </div>
             <div class="col">
               <label>Link</label>
-              <input type="text" class="form-control"  v-model="link"/>
+              <input type="text" class="form-control"  v-model="applicationLink"/>
             </div>
            
           </div>
@@ -26,16 +26,16 @@
           <div class="row my-4">
             <div class="col">
               <label>Application closure date</label>
-              <input type="date" class="form-control" v-model="closing_date"/>
+              <input type="date" class="form-control" v-model="closureDate"/>
             </div>
             <div class="col">
               <label>Batch ID</label>
-              <input type="text" class="form-control"  v-model="batch_id"/>
+              <input type="text" class="form-control"  v-model="batchId"/>
             </div>
           </div>
           <div class="form-group my-3">
             <label for>Instructions</label>
-            <textarea class="form-control" name id rows="4" v-model="instruction"></textarea>
+            <textarea class="form-control" name id rows="4" v-model="instructions"></textarea>
           </div>
           <div class="text-center">
             <button class="btn" type="submit">Submit</button>
@@ -57,23 +57,21 @@ export default {
   },
   data() {
     return {
-      file: '',
-      batch_id: '',
-      link: '',
-      closing_date: "",
+      image: '',
+      batchId: '',
+      applicationLink: '',
+      closureDate: "",
       instructions: ""
     }
   },
   computed: {
-    ...mapGetters(["apiResponse"]),
-
     isValid() {
       if (
-        this.link == "" ||
-        this.file == "" ||
-        this.batch_id == "" ||
-        this.closing_date == "" ||
-        this.instruction == ""
+        this.image == "" ||
+        this.applicationLink == "" ||
+        this.batchId == "" ||
+        this.closureDate == "" ||
+        this.instructions == ""
       ) {
         return false;
       } else {
@@ -81,38 +79,31 @@ export default {
       }
     }
   },
-
   methods: {
-    ...mapActions(["createApp"]),
-
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0];
+    handleFileUpload(event) {
+      this.image = event.target.files[0];
+       console.log(this.image);
     },
-
-    submitForm() {
+    async submitForm() {
       if( this.isValid) {
         let formData = new FormData();
-        // formData.append("file", this.file);
-        formData.append("batch_id", this.batch_id);
-        formData.append("link", this.link);
-        formData.append("closing_date", this.closing_date);
-        formData.append("instruction", this.instruction);
-        this.createApp(formData);
-        // this.file = '';
-        this.batch_id =  '';
-        this.link =  '';
-        this.closing_date = "";
-        this.instruction   = "";
+        formData.append("image", this.image);
+        formData.append("batchId", this.batchId);
+        formData.append("applicationLink", this.applicationLink);
+        formData.append("closureDate", this.closureDate);
+        formData.append("instructions", this.instructions);
+
+        let res = await this.$store.dispatch("createApplication", formData)
+      if (res.status === 201) {
         alert("Application Successfully Created")
-        
-      } else {
+      }else {
         alert("All fields are required");
       }
     }
     
-  },
-
-};
+  }
+}
+}
 </script>
 
 <style scoped>
