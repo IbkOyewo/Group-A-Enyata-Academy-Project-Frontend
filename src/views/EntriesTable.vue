@@ -70,6 +70,7 @@
               aria-labelledby="offcanvasRightLabel"
               v-for="entry in entries"
               :key="entry.id"
+              @click="selectEntry(id)"
             >
               <div class="offcanvas-header">
                 <!-- <h5 id="offcanvasRightLabel">Offcanvas right</h5> -->
@@ -201,7 +202,7 @@
                 </div>
               </div>
             </div>
-            <ApprovedModal 
+            <ApprovedModal
               @click="updateApplicantStatus('approved')"
               modalText="Are you sure you want to approve this application?"
             />
@@ -237,6 +238,7 @@ export default {
 
   async mounted() {
     try {
+      console.log(this.entry);
       let res = await this.$store.dispatch("batchEntries");
       if (res.status === 200) {
         console.log(res);
