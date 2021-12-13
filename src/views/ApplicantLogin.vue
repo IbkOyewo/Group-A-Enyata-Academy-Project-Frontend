@@ -95,7 +95,7 @@ export default {
       let password = this.user.password;
       let res = await this.$store.dispatch("login", { email, password });
       if (res.status === 200) {
-        this.$router.push("/applicationform")
+        this.$router.push("/dashboard")
       } 
     },
   },
