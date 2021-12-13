@@ -40,7 +40,7 @@ export default {
   async mounted() {
     try {
       let res = await this.$store.dispatch('assessmentHistory');  
-      console.log(res)
+      //console.log(res)
       this.histories = res.data.data  
     } catch (error) {
       console.log(error)
