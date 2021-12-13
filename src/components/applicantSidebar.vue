@@ -67,7 +67,7 @@ export default {
     let res = await this.$store.dispatch("getDashboard")
     let obj = res.data.data
     this.Profile.push(obj)
-    console.log(this.Profile);
+    //console.log(this.Profile);
   }
 };
 </script>

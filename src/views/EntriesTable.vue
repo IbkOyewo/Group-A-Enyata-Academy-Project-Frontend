@@ -68,6 +68,8 @@
               tabindex="-1"
               id="offcanvasRight"
               aria-labelledby="offcanvasRightLabel"
+              v-for="entry in entries"
+              :key="entry.id"
               @click="selectEntry(id)"
             >
               <div class="offcanvas-header">
@@ -183,6 +185,7 @@
                       class="btn btn-offcanvas"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
+                      @click="handleApprove"
                     >
                       Approve
                     </button>
@@ -191,6 +194,7 @@
                       class="btn btn-offcanvas ms-4"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal2"
+                      @click="handleDecline"
                     >
                       Decline
                     </button>
@@ -223,12 +227,12 @@ export default {
     ApprovedModal,
     DeclineModal,
   },
-
   data() {
     return {
       entries: "",
       applicantId: "",
       entry: {},
+      status:""
     };
   },
 
@@ -253,22 +257,35 @@ export default {
       this.$route.query.applicantId = id;
       const [entry] = this.entries.filter((entry) => entry.id === id);
       this.entry = entry;
-      console.log(id);
-      // id = entry.id
+      //console.log(this.entry);
     },
     updateApplicantStatus(status) {
-      // if(status === "approved"){
-      //   console.log(status)
-      // }
-      // else{
-      //   console.log(status)
-      // }
       try {
-        console.log(status);
+        this.status = status
+        console.log(this.status);
       } catch (error) {
         console.log(error);
       }
-      // this.$router.push({ name: 'adminentries' })
+    },
+    async handleApprove() {
+      try {
+        let res = await this.$store.dispatch("approveApplication");
+        if (res.status === 200) {
+          localStorage.setItem("Status",'Approved')
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async handleDecline() {
+      try {
+        let res = await this.$store.dispatch("declineApplication");
+        if (res.status === 200) {
+          localStorage.setItem("Status",'Declined')
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
