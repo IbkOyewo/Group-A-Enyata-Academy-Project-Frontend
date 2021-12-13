@@ -20,7 +20,8 @@
       </div>
       <div class="status-msg">
         <div class="date-text">Application Status</div>
-        <div class="status-display">Pending</div>
+        <!-- <EntriesTable :status="Helllllo"/> -->
+        <div class="status-display">{{status}}</div>
         <hr id="orange" />
         <div class="date-text">We will get back to you</div>
       </div>
@@ -50,26 +51,44 @@
 
 <script>
 import applicantSidebar from '@/components/applicantSidebar.vue'
+import EntriesTable from './EntriesTable.vue'
+// import ApprovedModal from "@/components/ApprovedModal.vue";
+// import DeclineModal from "@/components/DeclineModal.vue";
+
 export default {
   name: "dashboard",
   components: {
-    applicantSidebar
+    applicantSidebar,
+    EntriesTable
   },
  data() {
     return {
       Profile: [],
       file: '',
-      message: ""
+      message: "",
+      status:"Pending"
     };
   },
+   methods: {
+    async changeApprovalStatus(){
+       try {
+         const approvalstatus = localStorage.getItem("Status")
+         this.status = approvalstatus
+    } catch (error) {
+      console.log(error);
+    }
+    }
+  },
   created: async function () {
+    this.changeApprovalStatus()
+  
     let res = await this.$store.dispatch("getDashboard")
     let obj = res.data.data
     this.Profile.push(obj)
     const date =new Date(this.Profile[0].created_at) 
     const newDate = date.toLocaleDateString()
     this.Profile[0].created_at = newDate
-  }
+  },
 };
 </script>
 

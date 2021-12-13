@@ -11,6 +11,7 @@ export default new Vuex.Store({
     adminToken: localStorage.getItem("Admin-Token") || "",
     displayQuest: [],
     timeFinish: {},
+    approvalStatus: []
   },
   getters: {
     displayQuest: (state) => state.displayQuest,
@@ -242,6 +243,7 @@ export default new Vuex.Store({
         let token = localStorage.getItem("User-Token");
         let decoded = VueJwtDecode.decode(token);
         const {id} = decoded
+        console.log(decoded);
           let config = {
             method: 'get',
             url: `http://localhost:8082/api/dashboard/3`,
@@ -290,6 +292,50 @@ export default new Vuex.Store({
           });
       } catch (error) {
         console.log("state", error);
+      }
+    },
+    // eslint-disable-next-line no-unused-vars
+    async approveApplication({commit}) {
+      try {
+        let token = localStorage.getItem("User-Token");
+        let decoded = VueJwtDecode.decode(token);
+        const {id} = decoded
+          let config = {
+            method: 'put',
+            url: `http://localhost:8082/api/admin/approve/${id}`,
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.userToken
+          }
+          };
+
+          let response = axios(config)
+          return response
+      }
+      catch(error){
+        console.log(error);
+      }
+    },
+     // eslint-disable-next-line no-unused-vars
+     async declineApplication({commit}) {
+      try {
+        let token = localStorage.getItem("User-Token");
+        let decoded = VueJwtDecode.decode(token);
+        const {id} = decoded
+          let config = {
+            method: 'put',
+            url: `http://localhost:8082/api/admin/decline/${id}`,
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.userToken
+          }
+          };
+
+          let response = axios(config)
+          return response
+      }
+      catch(error){
+        console.log(error);
       }
     },
   },

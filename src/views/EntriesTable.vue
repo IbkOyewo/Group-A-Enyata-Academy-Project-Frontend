@@ -68,7 +68,8 @@
               tabindex="-1"
               id="offcanvasRight"
               aria-labelledby="offcanvasRightLabel"
-              @click="selectEntry(id)"
+              v-for="entry in entries"
+              :key="entry.id"
             >
               <div class="offcanvas-header">
                 <!-- <h5 id="offcanvasRightLabel">Offcanvas right</h5> -->
@@ -183,6 +184,7 @@
                       class="btn btn-offcanvas"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
+                      @click="handleApprove"
                     >
                       Approve
                     </button>
@@ -191,6 +193,7 @@
                       class="btn btn-offcanvas ms-4"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal2"
+                      @click="handleDecline"
                     >
                       Decline
                     </button>
@@ -198,7 +201,7 @@
                 </div>
               </div>
             </div>
-            <ApprovedModal
+            <ApprovedModal 
               @click="updateApplicantStatus('approved')"
               modalText="Are you sure you want to approve this application?"
             />
@@ -223,18 +226,17 @@ export default {
     ApprovedModal,
     DeclineModal,
   },
-
   data() {
     return {
       entries: "",
       applicantId: "",
       entry: {},
+      status:""
     };
   },
 
   async mounted() {
     try {
-      console.log(this.entry);
       let res = await this.$store.dispatch("batchEntries");
       if (res.status === 200) {
         console.log(res);
@@ -253,22 +255,35 @@ export default {
       this.$route.query.applicantId = id;
       const [entry] = this.entries.filter((entry) => entry.id === id);
       this.entry = entry;
-      console.log(id);
-      // id = entry.id
+      //console.log(this.entry);
     },
     updateApplicantStatus(status) {
-      // if(status === "approved"){
-      //   console.log(status)
-      // }
-      // else{
-      //   console.log(status)
-      // }
       try {
-        console.log(status);
+        this.status = status
+        console.log(this.status);
       } catch (error) {
         console.log(error);
       }
-      // this.$router.push({ name: 'adminentries' })
+    },
+    async handleApprove() {
+      try {
+        let res = await this.$store.dispatch("approveApplication");
+        if (res.status === 200) {
+          localStorage.setItem("Status",'Approved')
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async handleDecline() {
+      try {
+        let res = await this.$store.dispatch("declineApplication");
+        if (res.status === 200) {
+          localStorage.setItem("Status",'Declined')
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
