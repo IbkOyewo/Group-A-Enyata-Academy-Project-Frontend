@@ -10,6 +10,7 @@ export default new Vuex.Store({
     userToken: localStorage.getItem("User-Token") || "",
     adminToken: localStorage.getItem("Admin-Token") || "",
     displayQuest: [],
+    timeFinish: {},
   },
   getters: {
     displayQuest: (state) => state.displayQuest,
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     setToken: (state, payload) => state.adminToken = payload,
     setQuest: (state, payload) => {
       state.displayQuest = payload;
+    },
+    setTimeFinish: (state, payload) => {
+      state.timeFinish = payload;
     },
   },
   actions: {

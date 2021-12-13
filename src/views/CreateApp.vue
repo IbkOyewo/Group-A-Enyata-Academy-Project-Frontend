@@ -90,6 +90,12 @@ export default {
     },
 
     submitForm() {
+    this.$dtoast.pop({
+    preset: "success",
+    color: "white",
+    heading: "create application",
+    content: "successfully created",
+  })
       if( this.isValid) {
         let formData = new FormData();
         // formData.append("file", this.file);
