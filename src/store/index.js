@@ -266,7 +266,7 @@ export default new Vuex.Store({
             url: `http://localhost:8082/api/admin-dashboard/${user_id}`,
             headers: {
               'Content-Type': 'application/json',
-              'x-access-token': this.state.userToken
+              'x-access-token': this.state.adminToken
           }
           };
 
