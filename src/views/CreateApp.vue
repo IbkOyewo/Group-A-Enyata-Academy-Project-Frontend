@@ -49,7 +49,7 @@
 
 <script>
 import AdminSidebar from '@/components/AdminSidebar.vue'
-import { mapGetters, mapActions } from "vuex";
+// import { mapGetters, mapActions } from "vuex";
 export default {
   name: "applicationAdmin",
   components: {
@@ -84,7 +84,14 @@ export default {
       this.image = event.target.files[0];
        console.log(this.image);
     },
-    async submitForm() {
+
+    submitForm() {
+    this.$dtoast.pop({
+    preset: "success",
+    color: "white",
+    heading: "create application",
+    content: "successfully created",
+  })
       if( this.isValid) {
         let formData = new FormData();
         formData.append("image", this.image);
