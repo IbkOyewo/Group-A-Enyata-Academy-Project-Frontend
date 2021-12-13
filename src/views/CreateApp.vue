@@ -85,7 +85,7 @@ export default {
        console.log(this.image);
     },
 
-    submitForm() {
+   async submitForm() {
     this.$dtoast.pop({
     preset: "success",
     color: "white",
