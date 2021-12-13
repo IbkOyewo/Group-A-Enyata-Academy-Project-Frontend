@@ -83,17 +83,6 @@ const routes = [
   },
 
   {
-    path: "/adminentries-b4",
-    name: "adminEntryModalb",
-    component: () => import("../views/adminEntriesB4.vue"),
-  },
-
-  {
-    path: "/adminentries-b5",
-    name: "adminEntryModal",
-    component: () => import("../views/adminEntriesB5.vue"),
-  },
-  {
     path: "/success",
     name: "Success",
     component: () => import("../views/Success.vue"),
@@ -113,17 +102,22 @@ const routes = [
     path: "/assessment-history",
     name: "AssessHistory",
     component: () => import("../views/AssessHistory.vue"),
-  },   
+  }, 
+
+  {
+    path: "/reset-password",
+    name: "resetPassword",
+    component: () => import("../views/ResetPassword.vue"),
+  }, 
+  
+  
+
   {
     path: "/batch-3",
     name: "Batch-3",
     component: () => import("../views/Batch-3.vue"),
   },   
-  {
-    path: "/canva",
-    name: "offcanva",
-    component: () => import("../views/offcanvaview.vue"),
-  }, 
+  
   {
     path: "/profile-setting",
     name: "ProfileSettings",
