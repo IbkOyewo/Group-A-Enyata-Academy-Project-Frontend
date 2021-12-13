@@ -1,19 +1,20 @@
 <template>
   <div class="row">
     <div class="col-3">
-      <AdminSidebar/>
+      <AdminSidebar />
     </div>
     <div class="container my-5 col-9">
-       <div class="title-entries d-flex">
-      <span pt-5 pl-5>Entries - Batch 1</span>
-      <div class="image"><img src="../assets/arrow-down-icon.svg" alt="arrow"></div>
-    </div>
-    <div id="description-div">
-      <i class="description">Comprises of all that applied for Batch 1</i>
-    </div>
+      <div class="title-entries d-flex">
+        <span pt-5 pl-5>Entries - Batch 1</span>
+        <div class="image">
+          <img src="../assets/arrow-down-icon.svg" alt="arrow" />
+        </div>
+      </div>
+      <div id="description-div">
+        <i class="description">Comprises of all that applied for Batch 1</i>
+      </div>
 
       <div class="my-4">
-        
         <table class="table table-sm table-borderless table-responsive">
           <thead class="heading">
             <tr>
@@ -21,28 +22,113 @@
               <th scope="col">Email</th>
               <th scope="col">
                 DOB - Age
-                <i class="fa fa-sort mx-1" aria-hidden="true"  @click="sort('dob')"></i>
+                <i
+                  class="fa fa-sort mx-1"
+                  aria-hidden="true"
+                  @click="sort('dob')"
+                ></i>
               </th>
               <th scope="col">Address</th>
               <th scope="col">University</th>
-              <th scope="col" >
+              <th scope="col">
                 CGPA
-                <i class="fa fa-sort mx-1" aria-hidden="true" @click="sort('cgpa')"></i>
+                <i
+                  class="fa fa-sort mx-1"
+                  aria-hidden="true"
+                  @click="sort('cgpa')"
+                ></i>
               </th>
             </tr>
           </thead>
           <tbody>
-            <p v-if='entries === ""' class="fs-3 fw-bold">There are no applicants yet. Check back later</p>
-            <tr  v-else class="mx-1 different-row text-left" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" @click="selectEntry(entry.id)"
-                            aria-controls="offcanvasRight" v-for="entry in entries" :key="entry.id">
-              <td class="text-left">{{ entry.fname }} {{entry.lname}}</td>
-              <td class="text-left">{{entry.email}}</td>
-              <td class="text-left">{{entry.dob}}</td>
-              <td class="text-left">{{entry.address}}</td>
-              <td class="text-left">{{entry.university}}</td>
-              <td class="text-left">{{entry.cgpa}}</td>
+            <p v-if="entries === ''" class="fs-3 fw-bold">
+              There are no applicants yet. Check back later
+            </p>
+            <tr
+              v-else
+              class="mx-1 different-row text-left"
+              v-for="entry in entries"
+              @click="selectEntry(entry.id)"
+              :key="entry.id"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasRight"
+              aria-controls="offcanvasRight"
+            >
+              <!-- data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" @click="selectEntry(entry.id)"
+                            aria-controls="offcanvasRight"   -->
+              <td class="text-left">{{ entry.fname }} {{ entry.lname }}</td>
+              <td class="text-left">{{ entry.email }}</td>
+              <td class="text-left">{{ entry.dob }}</td>
+              <td class="text-left">{{ entry.address }}</td>
+              <td class="text-left">{{ entry.university }}</td>
+              <td class="text-left">{{ entry.cgpa }}</td>
             </tr>
-            <offcanva/>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" v-for="entry in entries" :key="entry.id">
+  <div class="offcanvas-header">
+    <!-- <h5 id="offcanvasRightLabel">Offcanvas right</h5> -->
+    <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
+  </div>
+  <div class="offcanvas-body">
+    <div class="box ps-4">
+          <img class="user-image" src="../assets/girl-img.png" alt="" />
+          <p class="mt-4">Personal Details</p>
+          <hr />
+          <form action="">
+            <div>
+              <label for="full-name">Name</label> <br />
+              <input type="text" readonly name="full-name" v-model="entry.fname" /><br />
+            </div>
+
+            <div>
+              <label for="email">Email</label> <br />
+              <input type="email" readonly  v-model="entry.email" name="email" /> <br />
+            </div>
+
+            <div>
+              <label for="address">Address</label> <br />
+              <input type="text" readonly v-model="entry.address" name="address" /><br />
+            </div>
+
+            <div>
+              <label for="uni">University</label> <br />
+              <input type="text" readonly v-model="entry.university" name="uni" /> <br />
+            </div>
+
+            <div>
+              <label for="course">Course of study</label> <br />
+              <input type="text" readonly v-model="entry.course" name="course" /><br />
+            </div>
+
+            <div>
+              <label for="date">Date of Birth</label> <br />
+              <input type="date" readonly v-model="entry.dob" name="date" /><br />
+            </div>
+
+            <div>
+              <label for="CGPA">CGPA</label> <br />
+              <input type="num" readonly v-model="entry.cgpa" name="CGPA" /><br />
+            </div>
+
+            <form>
+              <label for="fileUpload" class="form">
+                <span class="plus">
+                  <input type="text" readonly v-model="entry.cv" id="fileUpload" />
+                </span>
+              </label>
+            </form>
+          </form>
+          <p v-if="status === 'approved'" class="mt-3 fw-bold fs-4 text-center text-success">Approved</p>
+            <p v-else-if="status === 'declined'" class="mt-3 fw-bold fs-4 text-center text-danger">Declined</p>
+            <div v-else class="mt-3 text-center">
+                <button type="button" class="btn btn-offcanvas" data-bs-toggle="modal" data-bs-target="#exampleModal">Approve</button>
+                <button type="button" class="btn btn-offcanvas ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal2">Decline</button>
+            </div>
+         
+    </div>
+  </div>
+</div>
+ <ApprovedModal @click="updateApplicantStatus('approved')" modalText='Are you sure you want to approve this application?' />
+            <DeclineModal  @click="updateApplicantStatus('declined')" />
           </tbody>
         </table>
       </div>
@@ -51,46 +137,77 @@
 </template>
 
 <script>
-import AdminSidebar from '@/components/AdminSidebar.vue'
-import offcanva from '@/components/offcanva.vue'
+import AdminSidebar from "@/components/AdminSidebar.vue";
+import ApprovedModal from "@/components/ApprovedModal.vue";
+import DeclineModal from "@/components/DeclineModal.vue";
 // import { mapGetters, mapActions } from "vuex";
-
 
 export default {
   name: "adminentries",
   components: {
     AdminSidebar,
-    offcanva
+    ApprovedModal,
+    DeclineModal
   },
 
   data() {
     return {
       entries: "",
+      applicantId: "",
+      entry: {},
+    };
+  },
+
+  async mounted() {
+    try {
+      console.log(this.entry)
+      let res = await this.$store.dispatch("batchEntries");
+      if (res.status === 200) {
+        console.log(res);
+        this.entries = res.data.data;
+        this.applicantId = res.data.data[1].id;
+      }
+    } catch (error) {
+      console.log(error);
     }
   },
 
-async mounted() {
-    try {
-      let res = await this.$store.dispatch('batchEntries');  
-      console.log(res)
-      this.entries = res.data.data  
-    } catch (error) {
-      console.log(error)
-    }
-}
-
-}
+  methods: {
+    selectEntry(id) {
+      // this.applicantId = entry;
+      // console.log("applicant", this.applicantId);
+      this.$route.query.applicantId = id
+            const [ entry ] = this.entries.filter(entry => entry.id === id)
+            this.entry = entry
+            console.log(this.entry)
+    },
+    updateApplicantStatus(status) {
+      // if(status === "approved"){
+      //   console.log(status)
+      // }
+      // else{
+      //   console.log(status)
+      // }
+            try {
+      console.log(status)
+            } catch (error) {
+              console.log(error)
+            }
+            // this.$router.push({ name: 'adminentries' })
+        }
+  },
+};
 </script>
 
 <style scoped>
-*{
+/* * {
   box-sizing: border-box;
 }
-html{
-    overflow-x: hidden !important;
-}
+html {
+  overflow-x: hidden !important;
+} */
 
-.different-row{
+.different-row {
   border-left: 10px solid none;
   box-shadow: 8px 18px 20px none;
 }
@@ -100,7 +217,7 @@ html{
   border-radius: 10px;
   font-weight: bold;
   color: #2b3c4e;
-  border-left: 10px solid #7557D3;
+  border-left: 10px solid #7557d3;
   border-radius: 5px;
 }
 
@@ -120,6 +237,15 @@ html{
   margin-bottom: 37px;
   text-align: left;
 }
+
+.offcanvas.offcanvas-end{
+  width: 36.5%;
+}
+
+.box p {
+  font-weight: 700;
+}
+
 .description {
   font-weight: normal;
   font-size: 13px;
@@ -128,7 +254,7 @@ html{
   color: var(--text-secondary-small);
 }
 
-.container{
+.container {
   width: 70% !important;
 }
 
@@ -177,5 +303,94 @@ td {
 i {
   cursor: pointer;
   color: white;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 250px 250px;
+  grid-gap: 15px 20px;
+  color: #b1b1b1;
+}
+
+form label {
+  margin-bottom: 8px;
+}
+
+form input {
+  border: 2px solid #cdcfd6;
+  width: 221px;
+  height: 42px;
+  border-radius: 4px;
+  outline: none;
+}
+
+#fileUpload {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.form {
+  border: 1.55172px dashed #2b3c4e;
+  box-sizing: border-box;
+  border-radius: 6.2069px;
+  height: 42px;
+  width: 221px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.plus {
+  font-size: 17px;
+  /* margin-left: 85px;*/
+  margin-top: 37px;
+  text-align: center;
+}
+
+.file_upload {
+  display: flex;
+  width: 300px;
+  flex-wrap: wrap;
+  gap: 33px;
+  padding: 20px 14px;
+  justify-content: center;
+}
+
+.btn-2 {
+  padding: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.btn-2 button {
+  color: #2b3c4e;
+  background-color: #fff;
+  border: none;
+  font-weight: 100;
+  padding: 13px 30px;
+  border-radius: 5px;
+  border: 1px solid #cecece;
+}
+
+.btn-2 button:hover {
+  color: #fff;
+  background-color: #7557d3;
+  border: none;
+  font-weight: 100;
+  padding: 13px 30px;
+  border-radius: 5px;
+  border: 1px solid #cecece;
+}
+
+.btn.btn-offcanvas{
+  color: #fff;
+  background-color: #7557d3;
+  border: none;
+  border-radius: 5px;
+  padding: 13px 30px;
+  margin-top: 15px;
 }
 </style>
