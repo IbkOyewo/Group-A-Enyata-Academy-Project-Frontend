@@ -158,6 +158,7 @@ export default {
       let res = await this.$store.dispatch("application", formData)
 
       if (res.status === 201) {
+        localStorage.setItem("LoggedIn", this.email)
         alert("Application submitted Successfully")
         this.$router.push("/dashboard")
   }

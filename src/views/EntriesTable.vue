@@ -63,72 +63,149 @@
               <td class="text-left">{{ entry.university }}</td>
               <td class="text-left">{{ entry.cgpa }}</td>
             </tr>
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" v-for="entry in entries" :key="entry.id">
-  <div class="offcanvas-header">
-    <!-- <h5 id="offcanvasRightLabel">Offcanvas right</h5> -->
-    <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
-  </div>
-  <div class="offcanvas-body">
-    <div class="box ps-4">
-          <img class="user-image" src="../assets/girl-img.png" alt="" />
-          <p class="mt-4">Personal Details</p>
-          <hr />
-          <form action="">
-            <div>
-              <label for="full-name">Name</label> <br />
-              <input type="text" readonly name="full-name" v-model="entry.fname" /><br />
-            </div>
+            <div
+              class="offcanvas offcanvas-end"
+              tabindex="-1"
+              id="offcanvasRight"
+              aria-labelledby="offcanvasRightLabel"
+              v-for="entry in entries"
+              :key="entry.id"
+            >
+              <div class="offcanvas-header">
+                <!-- <h5 id="offcanvasRightLabel">Offcanvas right</h5> -->
+                <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
+              </div>
+              <div class="offcanvas-body">
+                <div class="box ps-4">
+                  <img class="user-image" src="../assets/girl-img.png" alt="" />
+                  <p class="mt-4">Personal Details</p>
+                  <hr />
+                  <form action="">
+                    <div>
+                      <label for="full-name">Name</label> <br />
+                      <input
+                        type="text"
+                        readonly
+                        name="full-name"
+                        v-model="entry.fname"
+                      /><br />
+                    </div>
 
-            <div>
-              <label for="email">Email</label> <br />
-              <input type="email" readonly  v-model="entry.email" name="email" /> <br />
-            </div>
+                    <div>
+                      <label for="email">Email</label> <br />
+                      <input
+                        type="email"
+                        readonly
+                        v-model="entry.email"
+                        name="email"
+                      />
+                      <br />
+                    </div>
 
-            <div>
-              <label for="address">Address</label> <br />
-              <input type="text" readonly v-model="entry.address" name="address" /><br />
-            </div>
+                    <div>
+                      <label for="address">Address</label> <br />
+                      <input
+                        type="text"
+                        readonly
+                        v-model="entry.address"
+                        name="address"
+                      /><br />
+                    </div>
 
-            <div>
-              <label for="uni">University</label> <br />
-              <input type="text" readonly v-model="entry.university" name="uni" /> <br />
-            </div>
+                    <div>
+                      <label for="uni">University</label> <br />
+                      <input
+                        type="text"
+                        readonly
+                        v-model="entry.university"
+                        name="uni"
+                      />
+                      <br />
+                    </div>
 
-            <div>
-              <label for="course">Course of study</label> <br />
-              <input type="text" readonly v-model="entry.course" name="course" /><br />
-            </div>
+                    <div>
+                      <label for="course">Course of study</label> <br />
+                      <input
+                        type="text"
+                        readonly
+                        v-model="entry.course"
+                        name="course"
+                      /><br />
+                    </div>
 
-            <div>
-              <label for="date">Date of Birth</label> <br />
-              <input type="date" readonly v-model="entry.dob" name="date" /><br />
-            </div>
+                    <div>
+                      <label for="date">Date of Birth</label> <br />
+                      <input
+                        type="date"
+                        readonly
+                        v-model="entry.dob"
+                        name="date"
+                      /><br />
+                    </div>
 
-            <div>
-              <label for="CGPA">CGPA</label> <br />
-              <input type="num" readonly v-model="entry.cgpa" name="CGPA" /><br />
-            </div>
+                    <div>
+                      <label for="CGPA">CGPA</label> <br />
+                      <input
+                        type="num"
+                        readonly
+                        v-model="entry.cgpa"
+                        name="CGPA"
+                      /><br />
+                    </div>
 
-            <form>
-              <label for="fileUpload" class="form">
-                <span class="plus">
-                  <input type="text" readonly v-model="entry.cv" id="fileUpload" />
-                </span>
-              </label>
-            </form>
-          </form>
-          <p v-if="status === 'approved'" class="mt-3 fw-bold fs-4 text-center text-success">Approved</p>
-            <p v-else-if="status === 'declined'" class="mt-3 fw-bold fs-4 text-center text-danger">Declined</p>
-            <div v-else class="mt-3 text-center">
-                <button type="button" class="btn btn-offcanvas" data-bs-toggle="modal" data-bs-target="#exampleModal">Approve</button>
-                <button type="button" class="btn btn-offcanvas ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal2">Decline</button>
+                    <form>
+                      <label for="fileUpload" class="form">
+                        <span class="plus">
+                          <input
+                            type="text"
+                            readonly
+                            v-model="entry.cv"
+                            id="fileUpload"
+                          />
+                        </span>
+                      </label>
+                    </form>
+                  </form>
+                  <p
+                    v-if="status === 'approved'"
+                    class="mt-3 fw-bold fs-4 text-center text-success"
+                  >
+                    Approved
+                  </p>
+                  <p
+                    v-else-if="status === 'declined'"
+                    class="mt-3 fw-bold fs-4 text-center text-danger"
+                  >
+                    Declined
+                  </p>
+                  <div v-else class="mt-3 text-center">
+                    <button
+                      type="button"
+                      class="btn btn-offcanvas"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      @click="handleApprove"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-offcanvas ms-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal2"
+                      @click="handleDecline"
+                    >
+                      Decline
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-         
-    </div>
-  </div>
-</div>
- <ApprovedModal @click="updateApplicantStatus('approved')" modalText='Are you sure you want to approve this application?' />
-            <DeclineModal  @click="updateApplicantStatus('declined')" />
+            <ApprovedModal 
+              @click="updateApplicantStatus('approved')"
+              modalText="Are you sure you want to approve this application?"
+            />
+            <DeclineModal @click="updateApplicantStatus('declined')" />
           </tbody>
         </table>
       </div>
@@ -147,20 +224,19 @@ export default {
   components: {
     AdminSidebar,
     ApprovedModal,
-    DeclineModal
+    DeclineModal,
   },
-
   data() {
     return {
       entries: "",
       applicantId: "",
       entry: {},
+      status:""
     };
   },
 
   async mounted() {
     try {
-      console.log(this.entry)
       let res = await this.$store.dispatch("batchEntries");
       if (res.status === 200) {
         console.log(res);
@@ -176,25 +252,39 @@ export default {
     selectEntry(id) {
       // this.applicantId = entry;
       // console.log("applicant", this.applicantId);
-      this.$route.query.applicantId = id
-            const [ entry ] = this.entries.filter(entry => entry.id === id)
-            this.entry = entry
-            console.log(this.entry)
+      this.$route.query.applicantId = id;
+      const [entry] = this.entries.filter((entry) => entry.id === id);
+      this.entry = entry;
+      //console.log(this.entry);
     },
     updateApplicantStatus(status) {
-      // if(status === "approved"){
-      //   console.log(status)
-      // }
-      // else{
-      //   console.log(status)
-      // }
-            try {
-      console.log(status)
-            } catch (error) {
-              console.log(error)
-            }
-            // this.$router.push({ name: 'adminentries' })
+      try {
+        this.status = status
+        console.log(this.status);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async handleApprove() {
+      try {
+        let res = await this.$store.dispatch("approveApplication");
+        if (res.status === 200) {
+          localStorage.setItem("Status",'Approved')
         }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async handleDecline() {
+      try {
+        let res = await this.$store.dispatch("declineApplication");
+        if (res.status === 200) {
+          localStorage.setItem("Status",'Declined')
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
@@ -238,7 +328,7 @@ html {
   text-align: left;
 }
 
-.offcanvas.offcanvas-end{
+.offcanvas.offcanvas-end {
   width: 36.5%;
 }
 
@@ -385,7 +475,7 @@ form input {
   border: 1px solid #cecece;
 }
 
-.btn.btn-offcanvas{
+.btn.btn-offcanvas {
   color: #fff;
   background-color: #7557d3;
   border: none;
