@@ -84,7 +84,14 @@ export default {
       this.image = event.target.files[0];
        console.log(this.image);
     },
-    async submitForm() {
+
+   async submitForm() {
+    this.$dtoast.pop({
+    preset: "success",
+    color: "white",
+    heading: "create application",
+    content: "successfully created",
+  })
       if( this.isValid) {
         let formData = new FormData();
         formData.append("image", this.image);

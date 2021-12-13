@@ -104,6 +104,12 @@ export default {
     }
   },
   async handleSubmit() {
+   await this.$dtoast.pop({
+    preset: "success",
+    color: "white",
+    heading: "compose questions",
+    content: "submitted successfully",
+  })
       let formData = new FormData();
       formData.append('image', this.image);
       formData.append('questions', this.questions);

@@ -45,7 +45,7 @@
     </div>
       <div class="two-buttons">
         <button class="second-button" @click="preQuest">Previous</button>
-        <button class="btn" @click="submit">Finish</button>
+        <button :disabled="!isDisabled()" @click="submit" :class="btnBg()">Finish</button>
         <button class="second-button" @click="nextQuest">Next</button>
       </div>
   </div>
@@ -59,10 +59,12 @@ export default {
         return {
             mins: 30,
             secs: 0,
-             currentQuestion: 1,
+             currentQuestion: 0,
              selectedAnswers:{},
             showScore: false,
             score:0,
+            btn: "btn",
+            btnFinish: "btn-finish",
             countDown : 30,
             timer:null,
             startQuiz: false,
@@ -256,6 +258,12 @@ export default {
     computed:{
     },
     methods: {
+      btnBg(){
+        if(this.currentQuestion === 6){
+        return this.btnFinish
+        } 
+          return this.btn
+      },
         startTimer(duration) {
             let timer = duration
             setInterval(() => {
@@ -267,7 +275,7 @@ export default {
 
                 if (--timer < 0) {
                     timer = duration;
-                } e
+                }
             }, 1000);
         },
          
@@ -281,32 +289,26 @@ export default {
            this.currentQuestion -= 1
         },
        submit(){
-         if(this.questions.length === 20){
            this.$router.push('/success');
-         } else{
-               setTimeout(() => {
-           const thirtyMins = 60 * 30
-          if(this.startTimer(thirtyMins)){
-               this.$router.push('/success');
-          }
-         })
-         }
+           const timeFinish = {mins:this.mins, secs:this.secs} 
+           this.$store.commit("setTimeFinish", timeFinish)
        },
+       isDisabled(){
+         if(this.currentQuestion > 5) return true
+       }
     },
     created(){
-       this.$http.get("http://localhost:8082/api/user/take-assessment")
-       .then(data => {
-         console.log(data.data.data)
+      //  this.$http.get("http://localhost:8082/api/user/take-assessment")
+      //  .then(data => {
+      //    console.log(data.data.data)
           // this.questions = data.data.data
          
-       })
+      //  })
     },
-    mounted() {
-        const thirtyMins = 60 * 30
+   mounted() {
+        const thirtyMins = 60 * 1
 
-        this.startTimer(thirtyMins)
-        
-
+         this.startTimer(thirtyMins)
     },
     watch:{
       userAnswers:{
@@ -314,6 +316,12 @@ export default {
           console.log(userAnswers)
         },
         deep:true
+      },
+      secs(secs){
+        if(Number(secs)===0 && Number(this.mins)===0){
+         this.submit()
+          clearInterval(this.startTimer())
+        }
       }
     }
   } 
@@ -395,7 +403,6 @@ li {
 .second-button:hover {
   color: white;
   background: #7557D3;
-;
 }
 
 .btn {
@@ -403,6 +410,20 @@ li {
   box-sizing: border-box;
   border-radius: 4px;
   background: #CECECE;
+  border-radius: 4px;
+  width: 205px;
+  height: 41px;
+  margin-top: 130px;
+  font-size: 16px;
+  line-height: 19px;
+  color: white;
+}
+
+.btn-finish {
+  border: none;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background: #7557D3;
   border-radius: 4px;
   width: 205px;
   height: 41px;
