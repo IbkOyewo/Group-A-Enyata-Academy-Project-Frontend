@@ -96,14 +96,14 @@ export default {
       let res = await this.$store.dispatch("login", { email, password });
       
       if (res.status === 200) {
-        // this.$router.push("/applicationform")
-        const user = localStorage.getItem('LoggedIn')
-        // console.log(user);
-        if(user.includes(email) === true){
-          this.$router.push("/dashboard")
-        }else{
-           this.$router.push("/applicationform")
-        }
+        this.$router.push("/applicationform")
+        // const user = localStorage.getItem('LoggedIn')
+        // // console.log(user);
+        // if(user.includes(email) === true){
+        //   this.$router.push("/dashboard")
+        // }else{
+        //    this.$router.push("/applicationform")
+        // }
        
       } 
     },
