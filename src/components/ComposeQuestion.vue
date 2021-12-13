@@ -8,7 +8,7 @@
           <label for="fileUpload" class="form">
             <span class="plus">
               <b style="font-weight: 600">+</b>&nbsp;Choose File
-              <input type="file" id="fileUpload" ref="file" @change="handleFile()" />
+              <input type="file" id="fileUpload" :v-model="image" ref="file" @change="handleFile" />
             </span>
           </label>
         </form>
@@ -22,25 +22,29 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Option A</label>
-          <input type="text" class="form-control" v-model="optionA" />
+          <input type="text" class="form-control" v-model="optionA" v-bind:class="{ active: isActiveA }" />
         </div>
         <div class="form-group col-md-6">
           <label>Option B</label>
-          <input type="text" class="form-control" v-model="optionB" />
+          <input type="text" class="form-control" v-model="optionB" v-bind:class="{ active: isActiveB }" />
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Option C</label>
-          <input type="text" class="form-control" v-model="optionC" />
+          <input type="text" class="form-control" v-model="optionC" v-bind:class="{ active: isActiveC }"/>
         </div>
         <div class="form-group col-md-6">
           <label>Option D</label>
-          <input type="text" class="form-control" v-model="optionD" />
+          <input type="text" class="form-control" v-model="optionD" v-bind:class="{ active: isActiveD }"/>
         </div>
       </div>
     </form>
+    <div>
+    <b-form-select @change="handleChange" v-model="answer" :options="options"></b-form-select>
+    <div class="mt-3">Answer: <strong>{{ answer }}</strong></div>
+  </div>
     <div>
       <div class="two-buttons">
         <button class="first-button">Previous</button>
@@ -49,6 +53,7 @@
       <button class="last-button">Finish</button>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -58,17 +63,45 @@ export default {
   data() {
     return {
       question:1,
-      imageUrl: "",
+      image: "",
       questions: "",
       optionA: "",
       optionB: "",
       optionC: "",
-      optionD: ""
+      optionD: "",
+      answer: "",
+      answer: null,
+        options: [
+          { value: null, text: 'Select Correct Answer',disabled: true  },
+          { value: "Option A" , text: 'Option A' },
+          { value: "Option B", text: 'Option B' },
+          { value: "Option C", text: 'Option C' },
+          { value: "Option D", text: 'Option D' }
+        ],
+      isActiveA: false,
+      isActiveB: false,
+      isActiveC: false,
+      isActiveD: false,
     }; 
   },
   methods: {
-    handleFile(){
-    this.imageUrl = this.$refs.file.files[0];
+    handleFile(event){
+    this.image = event.target.files[0];
+   
+  },
+  handleChange(){
+    if(this.answer === "Option A"){
+      this.isActiveA = true
+    }
+    if(this.answer === "Option B"){
+      this.isActiveB = true
+    }
+    if(this.answer === "Option C"){
+      this.isActiveC = true
+    }
+    if(this.answer === "Option D"){
+      this.isActiveD = true
+    }
   },
   async handleSubmit() {
    await this.$dtoast.pop({
@@ -78,15 +111,16 @@ export default {
     content: "submitted successfully",
   })
       let formData = new FormData();
-      formData.append('imageUrl', this.imageUrl);
+      formData.append('image', this.image);
       formData.append('questions', this.questions);
       formData.append('optionA', this.optionA);
       formData.append('optionB', this.optionB);
       formData.append('optionC', this.optionC);
       formData.append('optionD', this.optionD);
-      const data = {}
-      formData.forEach((value, key) => (data[key] = value))
-      let res = await this.$store.dispatch("composeAssessment", data)
+      formData.append('answer', this.answer)
+      // const data = {}
+      // formData.forEach((value, key) => (data[key] = value))
+      let res = await this.$store.dispatch("composeAssessment", formData)
       if (res.status === 201) {
         this.question++;
         this.questions = ''
@@ -94,6 +128,10 @@ export default {
         this.optionB = ''
         this.optionC = '' 
         this.optionD = ''
+        this.isActiveA = false
+        this.isActiveB = false
+        this.isActiveC = false
+        this.isActiveD = false
       } 
     },
   },
@@ -118,6 +156,9 @@ span {
 }
 .seconds {
   padding-left: 30px;
+}
+.active{
+  background: rgb(0, 255, 136);
 }
 .minute {
   font-family: Lato;

@@ -117,6 +117,7 @@ export default new Vuex.Store({
           };
 
           let response = axios(config)
+          console.log(response);
           return response
       }
       catch(error){
@@ -173,7 +174,6 @@ export default new Vuex.Store({
         };
   
        const response = await axios(config)
-          console.log(response)
           return response
       } catch (error) {
         console.log(error);
@@ -192,7 +192,6 @@ export default new Vuex.Store({
         };
   
        const response = await axios(config)
-          console.log(response)
           return response
       } catch (error) {
         console.log(error)
