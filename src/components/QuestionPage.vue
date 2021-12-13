@@ -274,7 +274,7 @@ li {
 }
 
 .second-button:hover {
-  color: rgb(63, 62, 62);
+  color: white;
   background: #7557D3;
 }
 
