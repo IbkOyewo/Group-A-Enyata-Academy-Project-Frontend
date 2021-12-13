@@ -71,6 +71,12 @@ export default {
     this.imageUrl = this.$refs.file.files[0];
   },
   async handleSubmit() {
+   await this.$dtoast.pop({
+    preset: "success",
+    color: "white",
+    heading: "compose questions",
+    content: "submitted successfully",
+  })
       let formData = new FormData();
       formData.append('imageUrl', this.imageUrl);
       formData.append('questions', this.questions);
