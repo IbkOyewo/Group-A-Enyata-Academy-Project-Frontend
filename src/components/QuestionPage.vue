@@ -15,13 +15,13 @@
         <div class="span">
           <div>
             <span class="time">
-              {{ mins }}
+              {{mins}}
               <span class="minute">mins</span>
             </span>
           </div>
           <div>
             <span class="seconds time">
-              0{{ secs }}
+              0{{secs}}
               <span class="minute">sec</span>
             </span>
           </div>
@@ -29,27 +29,6 @@
       </div>
     </div>
     <div class="container">
-<<<<<<< HEAD
-      <div>
-        <h6 class="text-center">Question {{ currentQuestion + 1 }}</h6>
-        <h2 class="text-center question_name">
-          {{ questions[currentQuestion]["questionText"] }}
-        </h2>
-        <div class="d-flex justify-content-center mt-5">
-          <div class="mb-5">
-            <div
-              class="d-flex align-items-center mb-3 gap-2"
-              v-for="item in questions[currentQuestion]['answerOptions']"
-              :key="item.answerText"
-            >
-              <input
-                :id="item.answerText"
-                type="radio"
-                :value="item.answerText"
-                v-model="userAnswers[currentQuestion]"
-              />
-              <label :for="item.answerText">{{ item.answerText }}</label>
-=======
         <div>      
           <h6 class="text-center">Question {{currentQuestion+1}}</h6>
           <h2 class="text-center question_name">{{questions[currentQuestion]["questions"]}}</h2>
@@ -81,27 +60,16 @@
                   </label>
                 </div>
               </div> 
->>>>>>> 365463711e9481910bf1ec8fbd4c6278789de84d
             </div>
-          </div>
+         </div>
+          
         </div>
-<<<<<<< HEAD
-=======
     </div>
       <div class="two-buttons">
         <button class="second-button" @click="preQuest">Previous</button>
         <button :disabled="!isDisabled()" @click="submit" :class="btnBg()">Finish</button>
         <button @click="nextQuest" :class="btnNextQuest()">Next</button>
->>>>>>> 365463711e9481910bf1ec8fbd4c6278789de84d
       </div>
-    </div>
-    <div class="two-buttons">
-      <button class="second-button" @click="preQuest">Previous</button>
-      <button :disabled="!isDisabled()" @click="submit" :class="btnBg()">
-        Finish
-      </button>
-      <button class="second-button" @click="nextQuest">Next</button>
-    </div>
   </div>
 </template>
 
@@ -110,84 +78,6 @@
 export default {
   name: "QuestionPage",
   data() {
-<<<<<<< HEAD
-    return {
-      mins: 30,
-      secs: 0,
-      currentQuestion: 0,
-      selectedAnswers: {},
-      showScore: false,
-      score: 0,
-      btn: "btn",
-      btnFinish: "btn-finish",
-      countDown: 30,
-      timer: null,
-      startQuiz: false,
-      userAnswers: new Array(7).fill(""),
-      // questions:[],
-
-      questions: [
-        {
-          questionText: "Which one is used for two-way binding?",
-          answerOptions: [
-            { answerText: "v-on", isCorrect: false },
-            { answerText: "v-bind", isCorrect: false },
-            { answerText: "v-model", isCorrect: true },
-            { answerText: "v-if", isCorrect: false },
-          ],
-        },
-        {
-          questionText: "Who is the creator of vueJS ?",
-          answerOptions: [
-            { answerText: "Jeff Bezos", isCorrect: false },
-            { answerText: "Elon Musk", isCorrect: false },
-            { answerText: "Evan You", isCorrect: true },
-            { answerText: "Tony Stark", isCorrect: false },
-          ],
-        },
-        {
-          questionText: "Vue is used in the backend. - True or False?",
-          answerOptions: [
-            { answerText: "True", isCorrect: false },
-            { answerText: "False", isCorrect: true },
-          ],
-        },
-        {
-          questionText: "Which version of Vue is Launched on 2020?",
-          answerOptions: [
-            { answerText: "Vue 2", isCorrect: false },
-            { answerText: "Vue 1", isCorrect: false },
-            { answerText: "Vue 4", isCorrect: false },
-            { answerText: "Vue 3", isCorrect: true },
-          ],
-        },
-        {
-          questionText: "Is vue an OpenSource Library?",
-          answerOptions: [
-            { answerText: "True", isCorrect: true },
-            { answerText: "False", isCorrect: false },
-          ],
-        },
-        {
-          questionText:
-            "Which of the following is a Full Javascript Frramework",
-          answerOptions: [
-            { answerText: "Vue", isCorrect: false },
-            { answerText: "node", isCorrect: false },
-            { answerText: "react", isCorrect: false },
-            { answerText: "Angular", isCorrect: true },
-          ],
-        },
-        {
-          questionText: "Composition API can be used on which version?",
-          answerOptions: [
-            { answerText: "Vue 5", isCorrect: false },
-            { answerText: "Vue 2 Only", isCorrect: false },
-            { answerText: "Vue 3 Only", isCorrect: false },
-            { answerText: "Both Vue 2 and Vue 3", isCorrect: true },
-          ],
-        },
-=======
         return {
             mins: 30,
             secs: 0,
@@ -226,195 +116,23 @@ export default {
             setInterval(() => {
                 this.mins = parseInt(timer / 60, 10);
                 this.secs = parseInt(timer % 60, 10);
->>>>>>> 365463711e9481910bf1ec8fbd4c6278789de84d
-
-        {
-          questionText: "Which one is used for two-way binding?",
-          answerOptions: [
-            { answerText: "v-on", isCorrect: false },
-            { answerText: "v-bind", isCorrect: false },
-            { answerText: "v-model", isCorrect: true },
-            { answerText: "v-if", isCorrect: false },
-          ],
-        },
-        {
-          questionText: "Who is the creator of vueJS ?",
-          answerOptions: [
-            { answerText: "Jeff Bezos", isCorrect: false },
-            { answerText: "Elon Musk", isCorrect: false },
-            { answerText: "Evan You", isCorrect: true },
-            { answerText: "Tony Stark", isCorrect: false },
-          ],
-        },
-        {
-          questionText: "Vue is used in the backend. - True or False?",
-          answerOptions: [
-            { answerText: "True", isCorrect: false },
-            { answerText: "False", isCorrect: true },
-          ],
-        },
-        {
-          questionText: "Which version of Vue is Launched on 2020?",
-          answerOptions: [
-            { answerText: "Vue 2", isCorrect: false },
-            { answerText: "Vue 1", isCorrect: false },
-            { answerText: "Vue 4", isCorrect: false },
-            { answerText: "Vue 3", isCorrect: true },
-          ],
-        },
-        {
-          questionText: "Is vue an OpenSource Library?",
-          answerOptions: [
-            { answerText: "True", isCorrect: true },
-            { answerText: "False", isCorrect: false },
-          ],
-        },
-        {
-          questionText:
-            "Which of the following is a Full Javascript Frramework",
-          answerOptions: [
-            { answerText: "Vue", isCorrect: false },
-            { answerText: "node", isCorrect: false },
-            { answerText: "react", isCorrect: false },
-            { answerText: "Angular", isCorrect: true },
-          ],
-        },
-        {
-          questionText: "Composition API can be used on which version?",
-          answerOptions: [
-            { answerText: "Vue 5", isCorrect: false },
-            { answerText: "Vue 2 Only", isCorrect: false },
-            { answerText: "Vue 3 Only", isCorrect: false },
-            { answerText: "Both Vue 2 and Vue 3", isCorrect: true },
-          ],
-        },
-
-<<<<<<< HEAD
-        {
-          questionText: "Which one is used for two-way binding?",
-          answerOptions: [
-            { answerText: "v-on", isCorrect: false },
-            { answerText: "v-bind", isCorrect: false },
-            { answerText: "v-model", isCorrect: true },
-            { answerText: "v-if", isCorrect: false },
-          ],
-=======
+                this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
+                this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
                 if (--timer < 0) {
                     timer = duration;
                 }
             }, 1000);
->>>>>>> 365463711e9481910bf1ec8fbd4c6278789de84d
         },
-        {
-          questionText: "Who is the creator of vueJS ?",
-          answerOptions: [
-            { answerText: "Jeff Bezos", isCorrect: false },
-            { answerText: "Elon Musk", isCorrect: false },
-            { answerText: "Evan You", isCorrect: true },
-            { answerText: "Tony Stark", isCorrect: false },
-          ],
+         
+       
+        nextQuest(){
+          if(this.currentQuestion === this.questions.length - 1) return 
+           this.currentQuestion += 1
         },
-        {
-          questionText: "Vue is used in the backend. - True or False?",
-          answerOptions: [
-            { answerText: "True", isCorrect: false },
-            { answerText: "False", isCorrect: true },
-          ],
+        preQuest(){
+          if(this.currentQuestion === 0) return 
+           this.currentQuestion -= 1
         },
-<<<<<<< HEAD
-        {
-          questionText: "Which version of Vue is Launched on 2020?",
-          answerOptions: [
-            { answerText: "Vue 2", isCorrect: false },
-            { answerText: "Vue 1", isCorrect: false },
-            { answerText: "Vue 4", isCorrect: false },
-            { answerText: "Vue 3", isCorrect: true },
-          ],
-        },
-        {
-          questionText: "Is vue an OpenSource Library?",
-          answerOptions: [
-            { answerText: "True", isCorrect: true },
-            { answerText: "False", isCorrect: false },
-          ],
-        },
-        {
-          questionText:
-            "Which of the following is a Full Javascript Frramework",
-          answerOptions: [
-            { answerText: "Vue", isCorrect: false },
-            { answerText: "node", isCorrect: false },
-            { answerText: "react", isCorrect: false },
-            { answerText: "Angular", isCorrect: true },
-          ],
-        },
-      ],
-    };
-  },
-  computed: {},
-  methods: {
-    btnBg() {
-      if (this.currentQuestion === 19) {
-        return this.btnFinish;
-      }
-      return this.btn;
-    },
-    startTimer(duration) {
-      let timer = duration;
-      setInterval(() => {
-        this.mins = parseInt(timer / 60, 10);
-        this.secs = parseInt(timer % 60, 10);
-
-        this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
-        this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
-
-        if (--timer < 0) {
-          timer = duration;
-        }
-      }, 1000);
-    },
-
-    nextQuest() {
-      if (this.currentQuestion === this.questions.length - 1) return;
-      this.currentQuestion += 1;
-    },
-    preQuest() {
-      if (this.currentQuestion === 0) return;
-      this.currentQuestion -= 1;
-    },
-    submit() {
-      this.$router.push("/success");
-      const timeFinish = { mins: this.mins, secs: this.secs };
-      this.$store.commit("setTimeFinish", timeFinish);
-    },
-    isDisabled() {
-      if (this.currentQuestion > 5) return true;
-    },
-  },
-  created() {
-    //  this.$http.get("http://localhost:8082/api/user/take-assessment")
-    //  .then(data => {
-    //    console.log(data.data.data)
-    // this.questions = data.data.data
-    //  })
-  },
-  mounted() {
-    const thirtyMins = 60 * 1;
-
-    this.startTimer(thirtyMins);
-  },
-  watch: {
-    userAnswers: {
-      handler(userAnswers) {
-        console.log(userAnswers);
-      },
-      deep: true,
-    },
-    secs(secs) {
-      if (Number(secs) === 0 && Number(this.mins) === 0) {
-        this.submit();
-        clearInterval(this.startTimer());
-=======
        submit(){
            this.$router.push('/success');
            const timeFinish = {mins:this.mins, secs:this.secs} 
@@ -434,7 +152,6 @@ export default {
     },
    mounted() {
         const thirtyMins = 60 * 30
-
          this.startTimer(thirtyMins)
     },
     watch:{
@@ -449,11 +166,9 @@ export default {
          this.submit()
           clearInterval(this.startTimer())
         }
->>>>>>> 365463711e9481910bf1ec8fbd4c6278789de84d
       }
-    },
-  },
-};
+    }
+  } 
 </script>
 
 <style scoped>
@@ -476,16 +191,15 @@ label{
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  color: #2b3c4e;
+  color: #2B3C4E;
 }
-
 .options_name {
   font-family: Lato;
   font-style: italic;
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  color: #2b3c4e;
+  color: #2B3C4E;
 }
 li {
   list-style: none;
@@ -554,35 +268,15 @@ li {
   height: 41px;
   border: none;
 }
-
 .second-button:hover {
   color: white;
-<<<<<<< HEAD
-  background: #7557d3;
-=======
   background: #7557D3;
->>>>>>> 365463711e9481910bf1ec8fbd4c6278789de84d
 }
-
 .btn {
   border: none;
   box-sizing: border-box;
   border-radius: 4px;
-  background: #cecece;
-  border-radius: 4px;
-  width: 205px;
-  height: 41px;
-  margin-top: 130px;
-  font-size: 16px;
-  line-height: 19px;
-  color: white;
-}
-
-.btn-finish {
-  border: none;
-  box-sizing: border-box;
-  border-radius: 4px;
-  background: #7557d3;
+  background: #CECECE;
   border-radius: 4px;
   width: 205px;
   height: 41px;
@@ -592,7 +286,6 @@ li {
   color: white;
   cursor: no-drop;
 }
-
 .btn-finish {
   border: none;
   box-sizing: border-box;
@@ -606,27 +299,11 @@ li {
   line-height: 19px;
   color: white;
 }
-
-.btn-finish {
-  border: none;
-  box-sizing: border-box;
-  border-radius: 4px;
-  background: #7557D3;
-  border-radius: 4px;
-  width: 205px;
-  height: 41px;
-  margin-top: 130px;
-  font-size: 16px;
-  line-height: 19px;
-  color: white;
-}
-
 .two-buttons {
   display: flex;
   justify-content: space-between;
   /* align-items: center; */
 }
-
 .dot-text {
   width: 510px;
   font-family: Lato;
@@ -645,7 +322,6 @@ li {
   line-height: 3.333em;
   padding: 0 10px 0 20px;
   text-align: left;
-
   font-family: Lato;
   font-style: italic;
   font-weight: 500;
@@ -660,7 +336,6 @@ h6 {
   line-height: 17px;
   color: #2b3c4e;
 }
-
 h2 {
   font-family: Lato;
   font-style: italic;
@@ -669,7 +344,6 @@ h2 {
   line-height: 29px;
   color: #2b3c4e;
 }
-
 .container > p {
   font-family: Lato;
   font-style: italic;
@@ -677,7 +351,6 @@ h2 {
   font-size: 16px;
   color: #2b3c4e;
 }
-
 .right h2 {
   font-family: Lato;
   font-style: normal;
