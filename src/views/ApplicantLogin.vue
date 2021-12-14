@@ -9,7 +9,9 @@
       <div class="form-body">
         <div class="input-field">
           <label for="email">Email</label>
-          <input class="email-box" type="email" v-model="user.email" required />
+          <input class="email-box" type="email" v-model="user.email" v-validate="'required|email'"
+            name="email" />
+          <span class="form-error">{{ errors.first("email") }}</span>
         </div>
 
         <div class="input-field">
@@ -19,6 +21,7 @@
               class="password-box"
               :type="showPassword ? 'text' : 'password'"
               name="password"
+              v-validate="'required'"
               @keyup="validatePassword()"
               v-model="user.password"
             /><span @click="togglePassword" v-show="showPassword">
@@ -28,6 +31,7 @@
               <i class="fas fa-eye-slash"></i>
             </span>
           </div>
+        <span class="form-error">{{ errors.first("password") }}</span>
         </div>
       </div>
       <button class="submit-btn" type="submit" :disabled="!isDisabled">
@@ -133,6 +137,13 @@ export default {
   line-height: 28.8px;
 }
 
+.form-error {
+  color: red;
+  margin-top: 6%;
+  position: absolute;
+  font-size: 14px;
+}
+
 .submit-btn:disabled {
   background: #ccc;
 }
@@ -164,7 +175,7 @@ form {
 }
 
 .input-field:nth-last-child(2) {
-  margin: 20px 0;
+  margin: 35px 0;
 }
 
 /* input:-webkit-autofill,
@@ -243,8 +254,7 @@ label {
   background: #7557d3;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 20px;
-  border: none;
+  margin-top: 40px;
 }
 
 .bottom-text {
