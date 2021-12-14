@@ -270,7 +270,26 @@ export default new Vuex.Store({
         console.log(decoded);
           let config = {
             method: 'get',
-            url: `http://localhost:8082/api/user/profile/${id}`,
+            url: `http://localhost:8082/api/user-dashboard/${id}`,
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.userToken
+          }
+          };
+
+          let response = axios(config)
+          return response
+      }
+      catch(error){
+        console.log(error);
+      }
+    },
+// eslint-disable-next-line no-unused-vars
+    async getUserDetails({commit},id) {
+      try {
+          let config = {
+            method: 'get',
+            url: `http://localhost:8082/api/user-dashboard/${id}`,
             headers: {
               'Content-Type': 'application/json',
               'x-access-token': this.state.userToken

@@ -5,11 +5,13 @@
       </div>
       <hr>
       <div class="set-divs">
+         <h4>Set Time</h4>
+          </div>
         <div class="set-time">
-          <h4>Set Time</h4>
-          <div class="custom-select mr-5">
-            <select v-model="time" name="minutes" id="minutes">
-              <option value="0">00</option>
+         
+          <div class="custom-select me-5">
+            <select name="minutes" id="minutes">
+              <option value="0">00<p class="fs">min</p></option>
               <option value="1">01</option>
               <option value="2">02</option>
               <option value="3">03</option>
@@ -138,10 +140,9 @@
           <h4>Set Test Expiration Date</h4>
           <input type="date" class="date">
         </div> -->
-      </div>
-      <div class="save-btn">
+      <button class="save-btn">
          Save
-      </div>
+      </button>
     </div>
 </template>
 
@@ -156,12 +157,17 @@ export default {
   font-family: Lato;
   font-style: normal;
 }
+
 .title h4 {
   font-weight: bold;
   font-size: 16px;
   line-height: 19px;
   letter-spacing: -0.4px;
   color: #4A4A4A;
+}
+
+.fs{
+  font-size: 5px;
 }
 .set-divs {
   display: flex;
@@ -173,8 +179,16 @@ export default {
   font-size: 14px;
   line-height: 17px;
   text-align: left;
-  color: var(--text-main);
 }
+
+select{
+  border:none;
+}
+
+.set-time{
+  display: flex;
+}
+
 .set-time h4 {
   margin-bottom: 20px;
 }
@@ -182,7 +196,6 @@ input {
   margin-top: 20px;
   width: 215px;
   height: 44px;
-  border: 1px solid var(--text-primary);
 }
 .custom-select {
   width: 70px;
@@ -193,7 +206,7 @@ input {
 .save-btn {
   width: 127px;
   height: 38px;
-  background: var(--enyata-purple);
+  background: #7557d3;
   color: #ffffff;
   border: none;
   margin: auto;

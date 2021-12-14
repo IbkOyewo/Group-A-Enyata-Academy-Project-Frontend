@@ -18,9 +18,9 @@
         <table class="table table-sm table-borderless table-responsive">
           <thead class="heading">
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">
+              <th class="name" scope="col">Name</th>
+              <th class="email" scope="col">Email</th>
+              <th class="dob" scope="col">
                 DOB - Age
                 <i
                   class="fa fa-sort mx-1"
@@ -28,9 +28,9 @@
                   @click="sort('dob')"
                 ></i>
               </th>
-              <th scope="col">Address</th>
-              <th scope="col">University</th>
-              <th scope="col">
+              <th class="address" scope="col">Address</th>
+              <th class="uni" scope="col">University</th>
+              <th class="cgpa" scope="col">
                 CGPA
                 <i
                   class="fa fa-sort mx-1"
@@ -68,8 +68,6 @@
               tabindex="-1"
               id="offcanvasRight"
               aria-labelledby="offcanvasRightLabel"
-              v-for="entry in entries"
-              :key="entry.id"
               @click="selectEntry(id)"
             >
               <div class="offcanvas-header">
@@ -78,7 +76,9 @@
               </div>
               <div class="offcanvas-body">
                 <div class="box ps-4">
-                  <img class="user-image" src="../assets/girl-img.png" alt="" />
+                  <div>
+        <img :src="Profile.image" class="profile"/>
+      </div>
                   <p class="mt-4">Personal Details</p>
                   <hr />
                   <form action="">
@@ -232,7 +232,8 @@ export default {
       entries: "",
       applicantId: "",
       entry: {},
-      status:""
+      status:"",
+      Profile: []
     };
   },
 
@@ -250,14 +251,26 @@ export default {
     }
   },
 
+   created: async function () {
+    this.getUserDetails();
+    let res = await this.$store.dispatch("getDashboard")
+    let obj = res.data.data
+    this.Profile.push(obj)
+    //console.log(this.Profile);
+  },
+
   methods: {
-    selectEntry(id) {
+    async selectEntry(id)
+ {
       // this.applicantId = entry;
       // console.log("applicant", this.applicantId);
       this.$route.query.applicantId = id;
+      let res = await this.$store.dispatch("getUserDetails",id);
       const [entry] = this.entries.filter((entry) => entry.id === id);
       this.entry = entry;
-      //console.log(this.entry);
+       let obj = res.data.data
+      this.Profile = obj;
+      console.log("000000000?",this.entry);
     },
     updateApplicantStatus(status) {
       try {
@@ -287,6 +300,19 @@ export default {
         console.log(error);
       }
     },
+
+     getUserDetails() {
+      // get token from localstorage
+      let token = localStorage.getItem("User-Token");
+      try {
+      //decode token here and attach to the user object
+      let decoded = VueJwtDecode.decode(token);
+      this.user = decoded; 
+      } catch (error) {
+        // return error in production env
+        console.log(error, 'error from decoding token')
+      }
+    },
   },
 };
 </script>
@@ -313,6 +339,14 @@ html {
   border-radius: 5px;
 }
 
+.profile {
+  width: 179px;
+  height: 179px;
+  /* border-radius: 50px; */
+  margin: auto;
+  margin-top: 20px;
+}
+
 .title-entries {
   width: 350px;
   height: 53px;
@@ -328,6 +362,16 @@ html {
 #description-div {
   margin-bottom: 37px;
   text-align: left;
+}
+
+th.name{
+  padding-right: 80px;
+  padding-left: 20px;
+}
+
+th.dob{
+  padding-right: 60px;
+  padding-left: 40px;
 }
 
 .offcanvas.offcanvas-end {
@@ -382,6 +426,7 @@ th {
   font-size: 14px;
   text-align: left;
   line-height: 17px;
+   padding-left: 20px;
 }
 td {
   font-family: Lato;
@@ -390,6 +435,7 @@ td {
   font-size: 16px;
   line-height: 19px;
   color: #4f4f4f;
+   padding-left: 20px;
   /* padding-left: 30px; */
 }
 i {

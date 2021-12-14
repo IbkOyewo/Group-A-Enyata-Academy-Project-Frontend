@@ -87,7 +87,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['adminUpdate' , 'adminProfile']),
+    ...mapActions(['adminProfile']),
     filesSelectedPhoto(fileRecordsNewlySelected) {
       this.update.photo = fileRecordsNewlySelected.length > 0
         ? fileRecordsNewlySelected[0]

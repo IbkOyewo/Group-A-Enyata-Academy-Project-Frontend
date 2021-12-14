@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+// import { mapGetters, mapActions } from "vuex";
 import VueJwtDecode from 'vue-jwt-decode'
 
 export default {

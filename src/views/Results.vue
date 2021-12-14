@@ -17,9 +17,9 @@
         <table class="table table-sm table-borderless table-responsive">
           <thead class="heading">
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">
+              <th class="name" scope="col">Name</th>
+              <th class="email" scope="col">Email</th>
+              <th class="dob" scope="col">
                 DOB - Age
                 <i class="fa fa-sort mx-1" aria-hidden="true" @click="sort('dob')"></i>
               </th>
@@ -152,7 +152,19 @@ th {
   font-size: 14px;
   text-align: left;
   line-height: 17px;
+  padding-left: 20px;
 }
+
+th.name{
+  padding-right: 80px;
+  padding-left: 20px;
+}
+
+th.dob{
+  padding-right: 60px;
+  padding-left: 40px;
+}
+
 td {
   font-family: Lato;
   font-style: normal;
@@ -160,6 +172,7 @@ td {
   font-size: 16px;
   line-height: 19px;
   color: #4f4f4f;
+  padding-left: 20px;
 }
 i {
   cursor: pointer;
