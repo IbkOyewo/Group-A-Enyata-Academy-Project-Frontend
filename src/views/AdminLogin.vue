@@ -29,12 +29,12 @@
               :type="showPassword ? 'text' : 'password'"
               @keyup="validatePassword()"
               required
-            /> <span @click="togglePassword" v-show="showPassword">
+            />
+            <span @click="togglePassword" v-show="showPassword">
               <i class="fas fa-eye mr-5" aria-hidden="true"></i>
             </span>
             <span @click="togglePassword" v-show="!showPassword">
-              <i class="fa fa-eye-slash mr-5" aria-hidden="true">
-              </i>
+              <i class="fa fa-eye-slash mr-5" aria-hidden="true"> </i>
             </span>
           </div>
           <button type="submit" class="btn" :disabled="!isDisabled">
@@ -66,7 +66,6 @@ export default {
     },
   },
   methods: {
-
     validatePassword() {
       if (this.userDetails.password.length >= 8) {
         this.feedbackPassword = true;
@@ -82,12 +81,26 @@ export default {
     },
 
     adminLogin: async function () {
-      console.log("Working");
-      let email = this.email;
-      let password = this.password;
-      let res = await this.$store.dispatch("adminLogin", { email, password });
-      if (res.status === 200) {
-        this.$router.push("/adminDashboard");
+      try {
+        let email = this.email;
+        let password = this.password;
+        let res = await this.$store.dispatch("adminLogin", { email, password });
+        if (res.status === 200) {
+          await this.$dtoast.pop({
+            preset: "success",
+            color: "white",
+            heading: "Success",
+            content: "Login successful",
+          });
+          this.$router.push("/adminDashboard");
+        }
+      } catch (error) {
+        await this.$dtoast.pop({
+          preset: "error",
+          color: "white",
+          heading: "Error",
+          content: "Invalid credentials. Please try again",
+        });
       }
     },
   },
@@ -129,7 +142,7 @@ html {
   z-index: 2;
   cursor: pointer;
   bottom: 52px;
-    left: 350px;
+  left: 350px;
 }
 
 .field-icon {

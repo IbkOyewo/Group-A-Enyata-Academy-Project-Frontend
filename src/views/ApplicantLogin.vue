@@ -30,23 +30,18 @@
           </div>
         </div>
       </div>
-      <button
-        class="submit-btn"
-        type="submit"
-        :disabled="!isDisabled"
-      >
+      <button class="submit-btn" type="submit" :disabled="!isDisabled">
         Submit
       </button>
       <div class="bottom-text">
         <span class="ft_txt"
-          >Don’t have an account yet?<router-link :to="{ name: 'signup' }"
-          >
+          >Don’t have an account yet?<router-link :to="{ name: 'signup' }">
             Sign Up</router-link
           ></span
         >
         <span class="ft_txt"
           ><router-link :to="{ name: 'Forgot Password' }"
-          >Forgot Password?</router-link 
+            >Forgot Password?</router-link
           ></span
         >
       </div>
@@ -73,7 +68,7 @@ export default {
     },
 
     isDisabled() {
-      return (this.user.email != "" && this.user.password != "");
+      return this.user.email != "" && this.user.password != "";
     },
   },
   methods: {
@@ -91,21 +86,34 @@ export default {
       this.showPassword = !this.showPassword;
     },
     login: async function () {
-      let email = this.user.email;
-      let password = this.user.password;
-      let res = await this.$store.dispatch("login", { email, password });
-      
-      if (res.status === 200) {
-        this.$router.push("/applicationform")
-        // const user = localStorage.getItem('LoggedIn')
-        // // console.log(user);
-        // if(user.includes(email) === true){
-        //   this.$router.push("/dashboard")
-        // }else{
-        //    this.$router.push("/applicationform")
-        // }
-       
-      } 
+      try {
+        let email = this.user.email;
+        let password = this.user.password;
+        let res = await this.$store.dispatch("login", { email, password });
+
+        if (res.status === 200) {
+          await this.$dtoast.pop({
+            preset: "success",
+            color: "white",
+            heading: "Success",
+            content: "Login successful",
+          });
+          const user = localStorage.getItem("Active Users");
+          if ( user === null || user.includes(email) === false) {
+            this.$router.push("/applicationform");
+          } else {
+            this.$router.push("/dashboard");
+          }
+        }
+      } catch (error) {
+        await this.$dtoast.pop({
+          preset: "error",
+          color: "white",
+          heading: "Error",
+          content: "Invalid Credentials. Please try again",
+        });
+        console.log(error);
+      }
     },
   },
 };
@@ -255,5 +263,4 @@ label {
 a {
   font-size: 16px;
 }
-
 </style>
