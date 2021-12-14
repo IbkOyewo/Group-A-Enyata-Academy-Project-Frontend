@@ -7,8 +7,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userToken: localStorage.getItem("User-Token") || "",
-    adminToken: localStorage.getItem("Admin-Token") || "",
+    userToken: localStorage.getItem('User-Token') || '',
+    adminToken: localStorage.getItem('Admin-Token') || '',
+    adminInfo: {},
     displayQuest: [],
     approvalStatus: [],
     loggedIn: [],
@@ -18,6 +19,7 @@ export default new Vuex.Store({
   getters: {
     displayQuest: (state) => state.displayQuest,
     getToken: (state) => state.adminToken,
+    getAdminInfo : (state) => state.adminInfo
   },
   mutations: {
     setToken: (state, payload) => state.adminToken = payload,
@@ -27,7 +29,11 @@ export default new Vuex.Store({
     setTimeFinish: (state, payload) => {
       state.timeFinish = payload;
     },
+    setAdminInfo(state, info) {
+      state.adminInfo = info;
+    }
   },
+  
   actions: {
     // eslint-disable-next-line no-unused-vars
     async signup({ commit }, userInfo) {
@@ -197,6 +203,25 @@ export default new Vuex.Store({
         console.log(error)
       }
     },
+
+      // eslint-disable-next-line no-unused-vars
+      async adminProfile({commit}) {
+        try {
+          let config = {
+            method: 'get',
+            url: 'http://localhost:8082/api/admin/profile',
+            headers: { 
+              'x-access-token': this.state.adminToken
+            }
+          };
+    
+         const response = await axios(config)
+            console.log(response)
+            commit("setAdminInfo", response.data.data);
+        } catch (error) {
+          console.log(error)
+        }
+      },
 
     // eslint-disable-next-line no-unused-vars
     async composeAssessment({ commit }, userInfo) {

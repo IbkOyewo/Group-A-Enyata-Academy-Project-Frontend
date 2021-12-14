@@ -6,23 +6,6 @@
       </div>
       <hr>
       <div class="options">
-        <!-- <VueFileAgent
-          ref="vueFileAgent"
-          :theme="'list'"
-          :multiple="false"
-          :meta="true"
-          :accept="'.jpeg'"
-          :maxSize="'2MB'"
-          :maxFiles="1"
-          :helpText="'Upload a new image'"
-          :errorText="{
-          type: 'Invalid file type. Only files with jpeg extension are allowed',
-          size: 'Files should not exceed 2MB in size',
-          }"
-          @select="filesSelectedPhoto($event)"
-          v-model="update.photo"
-          id="choose-file"
-        ></VueFileAgent> -->
         <div class="circle">
           <img src="../assets/account.svg" alt="profile-picture">
         </div> 
@@ -33,11 +16,11 @@
         <div class="row1">
           <div class="input-1">
             <label for="name">Name</label>
-            <input :disabled="editNow" type="text" placeholder="Fatomi Abiodun" v-model="update.fullName">
+            <input :disabled="editNow" type="text" v-model="update.fullName" >
           </div>
           <div class="input-2">
             <label for="name">Email</label>
-            <input disabled type="text" placeholder="fatomi@enyata.com" v-model="update.email">
+            <input :disabled="editNow" type="text" v-model="update.email">
           </div>
           <div class="input-3">
             <label for="name">Phone number</label>
@@ -62,7 +45,7 @@
           <b></b>
         </b-form-valid-feedback>
         <div class="save-btn">
-          <button class="save-btn">Save</button>
+          <button class="save-btn" v-on:click="editNow=true">Save</button>
         </div>
       </div>
     </div>
@@ -104,7 +87,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['adminUpdate']),
+    ...mapActions(['adminUpdate' , 'adminProfile']),
     filesSelectedPhoto(fileRecordsNewlySelected) {
       this.update.photo = fileRecordsNewlySelected.length > 0
         ? fileRecordsNewlySelected[0]
@@ -123,14 +106,18 @@ export default {
       console.log(this.update);
     //   this.reset();
     },
+    
   },
-  mounted() {
-    this.update.fullName = this.getAdminInfo.adminName;
-    this.update.email = this.getAdminInfo.adminEmail;
-    this.update.phone = this.getAdminInfo.adminPhone;
-    this.update.address = this.getAdminInfo.adminAddress;
-    this.update.country = this.getAdminInfo.adminCountry;
+  async mounted() {
+    await this.adminProfile()
+    this.update.fullName = this.getAdminInfo.name;
+    this.update.email = this.getAdminInfo.email;
+    this.update.phone = this.getAdminInfo.phonenumber;
+    this.update.address = this.getAdminInfo.address;
+    this.update.country = this.getAdminInfo.country;
+
   },
+
 };
 </script>
 
@@ -240,5 +227,11 @@ input:focus {
   border: none;
   margin: auto;
   border-radius: 3px;
+}
+.save-btn:hover{
+  background: #8d73da;
+}
+.save-btn:active{
+  background: #624aaa;
 }
 </style>
