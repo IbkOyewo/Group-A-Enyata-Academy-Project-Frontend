@@ -10,6 +10,7 @@ export default new Vuex.Store({
     userToken: localStorage.getItem("User-Token") || "",
     adminToken: localStorage.getItem("Admin-Token") || "",
     displayQuest: [],
+    approvalStatus: [],
     timeFinish: {},
     approvalStatus: []
   },
