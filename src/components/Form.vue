@@ -37,28 +37,30 @@
         </button>
       </div>
       <div class="signin">
-        <p>Already have an account?<router-link :to="{ name: 'applicantLogin' }"
-          >Sign in</router-link></p>
+        <p>
+          Already have an account?<router-link :to="{ name: 'applicantLogin' }"
+            >Sign in</router-link
+          >
+        </p>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex"
+import { mapActions } from "vuex";
 export default {
   name: "Form",
   data() {
     return {
-      formData:{
+      formData: {
         firstName: "",
         lastName: "",
         email: "",
         phoneNumber: "",
         password: "",
         cpassword: "",
-      }
-      
+      },
     };
   },
   computed: {
@@ -75,12 +77,27 @@ export default {
   },
   methods: {
     signup: async function () {
-      let res = await this.$store.dispatch("signup",this.formData);
-      if (res.status === 201) {
-        this.$router.push("/login");
-      } 
+      try {
+        let res = await this.$store.dispatch("signup", this.formData);
+        if (res.status === 201) {
+          await this.$dtoast.pop({
+            preset: "success",
+            color: "white",
+            heading: "Success",
+            content: "Registration successful",
+          });
+          this.$router.push("/login");
+        }
+      } catch (error) {
+        await this.$dtoast.pop({
+          preset: "error",
+          color: "white",
+          heading: "Error",
+          content: "User already exists",
+        });
+      }
     },
-  }
+  },
 };
 </script>
 

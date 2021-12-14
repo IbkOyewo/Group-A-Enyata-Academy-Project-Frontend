@@ -11,6 +11,7 @@ export default new Vuex.Store({
     adminToken: localStorage.getItem("Admin-Token") || "",
     displayQuest: [],
     approvalStatus: [],
+    loggedIn: [],
     timeFinish: {},
     approvalStatus: []
   },
@@ -39,9 +40,7 @@ export default new Vuex.Store({
         );
         return response;
       } catch (error) {
-        if (error.response.status === 400) {
-          alert("User already exists");
-        }
+        console.log(error);
       }
     },
     // eslint-disable-next-line no-unused-vars
@@ -55,9 +54,10 @@ export default new Vuex.Store({
         localStorage.setItem("User-Token", token);
         return response;
       } catch (error) {
-        if (error.response.status === 401) {
-          alert("Invalid Credentials. Please try again");
-        }
+        console.log(error.response)
+        // if (error.response.status === 401) {
+        //   alert("Invalid Credentials. Please try again");
+        // }
       }
     },
     // eslint-disable-next-line no-unused-vars
@@ -74,9 +74,7 @@ export default new Vuex.Store({
         localStorage.setItem("Admin-Token", token);
         return response;
       } catch (error) {
-        if (error.response.status === 401) {
-          alert("Admin already exists. Please try again");
-        }
+        console.log(error);
       }
     },
     // eslint-disable-next-line no-unused-vars
