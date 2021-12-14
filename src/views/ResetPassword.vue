@@ -8,18 +8,17 @@
       
     <div class="inputDiv">
       <label class="inputLabel" for="password">New Password</label>
-      <input type="password" id="password" name="password" required>
+      <input type="password" v-model.trim="pass1" id="password" name="password" required>
     </div>
       
     <div class="inputDiv">
       <label class="inputLabel" for="confirmPassword">Confirm Password</label>
-      <input type="password" id="confirmPassword" name="confirmPassword">
+      <input type="password" v-model.trim="pass2" id="confirmPassword" name="confirmPassword">
     </div>
     
     <div class="buttonWrapper">
-      <button type="submit" id="submitButton" onclick="validateSignupForm()" class="submitButton pure-button pure-button-primary">
+      <button type="submit" id="submitButton" @click.prevent="resetPassword()" class="submitButton pure-button pure-button-primary">
         <span>Continue</span>
-        <span id="loader"></span>
       </button>
     </div>
       
@@ -31,6 +30,49 @@
 <script>
 export default {
 name: "resetPassword",
+data(){
+  return {
+      pass1:"",
+      pass2:"",
+      email: ""
+  }
+},
+  methods: {
+    async resetPassword() {
+      try {
+        let pass1 = this.pass1;
+        let pass2 = this.pass2;
+        // console.log(this.$route.query.verification)
+        // console.log("====>",email)
+        if (pass1 === pass2) {
+          await this.$dtoast.pop({
+            preset: "success",
+            color: "white",
+            heading: "Success",
+            content: "password change successfully",
+          });
+          const userEmail = this.$store.state.getEmail
+          console.log("===>",userEmail)
+           this.$store.dispatch("forgetpassword", {pass1, userEmail });
+          this.$router.push("/login");
+        } else{
+          await this.$dtoast.pop({
+          preset: "error",
+          color: "white",
+          heading: "Error",
+          content: "password dose not match",
+        });
+        }
+      } catch (error) {
+       console.log(error) 
+      }
+    },
+  },
+   beforeMount(){
+     const {verification, email} = this.$route.query
+     this.$store.commit("setGetEmail", email)
+    console.log(email);
+  }
 }
 </script>
 

@@ -13,19 +13,23 @@ export default new Vuex.Store({
     approvalStatus: [],
     loggedIn: [],
     timeFinish: {},
-    approvalStatus: []
+    approvalStatus: [],
+    getEmail: "",
   },
   getters: {
     displayQuest: (state) => state.displayQuest,
     getToken: (state) => state.adminToken,
   },
   mutations: {
-    setToken: (state, payload) => state.adminToken = payload,
+    setToken: (state, payload) => (state.adminToken = payload),
     setQuest: (state, payload) => {
       state.displayQuest = payload;
     },
     setTimeFinish: (state, payload) => {
       state.timeFinish = payload;
+    },
+    setGetEmail: (state, payload) => {
+      state.getEmail = payload;
     },
   },
   actions: {
@@ -54,10 +58,43 @@ export default new Vuex.Store({
         localStorage.setItem("User-Token", token);
         return response;
       } catch (error) {
-        console.log(error.response)
+        console.log(error.response);
         // if (error.response.status === 401) {
         //   alert("Invalid Credentials. Please try again");
         // }
+      }
+    },
+    // forgetpassword
+    async forgetpassword({ commit }, { email }) {
+      try {
+        const response = await axios.post(
+          "http://localhost:8082/user/forgetpassword",
+          {
+            email,
+          }
+        );
+        let token = response.data.token;
+        localStorage.setItem("User-Token", token);
+        return response;
+      } catch (error) {
+        console.log(error.response);
+      }
+    },
+    // resetpassword
+    async resetpassword({ commit }, { email, password, oneTimeToken }) {
+      try {
+        const response = await axios.put(
+          `http://localhost:8082/user/reset-password/verification=${oneTimeToken} `,
+          {
+            password,
+            email,
+          }
+        );
+        let token = response.data.token;
+        localStorage.setItem("User-Token", token);
+        return response;
+      } catch (error) {
+        console.log(error.response);
       }
     },
     // eslint-disable-next-line no-unused-vars
@@ -94,40 +131,41 @@ export default new Vuex.Store({
         return response;
       } catch (error) {
         //console.log(error.response.status);
-        if (error.response.message === 'This user has already sent an application'){
-          alert("This user has already sent an application")
+        if (
+          error.response.message === "This user has already sent an application"
+        ) {
+          alert("This user has already sent an application");
         }
-        if (error.response.message === 'This user is not registered'){
-          alert("This user is not registered")
+        if (error.response.message === "This user is not registered") {
+          alert("This user is not registered");
         }
         //console.log(error);
       }
     },
- // eslint-disable-next-line no-unused-vars
-    async createApplication({commit}, applicationInfo) {
+    // eslint-disable-next-line no-unused-vars
+    async createApplication({ commit }, applicationInfo) {
       try {
-          let config = {
-            method: 'post',
-            url: 'http://localhost:8082/api/admin/application',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-access-token': this.state.adminToken
+        let config = {
+          method: "post",
+          url: "http://localhost:8082/api/admin/application",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": this.state.adminToken,
           },
-            data : applicationInfo
-          };
+          data: applicationInfo,
+        };
 
-          let response = axios(config)
-          console.log(response);
-          return response
-      }
-      catch(error){
+        let response = axios(config);
+        console.log(response);
+        return response;
+      } catch (error) {
         console.log(error);
       }
     },
 
     // eslint-disable-next-line no-unused-vars
-    async adminDashboard({commit}) {
-      try { 
+    async adminDashboard({ commit }) {
+      try {
         let config = {
           method: "get",
           url: "http://localhost:8082/api/admin/current_applications",
@@ -135,66 +173,65 @@ export default new Vuex.Store({
             "x-access-token": this.state.adminToken,
           },
         };
-  
-       const response = await axios(config)
-          return response
-      } catch (error) {
-        console.log(error)
-      }
-    },
 
-    // eslint-disable-next-line no-unused-vars
-    async totalApplication({commit}) {
-      try {
-        let config = {
-          method: 'get',
-          url: 'http://localhost:8082/api/admin/total_applications',
-          headers: { 
-            'x-access-token': this.state.adminToken
-          }
-        };
-  
-       const response = await axios(config)
-          return response
-      } catch (error) {
-        console.log(error)
-      }
-    },
-
-
-    // eslint-disable-next-line no-unused-vars
-    async batchEntries({commit}) {
-      try {
-        let config = {
-          method: 'get',
-          url: 'http://localhost:8082/api/user/details',
-          headers: { 
-            'x-access-token': this.state.adminToken
-          }
-        };
-  
-       const response = await axios(config)
-          return response
+        const response = await axios(config);
+        return response;
       } catch (error) {
         console.log(error);
       }
     },
 
     // eslint-disable-next-line no-unused-vars
-    async assessmentHistory({commit}) {
+    async totalApplication({ commit }) {
       try {
         let config = {
-          method: 'get',
-          url: 'http://localhost:8082/api/admin/assessment_history',
-          headers: { 
-            'x-access-token': this.state.adminToken
-          }
+          method: "get",
+          url: "http://localhost:8082/api/admin/total_applications",
+          headers: {
+            "x-access-token": this.state.adminToken,
+          },
         };
-  
-       const response = await axios(config)
-          return response
+
+        const response = await axios(config);
+        return response;
       } catch (error) {
-        console.log(error)
+        console.log(error);
+      }
+    },
+
+    // eslint-disable-next-line no-unused-vars
+    async batchEntries({ commit }) {
+      try {
+        let config = {
+          method: "get",
+          url: "http://localhost:8082/api/user/details",
+          headers: {
+            "x-access-token": this.state.adminToken,
+          },
+        };
+
+        const response = await axios(config);
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    // eslint-disable-next-line no-unused-vars
+    async assessmentHistory({ commit }) {
+      try {
+        let config = {
+          method: "get",
+          url: "http://localhost:8082/api/admin/assessment_history",
+          headers: {
+            "x-access-token": this.state.adminToken,
+          },
+        };
+
+        const response = await axios(config);
+        return response;
+      } catch (error) {
+        console.log(error);
       }
     },
 
@@ -218,7 +255,7 @@ export default new Vuex.Store({
       }
     },
     // eslint-disable-next-line no-unused-vars
-    async getResults({commit}) {
+    async getResults({ commit }) {
       try {
         let config = {
           method: "get",
@@ -229,55 +266,52 @@ export default new Vuex.Store({
           },
         };
 
-          let response = axios(config)
-          return response
-      }
-      catch(error){
+        let response = axios(config);
+        return response;
+      } catch (error) {
         console.log(error);
       }
     },
-     // eslint-disable-next-line no-unused-vars
-     async getDashboard({commit}) {
+    // eslint-disable-next-line no-unused-vars
+    async getDashboard({ commit }) {
       try {
         let token = localStorage.getItem("User-Token");
         let decoded = VueJwtDecode.decode(token);
-        const {id} = decoded
+        const { id } = decoded;
         console.log(decoded);
-          let config = {
-            method: 'get',
-            url: `http://localhost:8082/api/dashboard/3`,
-            headers: {
-              'Content-Type': 'application/json',
-              'x-access-token': this.state.userToken
-          }
-          };
+        let config = {
+          method: "get",
+          url: `http://localhost:8082/api/dashboard/3`,
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": this.state.userToken,
+          },
+        };
 
-          let response = axios(config)
-          return response
-      }
-      catch(error){
+        let response = axios(config);
+        return response;
+      } catch (error) {
         console.log(error);
       }
     },
-     // eslint-disable-next-line no-unused-vars
-     async getAdminDashboard({commit}) {
+    // eslint-disable-next-line no-unused-vars
+    async getAdminDashboard({ commit }) {
       try {
         let token = localStorage.getItem("Admin-Token");
         let decoded = VueJwtDecode.decode(token);
-        const {user_id} = decoded
-          let config = {
-            method: 'get',
-            url: `http://localhost:8082/api/admin-dashboard/${user_id}`,
-            headers: {
-              'Content-Type': 'application/json',
-              'x-access-token': this.state.adminToken
-          }
-          };
+        const { user_id } = decoded;
+        let config = {
+          method: "get",
+          url: `http://localhost:8082/api/admin-dashboard/${user_id}`,
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": this.state.adminToken,
+          },
+        };
 
-          let response = axios(config)
-          return response
-      }
-      catch(error){
+        let response = axios(config);
+        return response;
+      } catch (error) {
         console.log(error);
       }
     },
@@ -294,51 +328,48 @@ export default new Vuex.Store({
       }
     },
     // eslint-disable-next-line no-unused-vars
-    async approveApplication({commit}) {
+    async approveApplication({ commit }) {
       try {
         let token = localStorage.getItem("User-Token");
         let decoded = VueJwtDecode.decode(token);
-        const {id} = decoded
-          let config = {
-            method: 'put',
-            url: `http://localhost:8082/api/admin/approve/${id}`,
-            headers: {
-              'Content-Type': 'application/json',
-              'x-access-token': this.state.userToken
-          }
-          };
+        const { id } = decoded;
+        let config = {
+          method: "put",
+          url: `http://localhost:8082/api/admin/approve/${id}`,
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": this.state.userToken,
+          },
+        };
 
-          let response = axios(config)
-          return response
-      }
-      catch(error){
+        let response = axios(config);
+        return response;
+      } catch (error) {
         console.log(error);
       }
     },
-     // eslint-disable-next-line no-unused-vars
-     async declineApplication({commit}) {
+    // eslint-disable-next-line no-unused-vars
+    async declineApplication({ commit }) {
       try {
         let token = localStorage.getItem("User-Token");
         let decoded = VueJwtDecode.decode(token);
-        const {id} = decoded
-          let config = {
-            method: 'put',
-            url: `http://localhost:8082/api/admin/decline/${id}`,
-            headers: {
-              'Content-Type': 'application/json',
-              'x-access-token': this.state.userToken
-          }
-          };
+        const { id } = decoded;
+        let config = {
+          method: "put",
+          url: `http://localhost:8082/api/admin/decline/${id}`,
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": this.state.userToken,
+          },
+        };
 
-          let response = axios(config)
-          return response
-      }
-      catch(error){
+        let response = axios(config);
+        return response;
+      } catch (error) {
         console.log(error);
       }
     },
   },
-
 
   modules: {},
 });

@@ -29,7 +29,7 @@ export default {
           checkLogo: require("../assets/check-mark.png")
 
       }
-  }
+  },
 }
 </script>
 
