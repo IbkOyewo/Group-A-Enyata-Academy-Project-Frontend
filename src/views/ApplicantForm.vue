@@ -111,7 +111,10 @@
           <input type="text" class="form-control" v-model="cgpa" name="cgpa" value="7"/>
         </div>
       </div>
-      <div class='button'>
+      <div v-if="onclick === true" class='button'>
+          <button type="submit">Submit <i class="fas fa-spinner fa-pulse"></i></button> 
+      </div> 
+      <div v-else class='button'>
           <button type="submit">Submit</button> 
       </div> 
     </form@submit.prevent=>
@@ -123,6 +126,7 @@ export default {
   name: "applicantForm",
   data() {
     return {
+      onclick: false,
       profile: 0,
       fname: "",
       lname: "",
@@ -144,6 +148,7 @@ export default {
       this.image = event.target.files[0];
     },
     submitFile: async function () {
+      this.onclick = true;
       let formData = new FormData();
       formData.append("fname", this.fname);
       formData.append("lname", this.lname);

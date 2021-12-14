@@ -14,7 +14,6 @@ import DToaster from "dtoaster";
 import ToastPreset from "../toastPreset.json";
 import "dtoaster/dist/dtoaster.css";
 
-
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(DToaster, {

@@ -50,7 +50,10 @@
               v-model="instructions"
             ></textarea>
           </div>
-          <div class="text-center">
+          <div v-if="onclick === true" class="text-center">
+            <button class="btn" type="submit">Submit <i class="fas fa-spinner fa-pulse"></i></button>
+          </div>
+          <div v-else class="text-center">
             <button class="btn" type="submit">Submit</button>
           </div>
         </form>
@@ -69,6 +72,7 @@ export default {
   },
   data() {
     return {
+      onclick: false,
       image: "",
       batchId: "",
       applicationLink: "",
@@ -94,10 +98,11 @@ export default {
   methods: {
     handleFileUpload(event) {
       this.image = event.target.files[0];
-      console.log(this.image);
+      //console.log(this.image);
     },
 
     async submitForm() {
+      this.onclick = true;
       try {
         if (this.isValid) {
           let formData = new FormData();
@@ -115,6 +120,7 @@ export default {
               heading: "Success",
               content: "Application created successfully",
             });
+            localStorage.setItem("show", 'true')
           }
         }
       } catch (error) {
