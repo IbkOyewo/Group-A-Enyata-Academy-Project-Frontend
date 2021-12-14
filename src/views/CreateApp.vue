@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-3">
-      <AdminSidebar/>
+      <AdminSidebar />
     </div>
     <div class="container col-8 pt-5">
       <h2 class="my-5">Create Application</h2>
@@ -10,37 +10,49 @@
           <div class="row">
             <div class="fileup col">
               <div class="upload-btn-wrapper">
-                <button class="btns">
-                  <strong>+</strong> Choose file
-                </button>
-                <input type="file" name="file" :v-model="image" ref="file" @change="handleFileUpload"/>
+                <button class="btns"><strong>+</strong> Choose file</button>
+                <input
+                  type="file"
+                  name="file"
+                  :v-model="image"
+                  ref="file"
+                  @change="handleFileUpload"
+                />
               </div>
             </div>
             <div class="col">
               <label>Link</label>
-              <input type="text" class="form-control"  v-model="applicationLink"/>
+              <input
+                type="text"
+                class="form-control"
+                v-model="applicationLink"
+              />
             </div>
-           
           </div>
-          
+
           <div class="row my-4">
             <div class="col">
               <label>Application closure date</label>
-              <input type="date" class="form-control" v-model="closureDate"/>
+              <input type="date" class="form-control" v-model="closureDate" />
             </div>
             <div class="col">
               <label>Batch ID</label>
-              <input type="text" class="form-control"  v-model="batchId"/>
+              <input type="text" class="form-control" v-model="batchId" />
             </div>
           </div>
           <div class="form-group my-3">
             <label for>Instructions</label>
-            <textarea class="form-control" name id rows="4" v-model="instructions"></textarea>
+            <textarea
+              class="form-control"
+              name
+              id
+              rows="4"
+              v-model="instructions"
+            ></textarea>
           </div>
           <div class="text-center">
             <button class="btn" type="submit">Submit</button>
           </div>
-          
         </form>
       </div>
     </div>
@@ -48,21 +60,21 @@
 </template>
 
 <script>
-import AdminSidebar from '@/components/AdminSidebar.vue'
+import AdminSidebar from "@/components/AdminSidebar.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "applicationAdmin",
   components: {
-    AdminSidebar
+    AdminSidebar,
   },
   data() {
     return {
-      image: '',
-      batchId: '',
-      applicationLink: '',
+      image: "",
+      batchId: "",
+      applicationLink: "",
       closureDate: "",
-      instructions: ""
-    }
+      instructions: "",
+    };
   },
   computed: {
     isValid() {
@@ -77,40 +89,45 @@ export default {
       } else {
         return true;
       }
-    }
+    },
   },
   methods: {
     handleFileUpload(event) {
       this.image = event.target.files[0];
-       console.log(this.image);
+      console.log(this.image);
     },
 
-   async submitForm() {
-    this.$dtoast.pop({
-    preset: "success",
-    color: "white",
-    heading: "create application",
-    content: "successfully created",
-  })
-      if( this.isValid) {
-        let formData = new FormData();
-        formData.append("image", this.image);
-        formData.append("batchId", this.batchId);
-        formData.append("applicationLink", this.applicationLink);
-        formData.append("closureDate", this.closureDate);
-        formData.append("instructions", this.instructions);
+    async submitForm() {
+      try {
+        if (this.isValid) {
+          let formData = new FormData();
+          formData.append("image", this.image);
+          formData.append("batchId", this.batchId);
+          formData.append("applicationLink", this.applicationLink);
+          formData.append("closureDate", this.closureDate);
+          formData.append("instructions", this.instructions);
 
-        let res = await this.$store.dispatch("createApplication", formData)
-      if (res.status === 201) {
-        alert("Application Successfully Created")
-      }else {
-        alert("All fields are required");
+          let res = await this.$store.dispatch("createApplication", formData);
+          if (res.status === 201) {
+            await this.$dtoast.pop({
+              preset: "success",
+              color: "white",
+              heading: "Success",
+              content: "Application created successfully",
+            });
+          }
+        }
+      } catch (error) {
+        await this.$dtoast.pop({
+          preset: "error",
+          color: "white",
+          heading: "Error",
+          content: "All fields are required",
+        });
       }
-    }
-    
-  }
-}
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -129,8 +146,9 @@ h2 {
   color: #2b3c4e;
 }
 
-input, textarea{
-  border:1.5px solid #2B3C4E;
+input,
+textarea {
+  border: 1.5px solid #2b3c4e;
 }
 
 .upload-btn-wrapper {
@@ -139,7 +157,7 @@ input, textarea{
   display: inline-block;
 }
 
-.btn{
+.btn {
   width: 379px;
   height: 50px;
   color: #fff;
