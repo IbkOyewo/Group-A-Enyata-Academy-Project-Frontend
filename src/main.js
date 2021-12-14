@@ -13,8 +13,9 @@ import axios from "axios";
 import DToaster from "dtoaster";
 import ToastPreset from "../toastPreset.json";
 import "dtoaster/dist/dtoaster.css";
+import VeeValidate from 'vee-validate';
 
-
+Vue.use(VeeValidate);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(DToaster, {
