@@ -11,7 +11,7 @@
          
           <div class="custom-select me-5">
             <select name="minutes" id="minutes">
-              <option value="0">00<p class="fs">min</p></option>
+              <option value="0">00</option>
               <option value="1">01</option>
               <option value="2">02</option>
               <option value="3">03</option>
