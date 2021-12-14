@@ -154,18 +154,12 @@
                       /><br />
                     </div>
 
-                    <form>
-                      <label for="fileUpload" class="form">
-                        <span class="plus">
-                          <input
-                            type="text"
-                            readonly
-                            v-model="entry.cv"
-                            id="fileUpload"
-                          />
-                        </span>
+                    <div>
+                      <label for="fileUpload" class="form pd">
+                       <img class="pdf" src="../assets/PDF-icon.png" alt="">
+                       <span class="text-dark">My CV.pdf</span>
                       </label>
-                    </form>
+                    </div>
                   </form>
                   <p
                     v-if="status === 'approved'"
@@ -338,6 +332,19 @@ html {
   border-left: 10px solid #7557d3;
   border-radius: 5px;
 }
+
+.form.pd{
+  border: none;
+}
+
+.pdf{
+  -webkit-transform:rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
 
 .profile {
   width: 179px;

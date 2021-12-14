@@ -100,13 +100,13 @@ export default {
     },
     methods: {
       btnBg(){
-        if(this.currentQuestion === 8){
+        if(this.currentQuestion === 9){
         return this.btnFinish
         } 
           return this.btn
       },
         btnNextQuest(){
-        if(this.currentQuestion === 8){
+        if(this.currentQuestion === 9){
           return this.noNext
           } 
         return this.btnNext
@@ -139,7 +139,7 @@ export default {
            this.$store.commit("setTimeFinish", timeFinish)
        },
        isDisabled(){
-         if(this.currentQuestion === 8) return true
+         if(this.currentQuestion === 9) return true
        }
     },
     created(){
@@ -164,7 +164,7 @@ export default {
       secs(secs){
         if(Number(secs)===0 && Number(this.mins)===0){
          this.submit()
-          clearInterval(this.startTimer())
+          // clearInterval(this.startTimer())
         }
       }
     }

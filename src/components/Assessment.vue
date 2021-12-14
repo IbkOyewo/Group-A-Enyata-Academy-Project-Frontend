@@ -60,10 +60,8 @@ export default {
   //           setInterval(() => {
   //               this.mins = parseInt(timer / 60, 10);
   //               this.secs = parseInt(timer % 60, 10);
-
   //               this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
   //               this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
-
   //               if (--timer < 0) {
   //                   timer = duration;
   //               }
@@ -72,7 +70,6 @@ export default {
   //   },
   //   mounted() {
   //       const thirtyMins = 60 * 30
-
   //       this.startTimer(thirtyMins)
   //   }
 }
@@ -89,7 +86,6 @@ span {
   font-weight: 300;
   font-size: 48px;
 }
-
 .span {
   display: flex;
 }
@@ -120,7 +116,6 @@ span {
   line-height: 17px;
   /* margin-top: 40px; */
 }
-
 .dot-text {
   width: 510px;
   font-family: Lato;
@@ -164,7 +159,6 @@ h2 {
 #loading {
 animation: rotation 2s infinite linear;
 }
-
 @keyframes rotation {
 from {
 -webkit-transform: rotate(0deg);
