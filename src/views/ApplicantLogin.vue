@@ -30,14 +30,8 @@
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-
-      <button class="submit-btn" type="submit" :disabled="!isDisabled" @click="">
-        Submit 
-=======
       <button class="submit-btn" type="submit" :disabled="!isDisabled">
         Submit
->>>>>>> 365463711e9481910bf1ec8fbd4c6278789de84d
       </button>
 
       <div class="bottom-text">
@@ -271,7 +265,6 @@ label {
 a {
   font-size: 16px;
 }
-<<<<<<< HEAD
 
 #loader {
   position: absolute;
@@ -294,6 +287,4 @@ a {
     transform: rotate(360deg);
   }
 }
-=======
->>>>>>> 365463711e9481910bf1ec8fbd4c6278789de84d
 </style>
