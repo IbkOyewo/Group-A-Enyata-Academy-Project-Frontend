@@ -16,7 +16,7 @@
         "icon": "mdi mdi-close-circle-outline",
         "icon_size": "32px",
         "duration": "2500",
-        "background": "#ff1e1e",
+        "background": "red",
         "height": "75px",
         "color": "#FFFFFF",
         "show_progress_timeout": "true",

@@ -85,10 +85,11 @@
       <button class="last-button">Finish</button>
     </div>
   </div>
+  
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   name: "ComposeQuestion",
   data() {

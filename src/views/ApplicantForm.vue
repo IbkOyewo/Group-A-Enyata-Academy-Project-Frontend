@@ -59,7 +59,7 @@
       </svg>
       <p class="appli_hd">Application Form</p>
     </div>
-    <form@submit.prevent="submitFile" enctype="multipart/form-data">
+    <form @submit.prevent="submitFile" enctype="multipart/form-data">
       <div class="file_upload">
         <div class="file_div">
           <label for="file-upload" class="custom-file">
@@ -117,7 +117,7 @@
       <div v-else class='button'>
           <button type="submit">Submit</button> 
       </div> 
-    </form@submit.prevent=>
+    </form>
   </div>
 </template>
 

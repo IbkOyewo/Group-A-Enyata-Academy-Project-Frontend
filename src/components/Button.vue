@@ -1,10 +1,10 @@
 <template>
 <div class='main'>
     <div class='button'>
-        <button @click.prevent="submit" type="submit">{{text}}</button> 
+        <button @click.prevent="$emit('click')" type="submit">{{text}}</button> 
     </div> 
     <div>
-        <p>{{message}}<a href='#'>{{link}}</a></p>
+        <p>{{message}}<a href='#' @click.prevent="$emit('click')">{{link}}</a></p>
     </div>
 </div>
     
