@@ -124,45 +124,55 @@ export default {
   data() {
     return {
       profile: 0,
-        fname: "",
-        lname: "",
-        email: "",
-        cgpa: "",
-        dob: "",
-        address: "",
-        course: "",
-        university: "",
-        cv: "",
-        image: ""
-    };  
+      fname: "",
+      lname: "",
+      email: "",
+      cgpa: "",
+      dob: "",
+      address: "",
+      course: "",
+      university: "",
+      cv: "",
+      image: "",
+    };
   },
   methods: {
-      handleCvUpload(event){
-    this.cv = event.target.files[0];
-  },
-     handleImageUpload(event){
-     this.image = event.target.files[0];
-  },
-  submitFile: async function () {
+    handleCvUpload(event) {
+      this.cv = event.target.files[0];
+    },
+    handleImageUpload(event) {
+      this.image = event.target.files[0];
+    },
+    submitFile: async function () {
       let formData = new FormData();
-      formData.append('fname', this.fname);
-      formData.append('lname', this.lname);
-      formData.append('email', this.email);
-      formData.append('cgpa', this.cgpa);
-      formData.append('dob', this.dob);
-      formData.append('address', this.address);
-      formData.append('course', this.course);
-      formData.append('university', this.university);
-      formData.append('cv', this.cv);
-      formData.append('image', this.image);
-      let res = await this.$store.dispatch("application", formData)
+      formData.append("fname", this.fname);
+      formData.append("lname", this.lname);
+      formData.append("email", this.email);
+      formData.append("cgpa", this.cgpa);
+      formData.append("dob", this.dob);
+      formData.append("address", this.address);
+      formData.append("course", this.course);
+      formData.append("university", this.university);
+      formData.append("cv", this.cv);
+      formData.append("image", this.image);
+      let res = await this.$store.dispatch("application", formData);
 
       if (res.status === 201) {
-        //localStorage.setItem("LoggedIn", this.email)
-        alert("Application submitted Successfully")
-        this.$router.push("/dashboard")
-  }
+        this.$store.state.loggedIn.push(this.email);
+        localStorage.setItem("Active Users", this.$store.state.loggedIn);
+        console.log(`${this.email} stored`);
+        await this.$dtoast.pop({
+          preset: "success",
+          color: "white",
+          heading: "Success",
+          content: "Application submitted Successfully",
+        });
+        this.$router.push("/dashboard");
+      }
+    },
   },
+  created() {
+    console.log(this.$store.state.loggedIn);
   },
 };
 </script>
@@ -177,8 +187,8 @@ export default {
   /* margin-bottom: 50px; */
 }
 
-div.main{
-margin-bottom: 60px;
+div.main {
+  margin-bottom: 60px;
 }
 
 .icon_wrapper {
@@ -256,20 +266,20 @@ input[type="number"] {
   border-radius: 4px;
   border: 1.5px solid #2b3c4e;
 }
-input.date::placeholder{
+input.date::placeholder {
   font-size: 10px;
-  color: #CECECE;
+  color: #cecece;
 }
 
-button{
-    background: #7557D3;
-    margin: 15px 0 15px 320px;
+button {
+  background: #7557d3;
+  margin: 15px 0 15px 320px;
 
-    color: #fff;
-    width: 33%;
-    padding: 13px;
-    border: none;
-    border-radius: 4px;
+  color: #fff;
+  width: 33%;
+  padding: 13px;
+  border: none;
+  border-radius: 4px;
 }
 button:disabled {
   background: #ccc;
