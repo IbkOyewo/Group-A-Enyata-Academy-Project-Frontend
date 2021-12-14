@@ -6,16 +6,21 @@
       </div>
 
       <ul class="nav-links">
-        <router-link style="color: rgba(33, 31, 38, 0.71);
-" :to="{ name: 'home' }"
+        <router-link
+          style="color: rgba(33, 31, 38, 0.71)"
+          :to="{ name: 'home' }"
           ><li>Home</li></router-link
         >
-        <router-link style="color: rgba(33, 31, 38, 0.71);
-" :to="{ name: 'applicantLogin' }"
+        <router-link
+          style="color: rgba(33, 31, 38, 0.71)"
+          :to="{ name: 'applicantLogin' }"
           ><li>Sign in</li></router-link
         >
-        <router-link style="color: rgba(33, 31, 38, 0.71);
-" :to="{ name: 'signup' }"
+        <p v-if="show === false"></p>
+        <router-link
+          v-else
+          style="color: rgba(33, 31, 38, 0.71)"
+          :to="{ name: 'signup' }"
           ><li>Register Now</li></router-link
         >
       </ul>
@@ -35,8 +40,11 @@
           </p>
         </div>
 
-        <router-link style="color: #FFFFFF;
-" :to="{ name: 'signup' }"><button>Register Now</button></router-link
+        <p class="paragraph" v-if="show === false">
+          There is no application currently going on. Please check back again.
+        </p>
+        <router-link v-else style="color: #ffffff" :to="{ name: 'signup' }"
+          ><button>Register Now</button></router-link
         >
       </div>
 
@@ -99,6 +107,19 @@ export default {
   props: {
     msg: String,
   },
+  data() {
+    return {
+      show: false,
+    };
+  },
+  mounted() {
+    const showButton = localStorage.getItem("show");
+    if (showButton === null || showButton === false) {
+      this.show = false;
+    } else {
+      this.show = showButton;
+    }
+  }
 };
 </script>
 
@@ -158,7 +179,12 @@ nav img {
   left: 136px;
   top: 305px;
 }
-
+.paragraph {
+  color: #7557d3;
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 20px;
+}
 h1 {
   font-style: normal;
   font-weight: bold;

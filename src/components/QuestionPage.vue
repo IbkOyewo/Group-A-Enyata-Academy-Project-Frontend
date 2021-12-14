@@ -15,13 +15,13 @@
         <div class="span">
           <div>
             <span class="time">
-              {{mins}}
+              {{ mins }}
               <span class="minute">mins</span>
             </span>
           </div>
           <div>
             <span class="seconds time">
-              0{{secs}}
+              0{{ secs }}
               <span class="minute">sec</span>
             </span>
           </div>
@@ -29,25 +29,37 @@
       </div>
     </div>
     <div class="container">
-        <div>      
-          <h6 class="text-center">Question {{currentQuestion+1}}</h6>
-          <h2 class="text-center question_name">{{questions[currentQuestion]["questionText"]}}</h2>
-         <div class= "d-flex justify-content-center mt-5">
-           <div class="mb-5">
-              <div  class="d-flex align-items-center mb-3  gap-2"  v-for="(item) in questions[currentQuestion]['answerOptions']" :key="item.answerText">
-                <input :id="item.answerText" type="radio" :value="item.answerText"   v-model="userAnswers[currentQuestion]">
-                <label :for="item.answerText">{{item.answerText}}</label>
-              </div> 
+      <div>
+        <h6 class="text-center">Question {{ currentQuestion + 1 }}</h6>
+        <h2 class="text-center question_name">
+          {{ questions[currentQuestion]["questionText"] }}
+        </h2>
+        <div class="d-flex justify-content-center mt-5">
+          <div class="mb-5">
+            <div
+              class="d-flex align-items-center mb-3 gap-2"
+              v-for="item in questions[currentQuestion]['answerOptions']"
+              :key="item.answerText"
+            >
+              <input
+                :id="item.answerText"
+                type="radio"
+                :value="item.answerText"
+                v-model="userAnswers[currentQuestion]"
+              />
+              <label :for="item.answerText">{{ item.answerText }}</label>
             </div>
-         </div>
-          
+          </div>
         </div>
-    </div>
-      <div class="two-buttons">
-        <button class="second-button" @click="preQuest">Previous</button>
-        <button :disabled="!isDisabled()" @click="submit" :class="btnBg()">Finish</button>
-        <button class="second-button" @click="nextQuest">Next</button>
       </div>
+    </div>
+    <div class="two-buttons">
+      <button class="second-button" @click="preQuest">Previous</button>
+      <button :disabled="!isDisabled()" @click="submit" :class="btnBg()">
+        Finish
+      </button>
+      <button class="second-button" @click="nextQuest">Next</button>
+    </div>
   </div>
 </template>
 
@@ -56,275 +68,265 @@
 export default {
   name: "QuestionPage",
   data() {
-        return {
-            mins: 30,
-            secs: 0,
-             currentQuestion: 0,
-             selectedAnswers:{},
-            showScore: false,
-            score:0,
-            btn: "btn",
-            btnFinish: "btn-finish",
-            countDown : 30,
-            timer:null,
-            startQuiz: false,
-            userAnswers: new Array(7).fill(""),
-            // questions:[],
+    return {
+      mins: 30,
+      secs: 0,
+      currentQuestion: 0,
+      selectedAnswers: {},
+      showScore: false,
+      score: 0,
+      btn: "btn",
+      btnFinish: "btn-finish",
+      countDown: 30,
+      timer: null,
+      startQuiz: false,
+      userAnswers: new Array(7).fill(""),
+      // questions:[],
 
-
-    questions : [
-		{
-			questionText: 'Which one is used for two-way binding?',
-			answerOptions: [
-				{ answerText: 'v-on', isCorrect: false },
-        { answerText: 'v-bind', isCorrect: false },
-				{ answerText: 'v-model', isCorrect: true },
-				{ answerText: 'v-if', isCorrect: false },
-			],
-		},
-
-
-
-		{
-			questionText: 'Who is the creator of vueJS ?',
-			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: false },
-				{ answerText: 'Evan You', isCorrect: true },
-				{ answerText: 'Tony Stark', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'Vue is used in the backend. - True or False?',
-			answerOptions: [
-				{ answerText: 'True', isCorrect: false },
-				{ answerText: 'False', isCorrect: true },
-			],
-		},
-		{
-			questionText: 'Which version of Vue is Launched on 2020?',
-			answerOptions: [
-				{ answerText: 'Vue 2', isCorrect: false },
-				{ answerText: 'Vue 1', isCorrect: false },
-				{ answerText: 'Vue 4', isCorrect: false },
-				{ answerText: 'Vue 3', isCorrect: true },
-			],
+      questions: [
+        {
+          questionText: "Which one is used for two-way binding?",
+          answerOptions: [
+            { answerText: "v-on", isCorrect: false },
+            { answerText: "v-bind", isCorrect: false },
+            { answerText: "v-model", isCorrect: true },
+            { answerText: "v-if", isCorrect: false },
+          ],
         },
         {
-			questionText: 'Is vue an OpenSource Library?',
-			answerOptions: [
-				{ answerText: 'True', isCorrect: true },
-				{ answerText: 'False', isCorrect: false },
-			],
+          questionText: "Who is the creator of vueJS ?",
+          answerOptions: [
+            { answerText: "Jeff Bezos", isCorrect: false },
+            { answerText: "Elon Musk", isCorrect: false },
+            { answerText: "Evan You", isCorrect: true },
+            { answerText: "Tony Stark", isCorrect: false },
+          ],
         },
         {
-			questionText: 'Which of the following is a Full Javascript Frramework',
-			answerOptions: [
-				{ answerText: 'Vue', isCorrect: false },
-				{ answerText: 'node', isCorrect: false },
-				{ answerText: 'react', isCorrect: false },
-				{ answerText: 'Angular', isCorrect: true },
-			],
+          questionText: "Vue is used in the backend. - True or False?",
+          answerOptions: [
+            { answerText: "True", isCorrect: false },
+            { answerText: "False", isCorrect: true },
+          ],
         },
         {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		},
-    {
-			questionText: 'Composition API can be used on which version?',
-			answerOptions: [
-				{ answerText: 'Vue 5', isCorrect: false },
-				{ answerText: 'Vue 2 Only', isCorrect: false },
-				{ answerText: 'Vue 3 Only', isCorrect: false },
-				{ answerText: 'Both Vue 2 and Vue 3', isCorrect: true },
-			],
-		}
-    ],
-        }
-    },
-    computed:{
-    },
-    methods: {
-      btnBg(){
-        if(this.currentQuestion === 6){
-        return this.btnFinish
-        } 
-          return this.btn
-      },
-        startTimer(duration) {
-            let timer = duration
-            setInterval(() => {
-                this.mins = parseInt(timer / 60, 10);
-                this.secs = parseInt(timer % 60, 10);
+          questionText: "Which version of Vue is Launched on 2020?",
+          answerOptions: [
+            { answerText: "Vue 2", isCorrect: false },
+            { answerText: "Vue 1", isCorrect: false },
+            { answerText: "Vue 4", isCorrect: false },
+            { answerText: "Vue 3", isCorrect: true },
+          ],
+        },
+        {
+          questionText: "Is vue an OpenSource Library?",
+          answerOptions: [
+            { answerText: "True", isCorrect: true },
+            { answerText: "False", isCorrect: false },
+          ],
+        },
+        {
+          questionText:
+            "Which of the following is a Full Javascript Frramework",
+          answerOptions: [
+            { answerText: "Vue", isCorrect: false },
+            { answerText: "node", isCorrect: false },
+            { answerText: "react", isCorrect: false },
+            { answerText: "Angular", isCorrect: true },
+          ],
+        },
+        {
+          questionText: "Composition API can be used on which version?",
+          answerOptions: [
+            { answerText: "Vue 5", isCorrect: false },
+            { answerText: "Vue 2 Only", isCorrect: false },
+            { answerText: "Vue 3 Only", isCorrect: false },
+            { answerText: "Both Vue 2 and Vue 3", isCorrect: true },
+          ],
+        },
 
-                this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
-                this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
+        {
+          questionText: "Which one is used for two-way binding?",
+          answerOptions: [
+            { answerText: "v-on", isCorrect: false },
+            { answerText: "v-bind", isCorrect: false },
+            { answerText: "v-model", isCorrect: true },
+            { answerText: "v-if", isCorrect: false },
+          ],
+        },
+        {
+          questionText: "Who is the creator of vueJS ?",
+          answerOptions: [
+            { answerText: "Jeff Bezos", isCorrect: false },
+            { answerText: "Elon Musk", isCorrect: false },
+            { answerText: "Evan You", isCorrect: true },
+            { answerText: "Tony Stark", isCorrect: false },
+          ],
+        },
+        {
+          questionText: "Vue is used in the backend. - True or False?",
+          answerOptions: [
+            { answerText: "True", isCorrect: false },
+            { answerText: "False", isCorrect: true },
+          ],
+        },
+        {
+          questionText: "Which version of Vue is Launched on 2020?",
+          answerOptions: [
+            { answerText: "Vue 2", isCorrect: false },
+            { answerText: "Vue 1", isCorrect: false },
+            { answerText: "Vue 4", isCorrect: false },
+            { answerText: "Vue 3", isCorrect: true },
+          ],
+        },
+        {
+          questionText: "Is vue an OpenSource Library?",
+          answerOptions: [
+            { answerText: "True", isCorrect: true },
+            { answerText: "False", isCorrect: false },
+          ],
+        },
+        {
+          questionText:
+            "Which of the following is a Full Javascript Frramework",
+          answerOptions: [
+            { answerText: "Vue", isCorrect: false },
+            { answerText: "node", isCorrect: false },
+            { answerText: "react", isCorrect: false },
+            { answerText: "Angular", isCorrect: true },
+          ],
+        },
+        {
+          questionText: "Composition API can be used on which version?",
+          answerOptions: [
+            { answerText: "Vue 5", isCorrect: false },
+            { answerText: "Vue 2 Only", isCorrect: false },
+            { answerText: "Vue 3 Only", isCorrect: false },
+            { answerText: "Both Vue 2 and Vue 3", isCorrect: true },
+          ],
+        },
 
-                if (--timer < 0) {
-                    timer = duration;
-                }
-            }, 1000);
+        {
+          questionText: "Which one is used for two-way binding?",
+          answerOptions: [
+            { answerText: "v-on", isCorrect: false },
+            { answerText: "v-bind", isCorrect: false },
+            { answerText: "v-model", isCorrect: true },
+            { answerText: "v-if", isCorrect: false },
+          ],
         },
-         
-       
-        nextQuest(){
-          if(this.currentQuestion === this.questions.length - 1) return 
-           this.currentQuestion += 1
+        {
+          questionText: "Who is the creator of vueJS ?",
+          answerOptions: [
+            { answerText: "Jeff Bezos", isCorrect: false },
+            { answerText: "Elon Musk", isCorrect: false },
+            { answerText: "Evan You", isCorrect: true },
+            { answerText: "Tony Stark", isCorrect: false },
+          ],
         },
-        preQuest(){
-          if(this.currentQuestion === 0) return 
-           this.currentQuestion -= 1
+        {
+          questionText: "Vue is used in the backend. - True or False?",
+          answerOptions: [
+            { answerText: "True", isCorrect: false },
+            { answerText: "False", isCorrect: true },
+          ],
         },
-       submit(){
-           this.$router.push('/success');
-           const timeFinish = {mins:this.mins, secs:this.secs} 
-           this.$store.commit("setTimeFinish", timeFinish)
-       },
-       isDisabled(){
-         if(this.currentQuestion > 5) return true
-       }
-    },
-    created(){
-      //  this.$http.get("http://localhost:8082/api/user/take-assessment")
-      //  .then(data => {
-      //    console.log(data.data.data)
-          // this.questions = data.data.data
-         
-      //  })
-    },
-   mounted() {
-        const thirtyMins = 60 * 1
-
-         this.startTimer(thirtyMins)
-    },
-    watch:{
-      userAnswers:{
-        handler(userAnswers){
-          console.log(userAnswers)
+        {
+          questionText: "Which version of Vue is Launched on 2020?",
+          answerOptions: [
+            { answerText: "Vue 2", isCorrect: false },
+            { answerText: "Vue 1", isCorrect: false },
+            { answerText: "Vue 4", isCorrect: false },
+            { answerText: "Vue 3", isCorrect: true },
+          ],
         },
-        deep:true
-      },
-      secs(secs){
-        if(Number(secs)===0 && Number(this.mins)===0){
-         this.submit()
-          clearInterval(this.startTimer())
-        }
+        {
+          questionText: "Is vue an OpenSource Library?",
+          answerOptions: [
+            { answerText: "True", isCorrect: true },
+            { answerText: "False", isCorrect: false },
+          ],
+        },
+        {
+          questionText:
+            "Which of the following is a Full Javascript Frramework",
+          answerOptions: [
+            { answerText: "Vue", isCorrect: false },
+            { answerText: "node", isCorrect: false },
+            { answerText: "react", isCorrect: false },
+            { answerText: "Angular", isCorrect: true },
+          ],
+        },
+      ],
+    };
+  },
+  computed: {},
+  methods: {
+    btnBg() {
+      if (this.currentQuestion === 19) {
+        return this.btnFinish;
       }
-    }
-  } 
+      return this.btn;
+    },
+    startTimer(duration) {
+      let timer = duration;
+      setInterval(() => {
+        this.mins = parseInt(timer / 60, 10);
+        this.secs = parseInt(timer % 60, 10);
+
+        this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
+        this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
+
+        if (--timer < 0) {
+          timer = duration;
+        }
+      }, 1000);
+    },
+
+    nextQuest() {
+      if (this.currentQuestion === this.questions.length - 1) return;
+      this.currentQuestion += 1;
+    },
+    preQuest() {
+      if (this.currentQuestion === 0) return;
+      this.currentQuestion -= 1;
+    },
+    submit() {
+      this.$router.push("/success");
+      const timeFinish = { mins: this.mins, secs: this.secs };
+      this.$store.commit("setTimeFinish", timeFinish);
+    },
+    isDisabled() {
+      if (this.currentQuestion > 5) return true;
+    },
+  },
+  created() {
+    //  this.$http.get("http://localhost:8082/api/user/take-assessment")
+    //  .then(data => {
+    //    console.log(data.data.data)
+    // this.questions = data.data.data
+    //  })
+  },
+  mounted() {
+    const thirtyMins = 60 * 1;
+
+    this.startTimer(thirtyMins);
+  },
+  watch: {
+    userAnswers: {
+      handler(userAnswers) {
+        console.log(userAnswers);
+      },
+      deep: true,
+    },
+    secs(secs) {
+      if (Number(secs) === 0 && Number(this.mins) === 0) {
+        this.submit();
+        clearInterval(this.startTimer());
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -334,7 +336,7 @@ export default {
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  color: #2B3C4E;
+  color: #2b3c4e;
 }
 
 .options_name {
@@ -343,7 +345,7 @@ export default {
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  color: #2B3C4E;
+  color: #2b3c4e;
 }
 li {
   list-style: none;
@@ -402,14 +404,14 @@ li {
 
 .second-button:hover {
   color: white;
-  background: #7557D3;
+  background: #7557d3;
 }
 
 .btn {
   border: none;
   box-sizing: border-box;
   border-radius: 4px;
-  background: #CECECE;
+  background: #cecece;
   border-radius: 4px;
   width: 205px;
   height: 41px;
@@ -423,7 +425,7 @@ li {
   border: none;
   box-sizing: border-box;
   border-radius: 4px;
-  background: #7557D3;
+  background: #7557d3;
   border-radius: 4px;
   width: 205px;
   height: 41px;

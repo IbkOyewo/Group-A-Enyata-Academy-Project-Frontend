@@ -33,11 +33,11 @@
         <div class="row1">
           <div class="input-1">
             <label for="name">Name</label>
-            <input :disabled="editNow" type="text" placeholder="Fatomi Abiodun" v-model="update.fullName">
+            <input :disabled="editNow" type="text" placeholder="Fatomi Abiodun" v-model="name">
           </div>
           <div class="input-2">
             <label for="name">Email</label>
-            <input disabled type="text" placeholder="fatomi@enyata.com" v-model="update.email">
+            <input disabled type="text" value="fatomi@enayat.com" placeholder="fatomi@enyata.com" v-model="update.email">
           </div>
           <div class="input-3">
             <label for="name">Phone number</label>
@@ -62,7 +62,7 @@
           <b></b>
         </b-form-valid-feedback>
         <div class="save-btn">
-          <button class="save-btn">Save</button>
+          <button class="save-btn" @click="submit">Save</button>
         </div>
       </div>
     </div>
@@ -75,8 +75,9 @@ export default {
   name: 'ProfileComponent',
   data() {
     return {
+      name: '',
       update: {
-        fullName: '',
+        name: '',
         photo: null,
         email: '',
         phone: '',
@@ -89,40 +90,30 @@ export default {
       editNow: true,
     };
   },
-  computed: {
-    ...mapGetters(['getResponseAdminUpdate', 'getAdminInfo']),
-  },
-  watch: {
-    getResponseAdminUpdate(val) {
-      if (val.status === 'Success') {
-        this.updateStatus = true;
-        // eslint-disable-next-line no-restricted-globals
-        location.reload();
-      } else {
-        this.updateStatus = false;
-      }
-    },
-  },
   methods: {
-    ...mapActions(['adminUpdate']),
-    filesSelectedPhoto(fileRecordsNewlySelected) {
-      this.update.photo = fileRecordsNewlySelected.length > 0
-        ? fileRecordsNewlySelected[0]
-        : null;
-    },
-    updateAdminData() {
-    //     if (this.validateFields() === false) {
-    //     this.errors.fields = 'Refresh the page and fill all fields correctly';
-    //   } else {
-    // const newUserObj = {
-    // ...this.user, fullName: `${this.user.firstName} ${this.user.lastName}` };
-    // newUserObj.cv = this.user.cv.file;
-    // newUserObj.photo = this.user.photo.file;
-      this.update.photo = this.update.photo.file;
-      this.adminUpdate(this.update);
-      console.log(this.update);
-    //   this.reset();
-    },
+    submit: async function () {
+      try {
+        let name = this.name;
+        let res = await this.$store.dispatch("updateAdmin", {name });
+
+        if (res.status === 200) {
+          await this.$dtoast.pop({
+            preset: "success",
+            color: "white",
+            heading: "Success",
+            content: "Admin Updated successful",
+          });
+        }
+      } catch (error) {
+        await this.$dtoast.pop({
+          preset: "error",
+          color: "white",
+          heading: "Error",
+          content: "Invalid Credentials. Please try again",
+        });
+        console.log(error);
+      }
+    }
   },
   mounted() {
     this.update.fullName = this.getAdminInfo.adminName;
