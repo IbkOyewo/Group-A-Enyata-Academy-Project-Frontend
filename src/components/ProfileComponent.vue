@@ -37,7 +37,7 @@
           </div>
           <div class="input-2">
             <label for="name">Email</label>
-            <input disabled type="text" placeholder="fatomi@enyata.com" v-model="update.email">
+            <input :disabled="editNow" type="text" placeholder="fatomi@enyata.com" v-model="update.email">
           </div>
           <div class="input-3">
             <label for="name">Phone number</label>

@@ -30,9 +30,11 @@
           </div>
         </div>
       </div>
-      <button class="submit-btn" type="submit" :disabled="!isDisabled">
-        Submit
+
+      <button class="submit-btn" type="submit" :disabled="!isDisabled" @click="">
+        Submit 
       </button>
+
       <div class="bottom-text">
         <span class="ft_txt"
           >Don’t have an account yet?<router-link :to="{ name: 'signup' }">
@@ -115,7 +117,7 @@ export default {
         console.log(error);
       }
     },
-  },
+  }
 };
 </script>
 
@@ -243,6 +245,7 @@ label {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
+  border: none;
 }
 
 .bottom-text {
@@ -262,5 +265,27 @@ label {
 .bottom-text,
 a {
   font-size: 16px;
+}
+
+#loader {
+  position: absolute;
+  z-index: 1;
+  margin: -2px 0 0 10px;
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #666666;
+  width: 14px;
+  height: 14px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
