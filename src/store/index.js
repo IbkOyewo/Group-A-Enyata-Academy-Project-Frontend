@@ -337,6 +337,30 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+     // eslint-disable-next-line no-unused-vars
+     async updateAdmin({commit}, name) {
+      try {
+        let token = localStorage.getItem("Admin-Token");
+        let decoded = VueJwtDecode.decode(token);
+        const {user_id} = decoded
+        // console.log(decoded)
+          let config = {
+            method: 'put',
+            url: `http://localhost:8082/api/admin/update/${user_id}`,
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': this.state.adminToken
+          },
+          data: name
+          };
+
+          let response = axios(config)
+          return response
+      }
+      catch(error){
+        console.log(error);
+      }
+    },
   },
 
 
